@@ -1,0 +1,415 @@
+/* box-shadow: 0px 0px 15px 0px rgba(50, 50, 50, 0.5); 
+box-shadow: 0 0 3em rgba(0, 0, 0, 0.15);
+box-shadow: 0 0 1em rgba(0, 0, 0, 0.25);
+text-shadow: 2px 2px 1px #1f1f1f;
+*/
+
+/* width: min(500px, 70%);
+is like writing these two lines
+width: 70%;
+max-width: 500px */
+/* 
+width: max(400px, 20%, 50vh); cool tips
+min() we can do math in this function. width: min(500px + 10%, 600px);
+*/
+/* 
+auto-fit will fit the columns you've defined into the available space. 
+auto-fill will keep adding in new coumns, even if they are empty. want to use minmax(200px, 1fr) with auto-fill. the 1fr is the max size.
+*/
+/* 
+* + *{ select anything that has a sibling.
+  margin: 1em 0 0;
+  use this to offset certain elements.
+  select the parent the > * : example
+  .cta__grid > * {
+    margin=top: 0;
+  }
+*/
+/* 
+display: flex and display: grid; the flex items and grid items will be given display: block; even inline elements.
+*/
+/*
+circle clip path:
+.circle{
+position: absolute;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+clip-path: circle(600px at right 800px);
+}
+*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+:root {
+  --main-white: #f0f0f0;
+  --main-red: #be3144;
+  --main-blue: #45567d;
+  --main-gray: #303841;
+  --color-primary: #ee6352;
+  --color-body: #333;
+  --color-background: #ddd;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+/*img reset: max-width: 100%; height: auto; display:block; if we dont give a block element an explicit width it will have the width of its parent element
+images behave like inline-block. but in the CSS spec they are inline element.
+inline-elements are intrinsic elements. their width and height are defined by their content.
+*/
+body {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--main-white);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+/*** Skip link  ***/
+.skip-link {
+  display: block;
+  position: absolute;
+  /* style the <a> give it a width and height and the click area will match the width and height */
+  left: 45%;
+  top: 0;
+  width: 15rem;
+  height: 2.5rem;
+  text-decoration: none;
+  text-align: center;
+  /* vertical-align: middle; */
+  line-height: 2.5rem;
+  background: #eee;
+  transform: translateY(-3.5rem);
+  transition: all 0.5s ease-in;
+  border-radius: 0.2rem;
+  /* margin: 0 auto; */
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  /* we want to have a higher z-index then our position:fixed navbar */
+  z-index: 10;
+}
+
+.skip-link:hover {
+  color: red;
+  text-decoration: solid;
+  background: #45567d;
+}
+[href="#collaborate"] {
+  position: absolute;
+  left: 45%;
+  /* z-index: -10; */
+}
+
+/*** Navbar and Logo ***/
+#navbar {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 5rem;
+  position: fixed;
+  top: 0;
+  background: var(--main-red);
+  font-size: 1.3rem;
+  z-index: 10;
+  animation: moveInFromLeft 1s ease-out 0.3ms forwards;
+}
+
+.navbar-logo {
+  min-width: 10rem;
+  max-width: 20rem;
+  flex: 30%;
+  height: inherit;
+  /* object-fit: cover; */
+}
+.navbar-logo-img {
+  width: 100%;
+  height: inherit;
+}
+
+.navbar-title {
+  text-align: center;
+  flex: 40%;
+  font-size: 1.8rem;
+}
+#navbar ul {
+  display: flex;
+  justify-content: flex-end;
+  /* align-items: center; */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 30%;
+  /* height: inherit; */
+  /* line-height: 5rem; */
+  /* text-align: right; */
+  margin: 0 1rem 0 0;
+}
+
+#navbar li {
+  display: inline-block;
+}
+
+.navbar-link-list {
+  padding: 1.6rem;
+  /* color: inherit; */
+}
+.navbar-link-list:hover,
+.navbar-link-list:focus {
+  background: var(--main-blue);
+}
+
+/*** Welcome sections***/
+/* .center-me {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+#welcome-section {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background: black;
+  margin: 5rem 0 0 0;
+  background: url("/src/images/macbook.jpg") no-repeat;
+  background-size: 100vw 100vh;
+  /* text-align: center; */
+  /* position: relative; */
+}
+
+.welcome-section-title {
+  margin-bottom: 0;
+  font-size: 3rem;
+  animation: showText 2s ease-in 0.3ms forwards;
+}
+
+@keyframes showText {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes moveInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: lateX(0);
+  }
+}
+.welcome-section-profession {
+  margin-top: 0.6rem;
+  color: var(--main-red);
+  font-size: 1.3rem;
+  font-weight: 200;
+  font-style: italic;
+}
+
+/*** Projects Section***/
+
+#projects {
+  background: var(--main-blue);
+  width: 100%;
+  text-align: center;
+  padding: 7rem 1.5rem;
+}
+
+.project-tile {
+  cursor: pointer;
+  margin: 0 auto;
+  transition: all 0.5s linear;
+}
+
+.project-tile:hover {
+  box-shadow: 0 5px 60px 0 rgba(0, 0, 0, 0.5);
+  transform: translateY(-0.7rem);
+  /* transform: scale(1.1); */
+}
+/*** layout: using display:grid or flex ***/
+.projects-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  /* display: flex;
+  flex-flow: row wrap; */
+}
+
+/*** layout: using display:grid or flex ***/
+.projects-sub-titles {
+  max-width: 100%;
+  font-size: 2.5rem;
+  border-bottom: 0.1rem solid var(--main-white);
+  font-weight: lighter;
+  margin: 0 0 2rem 0;
+}
+
+.projects-img-container {
+  width: 100%;
+}
+.projects-img {
+  width: 100%;
+  height: min(250px, 40rem);
+}
+
+.projects-link-container {
+  font-size: 1.3rem;
+  background: #303841;
+  /* padding: 1rem; */
+}
+
+.projects-link {
+  /* color: var(--main-white); */
+  display: inline-block;
+  width: 100%;
+  padding: 1rem 0;
+  /* display: inline-block;
+  padding: 1.3rem 17.63rem; */
+}
+
+.projects-code-icon {
+  color: orange;
+  transition: opacity 1s ease-in;
+  opacity: 0;
+}
+
+.projects-link:hover .projects-code-icon {
+  /* color: var(--main-white); */
+  opacity: 1;
+}
+
+.btn {
+  /* color: var(--main-white); */
+  display: inline-block;
+  width: 10rem;
+  height: 3rem;
+  margin: 3rem 0 0 0;
+  font-size: 1.3rem;
+  line-height: 3rem;
+  background: #303841;
+  border-radius: 0.2rem;
+  transition: background 0.5s ease-out;
+}
+
+.fa-chevron-right {
+  transition: transform 0.5s ease-out;
+  transform: translateX(0);
+}
+.btn:hover {
+  background: var(--main-red);
+}
+
+.btn:hover .fa-chevron-right {
+  transform: translateX(0.3rem);
+}
+/*** Contact Section ***/
+
+#contact {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  background: #303841;
+  height: 45rem;
+  text-align: center;
+}
+
+.contact-subtitle {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.contact-text {
+  font-style: italic;
+  font-weight: 100;
+}
+.contact-social-media-links {
+  margin: 1.5rem 0 0 0;
+}
+.contact-social-media-links ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  list-style: none;
+  font-size: 1.5rem;
+}
+
+.contact-social-media-links li {
+  padding: 1rem;
+  text-shadow: 2px 2px 1px #1f1f1f;
+  transition: all 0.3s ease-in;
+}
+
+.contact-social-media-links li:hover {
+  transform: translateY(0.8rem);
+}
+.contact-social-media-links a {
+  margin: 0 0 0 0.5rem;
+}
+/*** Footer ***/
+
+.misc-info {
+  border-top: 0.3rem solid var(--main-red);
+  background: #303841;
+  font-size: 1.1rem;
+  /* padding: 1rem; */
+}
+
+.misc-info-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+}
+/* 
+margin: 0 calc(-50vw + 50%);
+*/
+.misc-info-container p {
+  margin: 1.5rem;
+}
+@media only screen and (min-width: 32.625em) {
+  .welcome-section-title {
+    color: red;
+  }
+  /*** Navbar ***/
+  .navbar-title {
+    padding: 0 0 0 4rem;
+    flex: 50%;
+  }
+  #navbar ul {
+    flex: 20%;
+  }
+}
+
+@media only screen and (min-width: 63.75em) {
+  /*** Debugging ***/
+  /* .project-tile {
+    color: blue;
+  } */
+  /*** Navbar ***/
+  .navbar-title {
+    padding: 0 0 0 15rem;
+    font-size: 2.5rem;
+  }
+}

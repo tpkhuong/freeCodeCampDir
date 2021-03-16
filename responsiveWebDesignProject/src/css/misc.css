@@ -1,0 +1,97 @@
+/* 
+text will not go under the floated element. think of floated elements as floating above the other elements.
+*/
+
+/* 
+position: sticky
+top: 0; telling it where to stick to. this means stick to top: 0;
+bottom: 100px; at bottom 100px.
+it will stick to its containing parent.
+*/
+
+/* using grid named lines: easier to remember
+grid-template-columns: [col1-start] 100px »
+[col1-end] 10px [col2-start] 100px [col2-end] »
+10px [col3-start] 100px [col3-end];
+grid-template-rows: [row1-start] auto [row1-end] »
+10px [row2-start] auto [row2-end]; */
+
+/* 
+CSS variables:
+:root {
+  --font-family: 'Fira Sans', sans-serif;
+  
+  --font-weight-n: 300;
+  --fw-m: 600;
+  --fw-b: 800;
+  
+  --font-size-2: 5rem;
+  --fs-p: 1rem;
+  
+  --primary-clr: #225560;
+  --secondary-clr: #36213E;
+  --secondary-clr-light: #554971;
+  --accent-clr: #EF6461;
+
+  --spacer: 1rem;
+  --spacer-md: calc(var(--spacer) * 2);
+  --spacer-lg: calc(var(--spacer) * 3);
+  
+  --shadow: 0 0 1em rgba(0,0,0, .25);
+  --br: 5px;
+  
+}
+*/
+
+@media only screen and (min-width: 32.625em) {
+  .welcome-section-title {
+    color: red;
+  }
+  /*** Navbar ***/
+  .navbar-title {
+    padding: 0 0 0 4rem;
+    flex: 50%;
+  }
+  #navbar ul {
+    flex: 20%;
+  }
+  /*** layout: using display:flex ***/
+  /*** Project sections***/
+  .projects-grid {
+    justify-content: space-between;
+  }
+  /* margin: 1.5rem */
+  .project-tile {
+    /* using .9rem we are getting .45rem on each side? */
+    flex: 0 0 calc(50% - 0.9rem);
+  }
+  /*** layout: using display:flex ***/
+}
+
+@media only screen and (min-width: 63.75em) {
+  /* font-size is 16px */
+  /*** Debugging ***/
+  .project-tile {
+    color: blue;
+  }
+  /*** Navbar ***/
+  .navbar-title {
+    padding: 0 0 0 15rem;
+    font-size: 2.5rem;
+  }
+  /*** layout: using display:flex ***/
+  /*** Projects ***/
+  .project-tile {
+    flex: 0 0 calc(34% - 1.5rem);
+    /*** layout: using display:flex ***/
+  }
+}
+
+.project-tile {
+  width: 80%;
+}
+
+.projects-img {
+  width: 100%;
+  height: min(250px, 40rem);
+}

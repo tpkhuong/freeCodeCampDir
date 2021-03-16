@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html" />
+    <meta name="author" content="KhuongCorp" />
+    <meta name="description" content="Learning Nodejs" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="src/css/surveyForm.css" />
+    <title></title>
+  </head>
+  <body>
+    <a class="skip-link" href="#survey-form">Skip to survey-form</a>
+    <div class="container">
+      <header class="header">
+        <h1 id="title" class="text-center">KhuongCorp Survey Form</h1>
+        <p id="description" class="text-center">
+          Thank you for taking the time to help us improve the platform
+        </p>
+      </header>
+      <form action="#" id="survey-form">
+        <div class="form-group">
+          <label id="name-label" for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            placeholder="Enter your name"
+            required
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email" id="email-label"> Email </label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            required
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="number" id="number-label">
+            Age <span class="clue">(optional)</span>
+          </label>
+          <input
+            type="number"
+            id="number"
+            min="5"
+            max="110"
+            step="1"
+            placeholder="Age"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <p for="dropdown">Which option best describes your current role?</p>
+          <select name="role" id="dropdown" class="form-control">
+            <option disabled selected value="">Select current role</option>
+            <option value="Student">Student</option>
+            <option value="Full Time Job">Full Time Job</option>
+            <option value="Full Time Learner">Full Time Learner</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <p>Would you recommend freeCodeCamp to a friend?</p>
+          <!-- since our input is inside our label element if we make our label element a flex container. we can use align-item: center to to align the radio buttons
+          or checkboxes
+          -->
+          <label for=""
+            ><input
+              name="recommendation"
+              type="radio"
+              value="Definitely"
+              checked="true"
+              class="input-radio"
+            />Definitely</label
+          >
+          <label for=""
+            ><input
+              name="recommendation"
+              type="radio"
+              value="Maybe"
+              class="input-radio"
+            />Maybe</label
+          >
+          <label for=""
+            ><input
+              name="recommendation"
+              type="radio"
+              value="Not sure"
+              class="input-radio"
+            />Not sure</label
+          >
+        </div>
+        <div class="form-group">
+          <p>What is your favorite feature of freeCOreCamp?</p>
+          <!-- <label for="favorite-feature">Select an option</label> -->
+          <select name="mostLike" id="favorite-feature" class="form-control">
+            <option disabled selected value="Select an option">
+              Select an option
+            </option>
+            <option value="Challenges">Challenges</option>
+            <option value="Projects">Projects</option>
+            <option value="Community">Community</option>
+            <option value="Open Source">Open Source</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <p>
+            What would you like to see improved?<span class="clue"
+              >(Check all that apply)</span
+            >
+          </p>
+          <label for="checkbox"
+            ><input
+              type="checkbox"
+              id="checkbox"
+              value="Front-end Projects"
+              class="input-checkbox"
+            />Front-end Projects</label
+          >
+
+          <label for="checkbox"
+            ><input
+              type="checkbox"
+              id="checkbox"
+              value="Back-end Projects"
+              class="input-checkbox"
+            />Back-end Projects</label
+          >
+
+          <label for="checkbox"
+            ><input
+              type="checkbox"
+              id="checkbox"
+              value="Data Visualization"
+              class="input-checkbox"
+            />Data Visualization</label
+          >
+
+          <label for="checkbox"
+            ><input
+              type="checkbox"
+              id="checkbox"
+              value="Challenges"
+              class="input-checkbox"
+            />Challenges</label
+          >
+
+          <label for="checkbox"
+            ><input
+              type="checkbox"
+              id="checkbox"
+              value="Open Source Community"
+              class="input-checkbox"
+            />Open Source Community</label
+          >
+
+          <label for="checkbox"
+            ><input
+              type="checkbox"
+              id="checkbox"
+              value="Gitter help rooms"
+              class="input-checkbox"
+            />Gitter help rooms</label
+          >
+
+          <label for="checkbox"
+            ><input
+              type="checkbox"
+              id="checkbox"
+              value="Videos"
+              class="input-checkbox"
+            />Videos</label
+          >
+
+          <label for="checkbox"
+            ><input
+              type="checkbox"
+              id="checkbox"
+              value="City Meetups"
+              class="input-checkbox"
+            />City Meetups</label
+          >
+
+          <label for="checkbox"
+            ><input
+              type="checkbox"
+              id="checkbox"
+              value="Wiki"
+              class="input-checkbox"
+            />Wiki</label
+          >
+
+          <label for="checkbox"
+            ><input
+              type="checkbox"
+              id="checkbox"
+              value="Forum"
+              class="input-checkbox"
+            />Forum</label
+          >
+
+          <label for="checkbox"
+            ><input
+              type="checkbox"
+              id="checkbox"
+              value="Additional Courses"
+              class="input-checkbox"
+            />Additional Courses</label
+          >
+        </div>
+        <div class="form-group">
+          <p>Any comments or suggestions?</p>
+          <textarea
+            class="input-textarea"
+            name="comments"
+            id="textarea"
+            cols="30"
+            rows="10"
+            placeholder="Enter your comment here..."
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <button id="submit" class="input-submit" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+    <script src="./js/app.js"></script>
+  </body>
+</html>

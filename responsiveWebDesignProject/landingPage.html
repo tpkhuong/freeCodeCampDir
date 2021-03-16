@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html" />
+    <meta name="author" content="KhuongCorp" />
+    <meta name="description" content="Learning Nodejs" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/css/landingPage.css" />
+    <title>Landing Page</title>
+  </head>
+  <body>
+      <a href="#pricing" class="skip-link testing">Skip to content</a>
+    <div class="page-wrapper">
+        <header role="banner" id="header">
+            <div class="hamburger-container burger-open" aria-label="Toggle navigation" role="button">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+          <div class="logo">
+              <img
+                src="https://s3.amazonaws.com/freecodecamp/original_trombones.png"
+                alt="Original Trombones Company Logo"
+                id="header-img"
+              />
+          </div>
+          <!-- nav-bar-open -->
+          <nav id="nav-bar" class="nav-bar">
+            <ul class="nav-container">
+                <!-- our a tags inside our li -->
+              <li class="nav-link"><a href="#features">Features</a></li>
+              <li class="nav-link"><a href="#How-It-Works">How-It-Works</a></li>
+              <li class="nav-link"><a href="#pricing">Pricing</a></li>
+            </ul>
+          </nav>
+        </header>
+        <section role="region" class="hero">
+            <h2 class="hero-title">Learning Programming from this awesome person</h2>
+            <form action="https://www.freecodecamp.com/email-submit" method="POST" id="form" class="hero-form">
+                <!-- <label for="email">Email</label -->
+                    <input
+                    class="input-email"
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                    />
+                    <input class="input-button" id="submit" type="submit" name=""></input>
+                </form>
+            </section>
+            <div class="container">
+                <section id="features">
+                    <div class="features-container">
+                        <div class="icon">
+                            <img src="src/image/noun_quality_2347569.svg" alt="Desktop computer">
+                        </div>
+                        <div class="description">
+                            <h2>Premium Materials</h2>
+                            <p>Our courses use the most recent materials. This will help you learn coding.</p>
+                        </div>
+                    </div>
+
+                    <div class="features-container">
+                        <div class="icon">
+                            <img src="src/image/noun_quality_2347569.svg" alt="Desktop computer">
+                        </div>
+                        <div class="description">
+                            <h2>Quality Assurance</h2>
+                            <p>Our courses use the most recent materials. This will help you learn coding.</p>
+                        </div>
+                    </div>
+
+                    <div class="features-container">
+                        <div class="icon">
+                            <img src="src/image/noun_quality_2347569.svg" alt="Desktop computer">
+                        </div>
+                        <div class="description">
+                            <h2>Back Money Guarantee</h2>
+                            <p>Our courses use the most recent materials. This will help you learn coding.</p>
+                        </div>
+                    </div>
+                </section>
+                <section id="How-It-Works">
+                    <iframe id="video" class="youtube-video" width="560" height="315" src="https://www.youtube.com/embed/cUOZlyqk2LM" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <!-- <video id="video" controls width="250">
+                    <source src="https://www.youtube-nocookie.com/embed/y8Yv4pnO7qc?rel=0&controls=0&showinfo=0" type="" />
+                    </video> -->
+            </section>
+            <section id="pricing">
+                <div class="card" id="Web Development">
+                    <h2>Web Development</h2>
+                    <h3 class="card__price">$1000</h3>
+                    <p class="card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, perspiciatis. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, aspernatur?</p>
+                    <button class="card__button" type="submit">Submit</button>
+                </div>
+                <div class="card" id="Data Science">
+                    <h2>Data Science</h2>
+                    <h3 class="card__price">$1200</h3>
+                    <p class="card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, perspiciatis. Lorem, ipsum dolor
+                        sit amet consectetur adipisicing elit. Perspiciatis, aspernatur?</p>
+                    <button class="card__button" type="submit">Submit</button>
+                </div>
+                <div class="card" id="UX Design">
+                    <h2>UX Design</h2>
+                    <h3 class="card__price">$900</h3>
+                    <p class="card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, perspiciatis. Lorem, ipsum dolor
+                        sit amet consectetur adipisicing elit. Perspiciatis, aspernatur?</p>
+                    <button class="card__button" type="submit">Submit</button>
+                </div>
+            </section>
+            <footer role="contentinfo" class="footer">
+                <ul>
+                    <li class="footer-link"><a href="">Privacy</a></li>
+                    <li class="footer-link"><a href="">Terms</a></li>
+                    <li class="footer-link"><a href="">Contact</a></li>
+                </ul>
+                <p>Copyright 2020, Original Trombones</p>
+            </footer>
+        </div>
+    </div>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+    <script src="src/js/app.js"></script>
+  </body>
+</html>

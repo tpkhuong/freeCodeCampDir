@@ -1,0 +1,162 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.345%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", Arial, sans-serif;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/*** Skip Link ***/
+.skip-link {
+  display: flex;
+  width: 12rem;
+  height: 2.5rem;
+  background: rgba(239, 239, 239, 0.9);
+  /* text-align: center; */
+  /* padding: 0.5rem 0; */
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-2.5rem);
+  transition: transform 0.7s ease-in;
+  margin: auto;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  /* font-size: 5rem; */
+}
+
+.skip-link:hover {
+  color: red;
+  text-decoration: underline;
+}
+/* center text for block, inline-block element. or we can use display: flex with justift-content:center and align-items: center 
+.skip-link {
+  //have to use block if we want to center the element using margin: 0 auto;
+  display: block;
+  width: 12rem;
+  height: 2.5rem;
+  /* line-height of our element must match the height if we want to center the text vertically */
+/*line-height: 2.5rem;
+  text-align: center;
+  vertical-align: middle;
+}
+*/
+
+/*** Text: Headings and paragraphs***/
+p {
+  margin: 1rem 1.5rem 0 2.7rem;
+}
+
+.variables-text {
+  margin: 1rem 1.5rem 0 1.5rem;
+}
+.topic {
+  margin-left: 1.5rem;
+  font-size: 2.1rem;
+}
+
+.main-doc-unordered {
+  margin: 0 1.5rem 0 3rem;
+}
+
+.main-doc-list {
+  margin-top: 1rem;
+}
+/*** Header and navbar ***/
+
+#navbar {
+  height: 20rem;
+  overflow: auto;
+  border-bottom: 0.1rem solid black;
+  color: rgb(0, 0, 0);
+}
+
+.nav__header {
+  font-size: 2.1rem;
+  text-align: center;
+}
+#navbar ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+#navbar li {
+  /* padding: 0.7rem 0.7rem 0.7rem 2rem; */
+  border-top: 0.1rem solid black;
+  font-size: 1.1rem;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.8rem 2.3rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 1rem 1rem 3rem rgb(255, 255, 255);
+}
+
+.nav-link:focus {
+  box-shadow: 0 0 1rem 0.7rem rgb(156, 139, 139);
+}
+.main-section {
+  /* border: 1px solid red; */
+  margin: 0 0 0.7rem 0;
+}
+
+.snippet {
+  display: inline-block;
+  width: 80%;
+  background: rgba(247, 247, 247, 1);
+  margin: 0.7rem 0 0 3.2rem;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  line-height: 2;
+}
+
+.data-types-unordered {
+  margin: 1rem 0 0 0;
+}
+
+.data-types-list {
+  margin: 1rem 0 0 0;
+}
+
+.main-section:last-of-type {
+  margin: 0 0 2rem 0;
+}
+
+@media only screen and (min-width: 36em) {
+  .grid-container {
+    display: grid;
+    /* position: relative; */
+    grid-template-columns: 200px minmax(67.78%, 990px);
+    /* grid-template-areas: "navbar main"; */
+  }
+
+  #navbar {
+    height: 100%;
+    width: 21rem;
+    /* grid-area: navbar; */
+    border-right: 0.2rem solid black;
+    position: fixed;
+    grid-column: 1 /2;
+  }
+  #main-doc {
+    /* grid-area: main; */
+    margin: 0 0 0 0.5rem;
+    grid-column: 2 / 3;
+  }
+}

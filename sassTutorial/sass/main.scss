@@ -1,0 +1,9 @@
+$primary-color: blue;
+
+/*example of maps a key to value pair like an object*/
+$font-weight: ("regular": 400, "medium": 500, "bold": 700);
+
+body {
+	background-color: $primary-color;
+	font-weight: map-get($font-weight, bold);
+}
