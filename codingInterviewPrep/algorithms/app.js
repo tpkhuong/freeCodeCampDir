@@ -11,14 +11,55 @@ Thus, for sets A and B above, and C = {2, 3}, A △ B △ C = (A △ B) △ C = 
 Create a function that takes two or more arrays and returns an array of their symmetric difference. The returned array must contain only unique values (no duplicates).
 */
 
+// [1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5]
+
 function symmetricDifference(...listOfArr) {
   //return array contain only unique values
   //always comparing two arrays
-  listOfArr.reduce(function getUniqueFromTwoArrs(buildingUp, currentValue) {
-    var checkValuesInThisArr = [];
-    return filterArr(buildingUp, currentValue);
+  var results = listOfArr.reduce(function getUniqueFromTwoArrs(
+    buildingUp,
+    currentValue
+  ) {
+    return twoLoopsVersion(buildingUp, currentValue);
   });
 
+  function twoLoopsVersion(list1, list2) {
+    // var copiedList2 = [...list2];
+    var findUniqueList1 = list1.reduce(function getUnique(
+      buildingUp,
+      currentValue
+    ) {
+      //buildingUp is an arr
+      //currentValue is the values in list1 which is 1 if the array is [1,2,3]
+      //check if list2 has currentValue
+      if (
+        list2.indexOf(currentValue) == -1 &&
+        buildingUp.indexOf(currentValue) == -1
+      ) {
+        return [...buildingUp, currentValue];
+      }
+      return buildingUp;
+    },
+    []);
+    var findUniqueList2 = list2.reduce(function uniqueValues(
+      buildingUp,
+      currentValue
+    ) {
+      if (
+        list1.indexOf(currentValue) == -1 &&
+        buildingUp.indexOf(currentValue) == -1
+      ) {
+        return [...buildingUp, currentValue];
+      }
+      return buildingUp;
+    },
+    []);
+    return [...findUniqueList1, ...findUniqueList2];
+  }
+  return results;
+}
+
+function notes() {
   function filterArr(list1, list2) {
     var copiedList2 = [...list2];
     var findUnique = list1.reduce(function getUnique(buildingUp, currentValue) {
@@ -34,6 +75,32 @@ function symmetricDifference(...listOfArr) {
       }
     }, []);
     return [...findUnique, ...copiedList2];
+  }
+  function twoLoopsVersion(list1, list2) {
+    var copiedList2 = [...list2];
+    var findUniqueList1 = list1.reduce(function getUnique(
+      buildingUp,
+      currentValue
+    ) {
+      //buildingUp is an arr
+      //currentValue is the values in list1 which is 1 if the array is [1,2,3]
+      //check if list2 has currentValue
+      if (copiedList2.indexOf(currentValue) == -1) {
+        return [...buildingUp, currentValue];
+      }
+    },
+    []);
+
+    var findUniqueList2 = list2.reduce(function uniqueValues(
+      buildingUp,
+      currentValue
+    ) {
+      if (list1.indexOf(currentValue) != -1) {
+        return [...buildingUp, currentValue];
+      }
+    },
+    []);
+    return [...findUniqueList1, ...findUniqueList2];
   }
 }
 
