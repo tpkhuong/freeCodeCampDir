@@ -107,3 +107,56 @@ function notes() {
 /***** recursion *****/
 
 /***** recursion *****/
+
+/*
+
+Inventory Update: 
+
+Compare and update the inventory stored in a 2D array against a second 2D array of a fresh delivery. Update the current existing inventory item quantities (in arr1).
+If an item cannot be found, add the new item and quantity into the inventory array. The returned inventory array should be in alphabetical order by item.
+
+var curInv = [
+    [21, "Bowling Ball"],
+    [2, "Dirty Sock"],
+    [1, "Hair Pin"],
+    [5, "Microphone"]
+];
+
+var newInv = [
+    [2, "Hair Pin"],
+    [3, "Half-Eaten Apple"],
+    [67, "Bowling Ball"],
+    [7, "Toothpaste"]
+];
+
+*/
+
+function updateInventory(curInv, newInv) {
+  //nested loop version
+  var copiedCurInv = [...curInv];
+  var copiedNewInv = newInv.slice();
+  //since we want to add unique items from both curInv and newInv, in our reduce method we want to remove the item from curInv if we find that item in newInv.
+  //we want to return an array without that item
+  //then we can concat the two arr into one then sort it by name
+  var updatedStorage = copiedCurInv.reduce(function updateAndSort(
+    buildingUp,
+    currentValue
+  ) {
+    //currentValue is eachSubarray
+    var [quantityNum, itemStr] = currentValue;
+    var itemStrIsInSecondArr;
+    copiedNewInv.forEach(function findItemInSecondArr(eachSubarray) {
+      var [innerQuantity, innerItemStr] = eachSubarray;
+      if (itemStr == innerItemStr) {
+        itemStrIsInSecondArr = true;
+      } else {
+        itemStrIsInSecondArr = false;
+      }
+    });
+    if (itemStrIsInSecondArr) {
+      return buildingUp;
+    }
+    return [...buildingUp, currentValue];
+  },
+  []);
+}
