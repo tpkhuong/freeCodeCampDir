@@ -149,14 +149,96 @@ function updateInventory(curInv, newInv) {
       var [innerQuantity, innerItemStr] = eachSubarray;
       if (itemStr == innerItemStr) {
         itemStrIsInSecondArr = true;
-      } else {
-        itemStrIsInSecondArr = false;
       }
     });
     if (itemStrIsInSecondArr) {
       return buildingUp;
+    } else {
+      return [...buildingUp, currentValue];
     }
-    return [...buildingUp, currentValue];
   },
   []);
+
+  var combineUpdatedStorageNewInv = [...updatedStorage, ...copiedNewInv];
+
+  combineUpdatedStorageNewInv.sort(function sortByItemStr(
+    firstSubarr,
+    secondSubarr
+  ) {
+    var [firstSubarrQuanity, firstSubarrItemStr] = firstSubarr;
+    var [secondSubarrQuanity, secondSubarrItemStr] = secondSubarr;
+
+    if (firstSubarrItemStr < secondSubarrItemStr) {
+      return -1;
+    }
+    if (secondSubarrItemStr < firstSubarrItemStr) {
+      return 1;
+    }
+    return 0;
+  });
+
+  return combineUpdatedStorageNewInv;
 }
+
+/***** difference approach to updateInventory without nested loops *****/
+
+function updateInventoryUsingObj(currentInv, newInv) {
+  var copiedCurrInv = [...currentInv];
+  var copiedNewInv = newInv.slice();
+
+  var objCurrInv = copiedCurrInv.reduce(function currInvConvertSubarrToSubobj(
+    buildingUp,
+    currentValue
+  ) {
+    var [quantityNumCurrInv, itemStrCurrInv] = currentValue;
+    var eachSubObjCurrInv = { [itemStrCurrInv]: quantityNumCurrInv };
+
+    //   return Object.assign(buildingUp, eachSubObjCurrInv);
+    return Object.assign(buildingUp, {
+      [itemStrCurrInv]: quantityNumCurrInv,
+    });
+  },
+  {});
+
+  var objNewInv = copiedNewInv.reduce(function newInvConvertSubarrToSubobj(
+    buildingUp,
+    currentValue
+  ) {
+    var [quantityNumNewInv, itemStrNewInv] = currentValue;
+    var eachSubObjNewInv = { [itemStrNewInv]: quantityNumNewInv };
+
+    return Object.assign(buildingUp, eachSubObjNewInv);
+  },
+  {});
+
+  var combineCurrInvAndNewInv = Object.assign(objCurrInv, objNewInv);
+
+  var arrOfSubarrays = Object.entries(combineCurrInvAndNewInv);
+
+  var swapPositionObjValueWithObjKey = arrOfSubarrays.reduce(
+    function swapValueWithKey(buildingUp, currentValue) {
+      var [itemStr, quantityNum] = currentValue;
+
+      return [...buildingUp, [quantityNum, itemStr]];
+    },
+    []
+  );
+
+  var copiedSwapArr = [...swapPositionObjValueWithObjKey];
+
+  copiedSwapArr.sort(function sortSubarrays(firstSubarr, secondSubarr) {
+    var [firstSubarrQuanity, firstSubarrItemStr] = firstSubarr;
+    var [secondSubarrQuanity, secondSubarrItemStr] = secondSubarr;
+    if (firstSubarrItemStr < secondSubarrItemStr) {
+      return -1;
+    }
+    if (secondSubarrItemStr < firstSubarrItemStr) {
+      return 1;
+    }
+    return 0;
+  });
+
+  return copiedSwapArr;
+}
+
+/***** difference approach to updateInventory without nested loops *****/
