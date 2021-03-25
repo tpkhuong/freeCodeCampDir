@@ -262,6 +262,10 @@ For example, aab should return 2 because it has 6 total permutations (aab, aab, 
 
 */
 
-function singlePermutation(strInput) {}
+function singlePermutation(strInput) {
+  function swap(list, index1, index2) {
+    return ([list[index1], list[index2]] = [list[index2], list[index1]]);
+  }
+}
 
 /***** No Repeats Please *****/
