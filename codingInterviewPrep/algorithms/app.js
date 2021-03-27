@@ -268,4 +268,36 @@ function singlePermutation(strInput) {
   }
 }
 
+function permutations(strInput) {
+  var arrOfResults = [];
+  var arrOfCharValues = strInput.split("");
+  var freqCount = arrOfCharValues.reduce(function getFreq(
+    buildingUp,
+    currentValue
+  ) {
+    buildingUp[currentValue] = (buildingUp[currentValue] || 0) + 1;
+    return buildingUp;
+  },
+  {});
+  var checkLengthToPushIntoArr = strInput.length;
+
+  recursivePermutations(arrOfCharValues, []);
+  function recursivePermutations(arrOfStrChars, addCharValueArr) {
+    // var arrOfCharValues = [...strInput];
+    var copiedArr = arrOfStrChars.slice();
+
+    if (arrOfStrChars.length == 0) {
+      return;
+    } else {
+      for (let loopIndex = 0; loopIndex < copiedArr.length; loopIndex++) {
+        let addStrChar = copiedArr.slice(loopIndex, loopIndex + 1);
+        addCharValueArr.push(addStrChar);
+        arrOfStrChars.splice(0, 1);
+        recursivePermutations(arrOfStrChars, addCharValueArr);
+      }
+    }
+  }
+  console.log(arrOfResults);
+}
+
 /***** No Repeats Please *****/
