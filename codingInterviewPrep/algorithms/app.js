@@ -271,29 +271,40 @@ function singlePermutation(strInput) {
 function permutations(strInput) {
   var arrOfResults = [];
   var arrOfCharValues = strInput.split("");
-  var freqCount = arrOfCharValues.reduce(function getFreq(
-    buildingUp,
-    currentValue
-  ) {
-    buildingUp[currentValue] = (buildingUp[currentValue] || 0) + 1;
-    return buildingUp;
-  },
-  {});
+  //   var freqCount = arrOfCharValues.reduce(function getFreq(
+  //     buildingUp,
+  //     currentValue
+  //   ) {
+  //     buildingUp[currentValue] = (buildingUp[currentValue] || 0) + 1;
+  //     return buildingUp;
+  //   },
+  //   {});
   var checkLengthToPushIntoArr = strInput.length;
 
-  recursivePermutations(arrOfCharValues, []);
-  function recursivePermutations(arrOfStrChars, addCharValueArr) {
+  recursivePermutations(arrOfCharValues, [], 0);
+  function recursivePermutations(arrOfStrChars, addCharValueArr, ourIndex) {
     // var arrOfCharValues = [...strInput];
-    var copiedArr = arrOfStrChars.slice();
+    var decisionTree = arrOfStrChars.slice();
+    var copiedArrOfValuesToAddToResultArr = [...addCharValueArr];
 
-    if (arrOfStrChars.length == 0) {
+    if (ourIndex == decisionTree.length) {
       return;
     } else {
-      for (let loopIndex = 0; loopIndex < copiedArr.length; loopIndex++) {
-        let addStrChar = copiedArr.slice(loopIndex, loopIndex + 1);
-        addCharValueArr.push(addStrChar);
-        arrOfStrChars.splice(0, 1);
-        recursivePermutations(arrOfStrChars, addCharValueArr);
+      for (let loopIndex = 0; loopIndex < decisionTree.length; loopIndex++) {
+        // we have to keep track of the used strChar
+        let addStrChar = decisionTree.slice(loopIndex, loopIndex + 1);
+        addCharValueArr = [...addCharValueArr, ...addStrChar];
+        let indexOfCopiedChar = decisionTree.indexOf(...addStrChar);
+        let arrOfStrPassedToRecursiveClass = decisionTree.slice(
+          indexOfCopiedChar + 1
+        );
+        recursivePermutations(
+          arrOfStrPassedToRecursiveClass,
+          addCharValueArr,
+          loopIndex
+        );
+        let whatCharIsThis = copiedArrOfValuesToAddToResultArr.pop();
+        /* when we go back up the recursive tree we have to remove the already used strChar from the arr we are building with each recursive call */
       }
     }
   }
