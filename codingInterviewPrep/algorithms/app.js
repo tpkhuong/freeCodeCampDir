@@ -271,14 +271,14 @@ function singlePermutation(strInput) {
 function permutations(strInput) {
   var arrOfResults = [];
   var arrOfCharValues = strInput.split("");
-  //   var freqCount = arrOfCharValues.reduce(function getFreq(
-  //     buildingUp,
-  //     currentValue
-  //   ) {
-  //     buildingUp[currentValue] = (buildingUp[currentValue] || 0) + 1;
-  //     return buildingUp;
-  //   },
-  //   {});
+  var freqCount = arrOfCharValues.reduce(function getFreq(
+    buildingUp,
+    currentValue
+  ) {
+    buildingUp[currentValue] = (buildingUp[currentValue] || 0) + 1;
+    return buildingUp;
+  },
+  {});
   var checkLengthToPushIntoArr = strInput.length;
 
   recursivePermutations(arrOfCharValues, [], 0);
@@ -290,20 +290,22 @@ function permutations(strInput) {
     if (ourIndex == decisionTree.length) {
       return;
     } else {
+      //for each recurPermutations call the length of each loop is correct
       for (let loopIndex = 0; loopIndex < decisionTree.length; loopIndex++) {
         // we have to keep track of the used strChar
-        let addStrChar = decisionTree.slice(loopIndex, loopIndex + 1);
-        addCharValueArr = [...addCharValueArr, ...addStrChar];
-        let indexOfCopiedChar = decisionTree.indexOf(...addStrChar);
-        let arrOfStrPassedToRecursiveClass = decisionTree.slice(
-          indexOfCopiedChar + 1
-        );
+        //what about repeated chars
+        //have to make sure we also keep track of the strChar we added to the result/answer arr
+        // let addStrChar = decisionTree.slice(loopIndex, loopIndex + 1);
+        // addCharValueArr = [...addCharValueArr, ...addStrChar];
+        // let indexOfCopiedChar = decisionTree.indexOf(...addStrChar);
+        // let arrOfStrPassedToRecursiveClass = decisionTree.slice(
+        //   indexOfCopiedChar + 1
+        // );
         recursivePermutations(
           arrOfStrPassedToRecursiveClass,
           addCharValueArr,
           loopIndex
         );
-        let whatCharIsThis = copiedArrOfValuesToAddToResultArr.pop();
         /* when we go back up the recursive tree we have to remove the already used strChar from the arr we are building with each recursive call */
       }
     }
