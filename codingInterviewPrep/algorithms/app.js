@@ -313,4 +313,13 @@ function permutations(strInput) {
   console.log(arrOfResults);
 }
 
+function heapPermutations(arrOfStr, lengthOfArr) {
+  function swapHelper(arrInput, indexOne, indexTwo) {
+    return ([arrInput[indexOne], arrInput[indexTwo]] = [
+      arrInput[indexTwo],
+      arrInput[indexOne],
+    ]);
+  }
+}
+
 /***** No Repeats Please *****/
