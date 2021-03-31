@@ -313,12 +313,32 @@ function permutations(strInput) {
   console.log(arrOfResults);
 }
 
-function heapPermutations(arrOfStr, lengthOfArr) {
+function permutations(strInput) {
+  var result = [];
+  var arrOfStrChar = strInput.split("");
+  var getArrLength = arrOfStrChar.length;
+
   function swapHelper(arrInput, indexOne, indexTwo) {
     return ([arrInput[indexOne], arrInput[indexTwo]] = [
       arrInput[indexTwo],
       arrInput[indexOne],
     ]);
+  }
+
+  function heapPermutations(heapArrOfStr, lengthOfArr) {
+    var copiedHeapArr = [...heapArrOfStr];
+    if (lengthOfArr == 1) {
+      result = [...result, ...heapArrOfStr];
+    } else {
+      for (let i = 0; i < lengthOfArr; i++) {
+        heapPermutations(copiedHeapArr, lengthOfArr - 1);
+        if (lengthOfArr % 2 != 0) {
+          swapHelper(copiedHeapArr, 0, lengthOfArr - 1);
+        } else {
+          swapHelper(copiedHeapArr, i, lengthOfArr - 1);
+        }
+      }
+    }
   }
 }
 
