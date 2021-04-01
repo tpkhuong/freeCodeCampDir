@@ -325,21 +325,34 @@ function permutations(strInput) {
     ]);
   }
 
+  heapPermutations(arrOfStrChar, getArrLength);
   function heapPermutations(heapArrOfStr, lengthOfArr) {
     var copiedHeapArr = [...heapArrOfStr];
     if (lengthOfArr == 1) {
-      result = [...result, ...heapArrOfStr];
+      if (result.length == 0) {
+        result = [[...copiedHeapArr]];
+      } else {
+        result = [...result, [...copiedHeapArr]];
+      }
+      return;
     } else {
-      for (let i = 0; i < lengthOfArr; i++) {
+      heapPermutations(copiedHeapArr, lengthOfArr - 1);
+      for (let i = 1; i < lengthOfArr; i++) {
         heapPermutations(copiedHeapArr, lengthOfArr - 1);
         if (lengthOfArr % 2 != 0) {
           swapHelper(copiedHeapArr, 0, lengthOfArr - 1);
         } else {
-          swapHelper(copiedHeapArr, i, lengthOfArr - 1);
+          swapHelper(copiedHeapArr, i - 1, lengthOfArr - 1);
         }
       }
     }
   }
 }
 
+var firstArr = [1, 2, 3, 4];
+var secondArr = [4, 5, 6, 7];
+var result = [[...firstArr], [...secondArr]];
+var thirdArr = [6, 7, 8, 9];
+
+restul = [...result, [...thirdArr]];
 /***** No Repeats Please *****/
