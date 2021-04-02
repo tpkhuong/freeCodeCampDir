@@ -331,22 +331,23 @@ function permutations(strInput) {
     if (lengthOfArr == 1) {
       if (result.length == 0) {
         result = [[...copiedHeapArr]];
+        return;
       } else {
         result = [...result, [...copiedHeapArr]];
-      }
-      return;
-    } else {
-      heapPermutations(copiedHeapArr, lengthOfArr - 1);
-      for (let i = 1; i < lengthOfArr; i++) {
-        heapPermutations(copiedHeapArr, lengthOfArr - 1);
-        if (lengthOfArr % 2 != 0) {
-          swapHelper(copiedHeapArr, 0, lengthOfArr - 1);
-        } else {
-          swapHelper(copiedHeapArr, i - 1, lengthOfArr - 1);
-        }
+        return;
       }
     }
+    heapPermutations(heapArrOfStr, lengthOfArr - 1);
+    for (let i = 0; i < lengthOfArr - 1; i++) {
+      if (lengthOfArr % 2 != 0) {
+        swapHelper(heapArrOfStr, 0, lengthOfArr - 1);
+      } else {
+        swapHelper(heapArrOfStr, i, lengthOfArr - 1);
+      }
+      heapPermutations(heapArrOfStr, lengthOfArr - 1);
+    }
   }
+  return result;
 }
 
 var firstArr = [1, 2, 3, 4];
