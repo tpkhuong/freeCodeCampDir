@@ -347,6 +347,46 @@ function permutations(strInput) {
       heapPermutations(heapArrOfStr, lengthOfArr - 1);
     }
   }
+  /***** result is our array with all the permutations, next we will find the permuations that have repeated strChar *****/
+  /***** filter method *****/
+  // var noRepeatStrCharFilterMethod = result.filter(
+  //   function countTheNonRepeatedStrChar(eachSubarray) {
+  //     // we want to compare currentValue with next value
+  //     var ourBoolean = eachSubarray.every(function containsNoRepeat(
+  //       eachValue,
+  //       currIndex,
+  //       list
+  //     ) {
+  //       if (list[currIndex + 1] == undefined && typeof eachValue == "string") {
+  //         return true;
+  //       }
+  //       return eachValue != list[currIndex + 1];
+  //     });
+  //     return ourBoolean;
+  //   }
+  // );
+  /***** filter method *****/
+  /***** reduce method *****/
+
+  var noRepeatStrChar = result.reduce(function countTheNonRepeatedStrChar(
+    buildingUp,
+    currentValue
+  ) {
+    var reduceBoolean = currentValue.some(function containsRepeatStrChar(
+      eachValue,
+      currIndex,
+      list
+    ) {
+      return eachValue == list[currIndex + 1];
+    });
+    if (reduceBoolean) {
+      return buildingUp;
+    }
+    return buildingUp.concat([currentValue]);
+  },
+  []);
+
+  /***** reduce method *****/
   return result;
 }
 
