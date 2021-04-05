@@ -429,6 +429,7 @@ function pairwise(arrInput, sumInput) {
   //want to use an obj when adding two pairs give us the total of sumInput save the value and its index in the original array.
   //keep track of repeated value
   //using reduce
+  // using the visited/cached so we don't calculate the same value, we also satisfy having the lowest index of the value that equal sumInput
   var visited = {};
   function helperFunc() {
     var arrOfObj = arrInput.reduce(function findPairEqualToSum(
@@ -442,28 +443,44 @@ function pairwise(arrInput, sumInput) {
         return buildingUp;
       } else {
         if (!visited[currentValue]) {
-          for (let i = currIndex + 1; i < list.length; i++) {
-            let ourCalcOfTwoPairNums = currentValue + list[i];
+          for (
+            let loopIndex = currIndex + 1;
+            loopIndex < list.length;
+            loopIndex++
+          ) {
+            let ourCalcOfTwoPairNums = currentValue + list[loopIndex];
             if (ourCalcOfTwoPairNums == sumInput) {
-              return [
-                ...building,
+              buildingUp = [
+                ...buildingUp,
                 {
                   firstIndex: currIndex,
-                  secondIndex: currIndex + 1,
+                  secondIndex: loopIndex,
                   firstValue: currentValue,
-                  secondValue: list[i],
+                  secondValue: list[loopIndex],
                 },
               ];
             }
-            return buildingUp;
           }
           visited[currentValue] = true;
+          return buildingUp;
         } else {
           return buildingUp;
         }
       }
     },
     []);
+    /***** arrOfObj will have the values that add up to sumInput with its corresponding index *****/
+    /***** we just have to add the index *****/
+    var sumOfIndices = arrOfObj.reduce(function addUpIndices(
+      buildingUp,
+      currentValue
+    ) {
+      //each currentValue is our obj
+      var { firstIndex, secondIndex } = currentValue;
+      buildingUp = buildingUp + firstIndex + secondIndex;
+      return buildingUp;
+    },
+    0);
   }
 
   storeInnerFunc = helperFunc;
