@@ -25,7 +25,7 @@ function symmetricDifference(...listOfArr) {
     return twoLoopsVersion(buildingUp, currentValue);
   });
 
-  function twoLoopsVersion(list1, list2) {
+  function symmetricDifferenceTwoLoopsVersion(list1, list2) {
     // var copiedList2 = [...list2];
     var findUniqueList1 = list1.reduce(function getUnique(
       buildingUp,
@@ -505,4 +505,20 @@ Instructions: Write a function bubbleSort which takes an array of integers as in
 
 /***** implement bubble sort *****/
 
-function bubbleSort(arrInput) {}
+function bubbleSort(arrInput) {
+  for (let outerIndex = arrInput.length - 1; 0 < outerIndex; outerIndex -= 1) {
+    let noswap;
+    for (let innerIndex = 0; innerIndex < outerIndex; innerIndex += 1) {
+      let firstValue = arrInput[innerIndex];
+      let secondValue = arrInput[innerIndex + 1];
+      if (firstValue > secondValue) {
+        swapHelper(arrInput, innerIndex, innerIndex + 1);
+        noswap = false;
+      }
+    }
+    if (noswap) break;
+  }
+  function swapHelper(arr, index1, index2) {
+    return ([arr[index2], arr[index1]] = [arr[index1], arr[index2]]);
+  }
+}
