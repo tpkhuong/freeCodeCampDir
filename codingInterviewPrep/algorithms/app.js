@@ -506,19 +506,57 @@ Instructions: Write a function bubbleSort which takes an array of integers as in
 /***** implement bubble sort *****/
 
 function bubbleSort(arrInput) {
-  for (let outerIndex = arrInput.length - 1; 0 < outerIndex; outerIndex -= 1) {
-    let noswap;
-    for (let innerIndex = 0; innerIndex < outerIndex; innerIndex += 1) {
-      let firstValue = arrInput[innerIndex];
-      let secondValue = arrInput[innerIndex + 1];
+  var copiedArr = [...arrInput];
+  let noswap;
+  for (let outerIndex = copiedArr.length; 0 < outerIndex; outerIndex--) {
+    noswap = true;
+    for (let innerIndex = 0; innerIndex < outerIndex - 1; innerIndex++) {
+      let firstValue = copiedArr[innerIndex];
+      let secondValue = copiedArr[innerIndex + 1];
       if (firstValue > secondValue) {
-        swapHelper(arrInput, innerIndex, innerIndex + 1);
+        swapHelper(copiedArr, innerIndex, innerIndex + 1);
         noswap = false;
       }
     }
     if (noswap) break;
   }
-  function swapHelper(arr, index1, index2) {
-    return ([arr[index2], arr[index1]] = [arr[index1], arr[index2]]);
+  return copiedArr;
+}
+
+function swapHelper(arr, index1, index2) {
+  return ([arr[index2], arr[index1]] = [arr[index1], arr[index2]]);
+}
+var unsortedArr = [7, 1, 5, 2, 3, 6];
+
+/*
+
+Implement Selection Sort
+Here we will implement selection sort. Selection sort works by selecting the minimum value in a list and swapping it with the first value in the list.
+It then starts at the second position, selects the smallest value in the remaining list, and swaps it with the second element.
+It continues iterating through the list and swapping elements until it reaches the end of the list. Now the list is sorted. Selection sort has quadratic time complexity in all cases.
+
+Instructions: Write a function selectionSort which takes an array of integers as input and returns an array of these integers in sorted order from least to greatest.
+
+*/
+
+function selectionSort(arrInput) {
+  var copiedArr = [...arrInput];
+  //outer loop will increase by 1 each iteration
+  //inner loop we want to keep track of the index of the lowest value
+  for (let outerIndex = 0; outerIndex < copiedArr.length; outerIndex++) {
+    let lowestMin = outerIndex;
+    for (
+      let innerIndex = outerIndex + 1;
+      innerIndex < copiedArr.length;
+      innerIndex++
+    ) {
+      let innerValue = copiedArr[innerIndex];
+      if (innerValue < copiedArr[lowestMin]) {
+        lowestMin = innerIndex;
+      }
+    }
+    if (lowestMin != outerIndex) {
+      swapHelper(copiedArr, copiedArr[lowestMin], copiedArr[outerIndex]);
+    }
   }
 }
