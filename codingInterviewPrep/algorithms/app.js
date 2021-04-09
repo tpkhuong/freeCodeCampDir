@@ -560,3 +560,101 @@ function selectionSort(arrInput) {
     }
   }
 }
+
+/*
+
+Implement Insertion Sort
+The next sorting method we'll look at is insertion sort. This method works by building up a sorted array at the beginning of the list.
+It begins the sorted array with the first element. Then it inspects the next element and swaps it backwards into the sorted array until it is in sorted position.
+It continues iterating through the list and swapping new items backwards into the sorted portion until it reaches the end. This algorithm has quadratic time complexity in the average and worst cases.
+
+Instructions: Write a function insertionSort which takes an array of integers as input and returns an array of these integers in sorted order from least to greatest.
+
+*/
+
+function insertionSort(arrInput) {
+  for (let outerIndex = 1; outerIndex < arrInput.length; outerIndex++) {
+    let currValue = arrInput[outerIndex];
+    //inner loop goes backwards
+    //starting index will be 1 less than outerIndex
+    for (
+      let innerIndex = outerIndex - 1;
+      0 <= innerIndex && arrInput[innerIndex] > currValue;
+      innerIndex--
+    ) {
+      let innerLoopCurrValue = arrInput[innerIndex];
+      arrInput[innerIndex + 1] = arrInput[innerIndex];
+    }
+    arrInput[innerIndex + 1] = currValue;
+  }
+}
+
+/*
+
+Implement Quick Sort
+Here we will move on to an intermediate sorting algorithm: quick sort. Quick sort is an efficient, recursive divide-and-conquer approach to sorting an array.
+In this method, a pivot value is chosen in the original array. The array is then partitioned into two subarrays of values less than and greater than the pivot value.
+We then combine the result of recursively calling the quick sort algorithm on both sub-arrays. This continues until the base case of an empty or single-item array is reached, which we return.
+The unwinding of the recursive calls return us the sorted array.
+
+Quick sort is a very efficient sorting method, providing O(nlog(n)) performance on average. It is also relatively easy to implement. These attributes make it a popular and useful sorting method.
+
+Instructions: Write a function quickSort which takes an array of integers as input and returns an array of these integers in sorted order from least to greatest.
+While the choice of the pivot value is important, any pivot will do for our purposes here. For simplicity, the first or last element could be used.
+
+*/
+
+function quickSort(arrInput) {
+  var copiedArr = [...arrInput];
+  //when our arr length is 1 or 0 we have a sorted array.
+  if (copiedArr.length < 1) return copiedArr;
+  var lessThanPivotArr = [];
+  var greaterThanPivotArr = [];
+
+  var pivotValue = copiedArr.pop();
+
+  for (let i = 0; i < copiedArr.length - 1; i++) {
+    let currValue = arrInput[i];
+    if (currValue < pivotValue) {
+      lessThanPivotArr.push(currValue);
+    } else {
+      greaterThanPivotArr.push(currValue);
+    }
+  }
+
+  return [
+    ...quickSort(lessThanPivotArr),
+    pivotValue,
+    ...quickSort(greaterThanPivotArr),
+  ];
+}
+
+function pivot(arrInput, start = 0, end = arrInput.length + 1) {
+  var pivotVal = arrInput[start];
+  var swapIndex = start;
+
+  for (let i = start + 1; i < arrInput.length; i++) {
+    let currValue = arrInput[i];
+    if (pivotVal > currValue) {
+      swapIndex++;
+      swapHelper(arrInput, swapIndex, i);
+    }
+  }
+  swapHelper(arrInput, swapIndex, start);
+  return swapIndex;
+}
+
+function quickSort(arrInput, left = 0, right = arrInput.length - 1) {
+  if (left < right) {
+    let pivotValue = pivot(arr, left, right);
+    quickSort(arrInput, left, pivotValue - 1);
+    quickSort(arrInput, pivotValue + 1, right);
+  }
+  return arrInput;
+}
+
+function thankYou(strInput) {
+  for (let i = 1; i < 0; i++) {
+    console.log(``);
+  }
+}
