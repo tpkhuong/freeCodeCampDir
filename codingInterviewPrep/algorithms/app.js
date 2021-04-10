@@ -658,3 +658,51 @@ function thankYou(strInput) {
     console.log(``);
   }
 }
+
+/***** intersection recursive *****/
+// [[5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20]]
+
+function intersection(arrInput) {
+  var visited = {};
+  if (arrInput.length == 1) return arrInput[0];
+
+  var firstArr = arrInput.shift();
+  var secondArr = arrInput[0];
+  var lastArr = arrInput[0 + 1];
+
+  var resultArr = firstArr.reduce(function findInSecondArr(
+    buildingUp,
+    currentValue
+  ) {
+    if (!visited[currentValue] && secondArr.includes(currentValue)) {
+      visited[currentValue] = true;
+      return [...buildingUp, currentValue];
+    }
+    return buildingUp;
+  },
+  []);
+
+  if (lastArr == undefined) {
+    return intersection([resultArr]);
+  } else {
+    return intersection([resultArr, lastArr]);
+  }
+}
+
+/***** intersection recursive *****/
+
+/***** intersection non-recursive *****/
+
+function intersectionNonRecursive(...arraysInput) {
+  var result = arraysInput.reduce(function findValuesInAllArr(
+    buildingUp,
+    currentValue,
+    currIndex,
+    list
+  ) {
+    var visited = {};
+  },
+  []);
+}
+
+/***** intersection non-recursive *****/
