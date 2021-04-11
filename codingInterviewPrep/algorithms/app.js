@@ -700,9 +700,30 @@ function intersectionNonRecursive(...arraysInput) {
     currIndex,
     list
   ) {
-    var visited = {};
-  },
-  []);
+    var firstArr = buildingUp.filter(function includeInSecondArr(eachValue) {
+      return currentValue.includes(eachValue);
+    });
+
+    var secondArr = currentValue.filter(function includeInFirstArr(eachValue) {
+      return buildingUp.includes(eachValue);
+    });
+
+    var valuesInBothArr = [...firstArr, ...secondArr];
+    var vistied = {};
+
+    return valuesInBothArr.reduce(function nonDuplicates(
+      buildingUp,
+      currentValue
+    ) {
+      if (!vistied[currentValue]) {
+        vistied[currentValue] = true;
+        return [...buildingUp, currentValue];
+      }
+      return buildingUp;
+    },
+    []);
+  });
+  return result;
 }
 
 /***** intersection non-recursive *****/
