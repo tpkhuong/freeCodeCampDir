@@ -806,3 +806,35 @@ function mergeSort(arrInput) {
     /***** add values left in either list1 or list2 *****/
   }
 }
+
+/***** includes *****/
+
+function includes(arrInput, valueInput, fromIndex = 0) {
+  var result = false;
+
+  for (let loopIndex = fromIndex; loopIndex < arrInput.length; loopIndex++) {
+    if (arrInput[loopIndex] == valueInput) {
+      result = true;
+    }
+  }
+
+  return result;
+}
+
+function includesWithReduce(arrInput, valueInput) {
+  var result = false;
+  return arrInput.reduce(function findValue(buildingUp, currentValue) {
+    if (currentValue == valueInput) {
+      result = true;
+      return result;
+    }
+    return result;
+  }, result);
+}
+
+var pets = ["dogs", "cats", "snakes"];
+
+includesWithReduce(pets, "cats"); //true
+includesWithReduce(pets, "mouse"); //false
+
+/***** includes *****/
