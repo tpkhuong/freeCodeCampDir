@@ -47,3 +47,19 @@ Although simpler, this can be an advantage for less-sophisticated JavaScript eng
 
 First create a buffer that is 64-bytes. Then create a Int32Array typed array with a view of it called i32View.
 */
+
+class ArrayBuffer {
+  /* 64 bytes */
+  constructor(byteSize) {
+    var multipleOf = Math.floor(byteSize / 8);
+    this.byteLength = byteSize;
+    //make array based on multiple of bytes
+  }
+  buffer() {}
+}
+
+class Int32Array extends ArrayBuffer {
+  constructor() {
+    super(byteSize);
+  }
+}
