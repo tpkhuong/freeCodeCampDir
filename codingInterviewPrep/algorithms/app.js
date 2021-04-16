@@ -838,3 +838,63 @@ includesWithReduce(pets, "cats"); //true
 includesWithReduce(pets, "mouse"); //false
 
 /***** includes *****/
+
+/***** some and every *****/
+
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
+
+const array = [1, 2, 3, 4, 5];
+
+function some(arr, callback) {
+  //implement me
+  var copiedArr = [...arr];
+  return copiedArr.reduce(function containOneTrue(
+    buildingUp,
+    currentValue,
+    index,
+    list
+  ) {
+    if (callback(currentValue)) {
+      copiedArr.splice(index);
+      return true;
+    }
+    return buildingUp;
+  },
+  false);
+}
+
+// checks whether an item is even
+const even = (item) => item % 2 === 0;
+
+// some(array,even)
+// expected output: true
+
+function every(arr, callback) {
+  // implement me
+  var copiedArr = [...arr];
+  return copiedArr.reduce(function containAllTrue(
+    buildingUp,
+    currentValue,
+    index,
+    list
+  ) {
+    if (callback(currentValue)) {
+      return buildingUp;
+    }
+    copiedArr.splice(index);
+
+    return false;
+  },
+  true);
+}
+
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every
+
+const isBelowThreshold = (currentValue) => currentValue < 40;
+
+const array1 = [1, 30, 41, 29, 10, 13];
+
+console.log(every(array1, isBelowThreshold));
+// expected output: true
+
+/***** some and every *****/
