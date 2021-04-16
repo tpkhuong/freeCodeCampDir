@@ -51,15 +51,21 @@ First create a buffer that is 64-bytes. Then create a Int32Array typed array wit
 class ArrayBuffer {
   /* 64 bytes */
   constructor(byteSize) {
-    var multipleOf = Math.floor(byteSize / 8);
+    this.byteSize = byteSize;
+    this.multipleOf = Math.floor(byteSize / 8);
     this.byteLength = byteSize;
     //make array based on multiple of bytes
   }
-  buffer() {}
 }
 
 class Int32Array extends ArrayBuffer {
-  constructor() {
+  constructor(byteSize) {
     super(byteSize);
+    // console.log("hello");
+    this.resultArr = [];
+    for (let i = 0; i < this.multipleOf; i++) {
+      this.resultArr = [...this.resultArr, 0];
+    }
+    return this.resultArr;
   }
 }
