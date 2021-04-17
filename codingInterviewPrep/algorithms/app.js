@@ -863,6 +863,19 @@ function some(arr, callback) {
   false);
 }
 
+function some(arr, callback) {
+  return arr.reduce(function untilTrue(buildingUp, currentValue) {
+    return callback(currentValue) ? true : buildingUp;
+  }, false);
+}
+
+function some(array, callback) {
+  return array.reduce((p, c) => p || callback(c), false);
+}
+function every(array, callback) {
+  return array.reduce((p, c) => !p || callback(c), true);
+}
+
 // checks whether an item is even
 const even = (item) => item % 2 === 0;
 
@@ -886,6 +899,12 @@ function every(arr, callback) {
     return false;
   },
   true);
+}
+
+function every(arr, callback) {
+  return arr.reduce(function untilFalse(buildingUp, currentValue) {
+    return !callback(currentValue) ? false : buildingUp;
+  }, true);
 }
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every
