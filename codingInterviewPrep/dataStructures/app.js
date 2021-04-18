@@ -193,9 +193,64 @@ class PriorityQueue {
   constructor() {
     this.collection = [];
   }
-  enqueue() {}
+  enqueue(arrInput) {
+    var copiedCollection = [...this.collection];
+    if (arrInput.length < 2) {
+      throw new error("Format have to be [strInput, priority]");
+    } else {
+      if (copiedCollection.length == 0) {
+        copiedCollection = [...copiedCollection, arrInput];
+      } else if (copiedCollection == 1) {
+        var [firstSubarray] = copiedCollection;
+        var [, priorityOfSubarray] = firstSubarray;
+        var [, arrInputPriority] = arrInput;
+        arrInputPriority < priorityOfSubarray
+          ? (copiedCollection = [...copiedCollection, arrInput])
+          : copiedCollection.push(arrInput);
+      } else {
+        //when our array/priorityqueue length is greater than 1 [[strInput,priority],[strInput,priority]]
+        // copiedCollection.forEach(function checkPriority(
+        //   eachSubarray,
+        //   index,
+        //   list
+        // ) {
+        //   var beforeSubarray = list[index - 1];
+        //   var beforePriority = beforeSubarray[1];
+        //   var afterSubarray = list[index + 1];
+        //   var afterPriority = afterSubarray[1];
+        //   var priorityOfArrInput = arrInput[1];
+        // });
+        /***** use for loop so we can break once we add the arr into the collection *****/
+        for (let index = 0; index < copiedCollection.length; index++) {
+          let beforeSubarray = copiedCollection[index - 1];
+          let beforePriority = beforeSubarray[1];
+          let afterSubarray = copiedCollection[index + 1];
+          let afterPriority = afterSubarray[1];
+          let priorityOfArrInput = arrInput[1];
+          if (beforeSubarray != undefined && afterSubarray != undefined) {
+          }
+        }
+        /***** use for loop so we can break once we add the arr into the collection *****/
+      }
+    }
+    this.collection = [...copiedCollection];
+  }
   dequeue() {}
   size() {}
   front() {}
   isEmpty() {}
+  viewQueue() {
+    return this.collection;
+  }
+}
+
+function testingForLoop(arrInput) {
+  var result = "hello";
+  for (let i = 0; i < arrInput.length; i++) {
+    if (arrInput[i] == 3) {
+      result = "Done";
+      break;
+    }
+  }
+  return result;
 }
