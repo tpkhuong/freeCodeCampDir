@@ -917,3 +917,98 @@ console.log(every(array1, isBelowThreshold));
 // expected output: true
 
 /***** some and every *****/
+
+function some(arrInput, callback) {
+  var result = false;
+  // for (let index = 0; index < arrInput.length; index++) {
+  //   let loopValue = arrInput[index];
+  //   if (callback(loopValue)) {
+  //     return true;
+  //   }
+  // }
+  var index = 0;
+  while (index < arrInput.length) {
+    let eachValue = arrInput[index];
+    if (callback(eachValue)) {
+      return true;
+    }
+    index++;
+  }
+  return result;
+}
+
+/***** some and every *****/
+
+/***** intersection *****/
+
+function intersection(arrInput) {
+  var result = [];
+  // var copiedArr = [].concat(arrInput);
+  // var copiedArr = arrInput.slice();
+  var copiedArr = [...arrInput];
+
+  var subarrayWithValueAppearOnce = copiedArr.reduce(
+    function makeSubarrayOfValueAppearingOnce(
+      buildingUp,
+      currentValue,
+      index,
+      list
+    ) {
+      // var afterCurrValueArr = list[index + 1];
+      // //when index + 1 == arr.length that will make nextArr undefined. when nextArr is undefined we want to return the value we want to return.
+      // if (!afterCurrValueArr) return buildingUp;
+      // //work with an array where the value appear once
+      // var visitedFirstArr = {};
+      // var visitedSecondArr = {};
+      // var filterFirstArr = currentValue.filter(function appearOnce(eachValue) {
+      //   if (!visitedFirstArr[eachValue]) {
+      //     visitedFirstArr[eachValue] = true;
+      //     return eachValue;
+      //   }
+      // });
+
+      // var filterSecondArr = afterCurrValueArr.filter(function appearOnce(eachValue) {
+      //   if (!visitedSecondArr[eachValue]) {
+      //     visitedSecondArr[eachValue] = true;
+      //     return eachValue;
+      //   }
+      // })
+      /***** take original array loop through it for each subarray we want to take that array and make an array where the value appear once *****/
+      var visited = {};
+      var appearOnceArr = [];
+
+      currentValue.forEach(function findValueAppearingOnce(eachValue) {
+        if (!visited[eachValue]) {
+          appearOnceArr.push(eachValue);
+          visited[eachValue] = true;
+        }
+      });
+      return [...buildingUp, [...appearOnceArr]];
+      /***** take original array loop through it for each subarray we want to take that array and make an array where the value appear once *****/
+    },
+    []
+  );
+
+  var lengthForCheck = subarrayWithValueAppearOnce.length;
+  // flat our arrays;
+  var flatOurArr = subarrayWithValueAppearOnce.flat();
+  var freqCounter = flatOurArr.reduce(function getFreq(
+    buildingUp,
+    currentValue
+  ) {
+    buildingUp[currentValue] = (buildingUp[currentValue] || 0) + 1;
+    return buildingUp;
+  },
+  {});
+  for (let eachKey in freqCounter) {
+    let freqOfNum = freqCounter[eachKey];
+    if (freqOfNum == lengthForCheck) {
+      result.push(Number(eachKey));
+    }
+  }
+  return result;
+}
+
+// [[5, 10, 15,5,15, 20], [15, 88, 1, 5, 7,15,5], [15,5,1, 10, 15, 5, 20,15]]
+//after running our reduce [[5, 10, 15, 20],[15, 88, 1, 5, 7],[15, 5, 1, 10, 20]]
+/***** intersection *****/
