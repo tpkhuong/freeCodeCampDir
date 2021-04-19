@@ -228,6 +228,27 @@ class PriorityQueue {
           let afterPriority = afterSubarray[1];
           let priorityOfArrInput = arrInput[1];
           if (beforeSubarray != undefined && afterSubarray != undefined) {
+            if (
+              priorityOfArrInput < afterPriority &&
+              priorityOfArrInput == beforePriority
+            ) {
+              copiedCollection = [arrInput, ...copiedCollection];
+            } else if (
+              priorityOfArrInput == afterPriority &&
+              priorityOfArrInput > beforePriority
+            ) {
+              let leftOfArrInput = copiedCollection.slice(0, index);
+              let rightOfArrInput = copiedCollection.slice(index);
+              copiedCollection = [
+                ...leftOfArrInput,
+                arrInput,
+                ...rightOfArrInput,
+              ];
+            } else if (priorityOfArrInput < beforePriority) {
+              copiedCollection = [arrInput, ...copiedCollection];
+            } else if (priorityOfArrInput > afterPriority) {
+              copiedCollection = [...copiedCollection, arrInput];
+            }
           }
         }
         /***** use for loop so we can break once we add the arr into the collection *****/
@@ -235,7 +256,25 @@ class PriorityQueue {
     }
     this.collection = [...copiedCollection];
   }
-  dequeue() {}
+  dequeue(valueInput) {
+    //remove the subarray but just return the value not the priorty
+    //loop through array when we find the value remove that subarray
+    var copiedList = [...this.collection];
+    // var copiedArr = [].concat(this.collection);
+    // var copiedCollection = this.collection.slice()
+    var [findSubarrayWithThisValue] = copiedList;
+    var removedValue;
+    var removedSubarray;
+    for (let index = 0; index < copiedList.length; index++) {
+      let eachSubarray = copiedList[index];
+      let [valueFoundInSubarray] = eachSubarray;
+      if (eachSubarray.includes(findSubarrayWithThisValue)) {
+        removedValue = valueFoundInSubarray;
+        removedSubarray = copiedList.splice(index, 1);
+      }
+    }
+    return removedValue;
+  }
   size() {}
   front() {}
   isEmpty() {}
@@ -254,3 +293,7 @@ function testingForLoop(arrInput) {
   }
   return result;
 }
+
+var heroes = ["batman", "superman", "captain america"];
+
+var copiedArr = [].concat(heroes);
