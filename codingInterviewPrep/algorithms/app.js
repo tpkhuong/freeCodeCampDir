@@ -1012,3 +1012,36 @@ function intersection(arrInput) {
 // [[5, 10, 15,5,15, 20], [15, 88, 1, 5, 7,15,5], [15,5,1, 10, 15, 5, 20,15]]
 //after running our reduce [[5, 10, 15, 20],[15, 88, 1, 5, 7],[15, 5, 1, 10, 20]]
 /***** intersection *****/
+
+/***** union *****/
+
+function union(arrInput) {
+  var copiedArr = [...arrInput];
+  // var copiedArr = [].concat(arrInput);
+  // var copiedArr = arrInput.slice();
+  var flattenArr = copiedArr.flat();
+  var visited = {};
+  var result = flattenArr.reduce(function findUniqueValueInOrder(
+    buildingUp,
+    currentValue,
+    index,
+    list
+  ) {
+    if (!visited[currentValue]) {
+      visited[currentValue] = true;
+      return [...buildingUp, currentValue];
+    }
+    return buildingUp;
+  },
+  []);
+  return result;
+}
+
+union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]);
+union([
+  [5, 10, 15],
+  [15, 88, 1, 5, 7],
+  [100, 15, 10, 1, 5],
+]);
+
+/***** union *****/
