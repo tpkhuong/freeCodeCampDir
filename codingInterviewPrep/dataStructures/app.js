@@ -196,18 +196,23 @@ class PriorityQueue {
   enqueue(arrInput) {
     var copiedCollection = [...this.collection];
     if (arrInput.length < 2) {
-      throw new error("Format have to be [strInput, priority]");
+      throw new Error("Format have to be [strInput, priority]");
     } else {
       if (copiedCollection.length == 0) {
         copiedCollection = [...copiedCollection, arrInput];
-      } else if (copiedCollection == 1) {
+      } else if (copiedCollection.length == 1) {
         var [firstSubarray] = copiedCollection;
         var [, priorityOfSubarray] = firstSubarray;
         var [, arrInputPriority] = arrInput;
+        // if (arrInputPriority < priorityOfSubarray) {
+        //   copiedCollection = [...copiedCollection, arrInput];
+        // } else {
+        //   copiedCollection.push(arrInput);
+        // }
         arrInputPriority < priorityOfSubarray
-          ? (copiedCollection = [...copiedCollection, arrInput])
+          ? (copiedCollection = [arrInput, ...copiedCollection])
           : copiedCollection.push(arrInput);
-      } else {
+      } else if (copiedCollection.length == 2) {
         //when our array/priorityqueue length is greater than 1 [[strInput,priority],[strInput,priority]]
         // copiedCollection.forEach(function checkPriority(
         //   eachSubarray,
@@ -223,11 +228,13 @@ class PriorityQueue {
         /***** use for loop so we can break once we add the arr into the collection *****/
         for (let index = 0; index < copiedCollection.length; index++) {
           let beforeSubarray = copiedCollection[index - 1];
-          let beforePriority = beforeSubarray[1];
           let afterSubarray = copiedCollection[index + 1];
-          let afterPriority = afterSubarray[1];
-          let priorityOfArrInput = arrInput[1];
+          if (beforeSubarray == undefined) continue;
+          if (afterSubarray == undefined) break;
           if (beforeSubarray != undefined && afterSubarray != undefined) {
+            let beforePriority = beforeSubarray[1];
+            let afterPriority = afterSubarray[1];
+            let priorityOfArrInput = arrInput[1];
             if (
               priorityOfArrInput < afterPriority &&
               priorityOfArrInput == beforePriority
@@ -252,6 +259,7 @@ class PriorityQueue {
           }
         }
         /***** use for loop so we can break once we add the arr into the collection *****/
+      } else {
       }
     }
     this.collection = [...copiedCollection];
@@ -275,9 +283,16 @@ class PriorityQueue {
     }
     return removedValue;
   }
-  size() {}
-  front() {}
-  isEmpty() {}
+  size() {
+    return this.collection.length;
+  }
+  front() {
+    var [firstValue] = this.collection;
+    return firstValue;
+  }
+  isEmpty() {
+    return this.collection == 0 ? true : false;
+  }
   viewQueue() {
     return this.collection;
   }
@@ -297,3 +312,23 @@ function testingForLoop(arrInput) {
 var heroes = ["batman", "superman", "captain america"];
 
 var copiedArr = [].concat(heroes);
+
+// var students = [
+//   { id: 14, name: "Kyle" },
+//   { id: 73, name: "Suzy" },
+//   { id: 112, name: "Frank" },
+//   { id: 6, name: "Sarah" },
+// ];
+
+// function getStudentName(studentID) {
+//   // function scope: BLUE
+
+//   console.log(student);
+//   for (let student of students) {
+//     // loop scope: GREEN
+
+//     if (student.id === studentID) {
+//       return student.name;
+//     }
+//   }
+// }
