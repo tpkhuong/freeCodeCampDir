@@ -213,6 +213,22 @@ class PriorityQueue {
           ? (copiedCollection = [arrInput, ...copiedCollection])
           : copiedCollection.push(arrInput);
       } else if (copiedCollection.length == 2) {
+        let [beforeSubarray] = copiedCollection;
+        let [, afterSubarray] = copiedCollection;
+        let [, beforePriority] = beforeSubarray;
+        let [, afterPriority] = afterSubarray;
+        let [, arrInputPriority] = arrInput;
+
+        if (arrInputPriority <= beforePriority) {
+          copiedCollection = [arrInput, ...copiedCollection];
+        } else if (
+          arrInputPriority > beforePriority &&
+          arrInputPriority <= afterPriority
+        ) {
+          copiedCollection = [beforeSubarray, arrInput, afterSubarray];
+        } else {
+          copiedCollection = [...copiedCollection, arrInput];
+        }
         //when our array/priorityqueue length is greater than 1 [[strInput,priority],[strInput,priority]]
         // copiedCollection.forEach(function checkPriority(
         //   eachSubarray,
@@ -226,11 +242,14 @@ class PriorityQueue {
         //   var priorityOfArrInput = arrInput[1];
         // });
         /***** use for loop so we can break once we add the arr into the collection *****/
-        for (let index = 0; index < copiedCollection.length; index++) {
+        /***** use for loop so we can break once we add the arr into the collection *****/
+      } else {
+        //[[1],[2],[3]], our loopIndex will be 1. loop until index is < length - 1 which will be 2. when our loop get to index 2 it will break
+        for (let index = 1; index < copiedCollection.length - 1; index++) {
           let beforeSubarray = copiedCollection[index - 1];
           let afterSubarray = copiedCollection[index + 1];
-          if (beforeSubarray == undefined) continue;
-          if (afterSubarray == undefined) break;
+          // if (beforeSubarray == undefined) continue;
+          // if (afterSubarray == undefined) break;
           if (beforeSubarray != undefined && afterSubarray != undefined) {
             let beforePriority = beforeSubarray[1];
             let afterPriority = afterSubarray[1];
@@ -258,8 +277,6 @@ class PriorityQueue {
             }
           }
         }
-        /***** use for loop so we can break once we add the arr into the collection *****/
-      } else {
       }
     }
     this.collection = [...copiedCollection];
