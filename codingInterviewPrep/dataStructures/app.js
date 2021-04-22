@@ -245,38 +245,42 @@ class PriorityQueue {
         /***** use for loop so we can break once we add the arr into the collection *****/
       } else {
         //[[1],[2],[3]], our loopIndex will be 1. loop until index is < length - 1 which will be 2. when our loop get to index 2 it will break
-        for (let index = 1; index < copiedCollection.length - 1; index++) {
-          let beforeSubarray = copiedCollection[index - 1];
-          let afterSubarray = copiedCollection[index + 1];
-          // if (beforeSubarray == undefined) continue;
-          // if (afterSubarray == undefined) break;
-          if (beforeSubarray != undefined && afterSubarray != undefined) {
-            let beforePriority = beforeSubarray[1];
-            let afterPriority = afterSubarray[1];
-            let priorityOfArrInput = arrInput[1];
-            if (
-              priorityOfArrInput < afterPriority &&
-              priorityOfArrInput == beforePriority
-            ) {
-              copiedCollection = [arrInput, ...copiedCollection];
-            } else if (
-              priorityOfArrInput == afterPriority &&
-              priorityOfArrInput > beforePriority
-            ) {
-              let leftOfArrInput = copiedCollection.slice(0, index);
-              let rightOfArrInput = copiedCollection.slice(index);
-              copiedCollection = [
-                ...leftOfArrInput,
-                arrInput,
-                ...rightOfArrInput,
-              ];
-            } else if (priorityOfArrInput < beforePriority) {
-              copiedCollection = [arrInput, ...copiedCollection];
-            } else if (priorityOfArrInput > afterPriority) {
-              copiedCollection = [...copiedCollection, arrInput];
-            }
+        //
+        let firstPriority = copiedCollection[0];
+        let lastPriority = copiedCollection[copiedCollection.length - 1];
+        let [, arrPriority] = arrInput;
+
+        if (arrPriority < firstPriority) {
+          copiedCollection = [arrInput, ...copiedCollection];
+        } else if (arrInput > lastPriority) {
+          copiedCollection = [...copiedCollection, arrInput];
+        } else {
+        }
+        //find index of matching priority.
+        let indexOfPriorityInArr;
+        for (let index = 1; index < copiedCollection.length; index++) {
+          let eachSubarray = copiedCollection[index];
+          let [, subarrayPriority] = eachSubarray;
+
+          if (arrPriority == subarrayPriority) {
+            indexOfPriorityInArr = index;
           }
         }
+        //once we get the index of matching priority. we want to copy left side of index of the priority and the right side of index of the priority.
+        //the arrInput will go between leftside of the copied array and the rightside of the copied array. the leftside array will have a higher priority than the arrinput
+        //the rightside array will have a lower equal priority than the arrInput.
+        let higherPrioritySide = copiedCollection.slice(
+          0,
+          indexOfPriorityInArr
+        );
+        let lowerEqualToPrioritySide = copiedCollection.slice(
+          indexOfPriorityInArr
+        );
+        copiedCollection = [
+          ...higherPrioritySide,
+          arrInput,
+          ...lowerEqualToPrioritySide,
+        ];
       }
     }
     this.collection = [...copiedCollection];
@@ -330,6 +334,35 @@ var heroes = ["batman", "superman", "captain america"];
 
 var copiedArr = [].concat(heroes);
 
+function extraCode() {
+  let beforeSubarray = copiedCollection[index - 1];
+  let afterSubarray = copiedCollection[index + 1];
+  // if (beforeSubarray == undefined) continue;
+  // if (afterSubarray == undefined) break;
+  if (beforeSubarray != undefined && afterSubarray != undefined) {
+    let beforePriority = beforeSubarray[1];
+    let afterPriority = afterSubarray[1];
+    let priorityOfArrInput = arrInput[1];
+    if (
+      priorityOfArrInput < afterPriority &&
+      priorityOfArrInput == beforePriority
+    ) {
+      copiedCollection = [arrInput, ...copiedCollection];
+    } else if (
+      priorityOfArrInput == afterPriority &&
+      priorityOfArrInput > beforePriority
+    ) {
+      let leftOfArrInput = copiedCollection.slice(0, index);
+      let rightOfArrInput = copiedCollection.slice(index);
+      copiedCollection = [...leftOfArrInput, arrInput, ...rightOfArrInput];
+    } else if (priorityOfArrInput < beforePriority) {
+      copiedCollection = [arrInput, ...copiedCollection];
+    } else if (priorityOfArrInput > afterPriority) {
+      copiedCollection = [...copiedCollection, arrInput];
+    }
+  }
+}
+
 // var students = [
 //   { id: 14, name: "Kyle" },
 //   { id: 73, name: "Suzy" },
@@ -349,3 +382,8 @@ var copiedArr = [].concat(heroes);
 //     }
 //   }
 // }
+
+// var arrTest = [1, 2, 3, 4, 5];
+
+// var leftSide = arrTest.slice(0, 4);
+// var rightSide = arrTest.slice(4)
