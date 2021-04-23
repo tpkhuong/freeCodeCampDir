@@ -246,41 +246,42 @@ class PriorityQueue {
       } else {
         //[[1],[2],[3]], our loopIndex will be 1. loop until index is < length - 1 which will be 2. when our loop get to index 2 it will break
         //
-        let firstPriority = copiedCollection[0];
-        let lastPriority = copiedCollection[copiedCollection.length - 1];
+
+        let [, firstPriority] = copiedCollection[0];
+        let [, lastPriority] = copiedCollection[copiedCollection.length - 1];
         let [, arrPriority] = arrInput;
 
         if (arrPriority < firstPriority) {
           copiedCollection = [arrInput, ...copiedCollection];
-        } else if (arrInput > lastPriority) {
+        } else if (arrPriority > lastPriority) {
           copiedCollection = [...copiedCollection, arrInput];
         } else {
-        }
-        //find index of matching priority.
-        let indexOfPriorityInArr;
-        for (let index = 1; index < copiedCollection.length; index++) {
-          let eachSubarray = copiedCollection[index];
-          let [, subarrayPriority] = eachSubarray;
+          //find index of matching priority.
+          let indexOfPriorityInArr;
+          for (let index = 1; index < copiedCollection.length; index++) {
+            let eachSubarray = copiedCollection[index];
+            let [, subarrayPriority] = eachSubarray;
 
-          if (arrPriority == subarrayPriority) {
-            indexOfPriorityInArr = index;
+            if (arrPriority == subarrayPriority) {
+              indexOfPriorityInArr = index;
+            }
           }
+          //once we get the index of matching priority. we want to copy left side of index of the priority and the right side of index of the priority.
+          //the arrInput will go between leftside of the copied array and the rightside of the copied array. the leftside array will have a higher priority than the arrinput
+          //the rightside array will have a lower equal priority than the arrInput.
+          let higherPrioritySide = copiedCollection.slice(
+            0,
+            indexOfPriorityInArr
+          );
+          let lowerEqualToPrioritySide = copiedCollection.slice(
+            indexOfPriorityInArr
+          );
+          copiedCollection = [
+            ...higherPrioritySide,
+            arrInput,
+            ...lowerEqualToPrioritySide,
+          ];
         }
-        //once we get the index of matching priority. we want to copy left side of index of the priority and the right side of index of the priority.
-        //the arrInput will go between leftside of the copied array and the rightside of the copied array. the leftside array will have a higher priority than the arrinput
-        //the rightside array will have a lower equal priority than the arrInput.
-        let higherPrioritySide = copiedCollection.slice(
-          0,
-          indexOfPriorityInArr
-        );
-        let lowerEqualToPrioritySide = copiedCollection.slice(
-          indexOfPriorityInArr
-        );
-        copiedCollection = [
-          ...higherPrioritySide,
-          arrInput,
-          ...lowerEqualToPrioritySide,
-        ];
       }
     }
     this.collection = [...copiedCollection];
@@ -291,24 +292,28 @@ class PriorityQueue {
     var copiedList = [...this.collection];
     // var copiedArr = [].concat(this.collection);
     // var copiedCollection = this.collection.slice()
-    var [findSubarrayWithThisValue] = copiedList;
+    // var [findSubarrayWithThisValue] = copiedList;
+
     var removedValue;
     var removedSubarray;
     for (let index = 0; index < copiedList.length; index++) {
       let eachSubarray = copiedList[index];
       let [valueFoundInSubarray] = eachSubarray;
-      if (eachSubarray.includes(findSubarrayWithThisValue)) {
-        removedValue = valueFoundInSubarray;
-        removedSubarray = copiedList.splice(index, 1);
+      if (eachSubarray.includes(valueInput)) {
+        // removedValue = valueFoundInSubarray;
+        removedSubarray = copiedList.splice(index, 1)[0];
       }
     }
-    return removedValue;
+    removedValue = removedSubarray.shift();
+    this.collection = [...copiedList];
+    return removedValue ? removedValue : `${valueInput} not in this queue`;
   }
   size() {
     return this.collection.length;
   }
   front() {
-    var [firstValue] = this.collection;
+    var [firstSubarray] = this.collection;
+    var [firstValue] = firstSubarray;
     return firstValue;
   }
   isEmpty() {
