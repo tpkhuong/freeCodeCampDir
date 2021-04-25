@@ -441,14 +441,26 @@ First, we create an array of length 5:
    ^Read @ 0
    ^Write @ 0
 Then we enqueue a, b, and c:
+enqueue(a)
+enqueue(b)
+enqueue(c)
   [a, b, c, null, null]
    ^Read @ 0
             ^Write @ 3
 Now we dequeue all the enqueued items:
+dequeue()
+dequeue()
+dequeue()
   [null, null, null, null, null]
                      ^Read @ 3
                      ^Write @ 3
 Finally, we enqueue d, e and f:
+enqueue(d)
+enqueue(e)
+enqueue(f)
+
+we can enqueue() three more times before we can't passed the read pointer
+
   [f, null, null, d, e]
                   ^Read @ 3
       ^Write @ 1
@@ -456,8 +468,26 @@ Finally, we enqueue d, e and f:
 */
 
 class CircularQueue {
-  constructor(size) {}
+  constructor(size) {
+    this.queue = [];
+    this.read = 0;
+    this.write = 0;
+    this.max = size - 1;
 
-  enqueue() {}
-  dequeue() {}
+    while (size > 0) {
+      this.queue.push(null);
+      size--;
+    }
+  }
+
+  print() {
+    return this.queue;
+  }
+
+  enqueue(item) {
+    //write pointer should not move passed the read pointer
+  }
+  dequeue() {
+    //read pointer should not move passed the write pointer
+  }
 }
