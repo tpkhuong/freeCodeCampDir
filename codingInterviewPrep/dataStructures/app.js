@@ -472,6 +472,7 @@ class CircularQueue {
     this.queue = [];
     this.read = 0;
     this.write = 0;
+    this.numberOfPasses = 0;
     this.max = size - 1;
 
     while (size > 0) {
@@ -483,11 +484,61 @@ class CircularQueue {
   print() {
     return this.queue;
   }
-
+  // how do we check that this.write does not passed this.read and this.read does not pass this.write
   enqueue(item) {
     //write pointer should not move passed the read pointer
+    this.arr = [...this.queue];
+    this.valueAtCurrPosition = this.arr[this.write];
+
+    if (this.write == 5) {
+      this.write = 0;
+      this.numberOfPasses++;
+    }
+
+    if (this.numberOfPasses < 1) {
+      //algorithm to handle writing data
+      this.queue[this.write] = item;
+      return this.queue[this.write];
+    } else {
+      if (this.write === this.read) {
+        return null;
+      } else {
+        //algorithm to handle writing data
+        this.queue[this.write] = item;
+        return this.queue[this.write];
+      }
+    }
   }
+
   dequeue() {
     //read pointer should not move passed the write pointer
+    this.arr = [...this.queue];
+    this.valueAtCurrPosition = this.arr[this.read];
+
+    if (this.read == 5) {
+      this.read = 0;
+    }
+    if (this.read <= this.write) {
+    }
   }
 }
+
+var logger = function (strInput) {
+  console.log("hello");
+  var innerLogger = () => {
+    console.log(strInput);
+  };
+};
+
+setTimeout(function () {
+  console.log("what is this");
+}, 1000);
+
+const myAlert = () => {
+  const x = "Help! I think I found a clue!";
+  const alerter = () => {
+    alert(x);
+  };
+  setTimeout(alerter, 1000);
+  console.log("what happens first? this log or the alert?");
+};
