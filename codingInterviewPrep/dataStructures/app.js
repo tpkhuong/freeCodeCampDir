@@ -498,6 +498,7 @@ class CircularQueue {
     if (this.numberOfPasses < 1) {
       //algorithm to handle writing data
       this.queue[this.write] = item;
+      this.write++;
       return this.queue[this.write];
     } else {
       if (this.write === this.read) {
@@ -505,6 +506,7 @@ class CircularQueue {
       } else {
         //algorithm to handle writing data
         this.queue[this.write] = item;
+        this.write++;
         return this.queue[this.write];
       }
     }
@@ -519,6 +521,11 @@ class CircularQueue {
       this.read = 0;
     }
     if (this.read <= this.write) {
+      let dequeuedItem = this.queue[this.read];
+      this.queue[this.read] = null;
+      return dequeuedItem;
+    } else {
+      return null;
     }
   }
 }
