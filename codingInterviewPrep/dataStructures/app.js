@@ -488,9 +488,9 @@ class CircularQueue {
   enqueue(item) {
     //write pointer should not move passed the read pointer
     this.arr = [...this.queue];
-    this.valueAtCurrPosition = this.arr[this.write];
+    this.valueAtCurrPosition = this.queue[this.write];
 
-    if (this.write == 5) {
+    if (this.write == this.max) {
       this.write = 0;
       this.numberOfPasses++;
     }
@@ -499,7 +499,7 @@ class CircularQueue {
       //algorithm to handle writing data
       this.queue[this.write] = item;
       this.write++;
-      return this.queue[this.write];
+      return item;
     } else {
       if (this.write === this.read) {
         return null;
@@ -507,7 +507,7 @@ class CircularQueue {
         //algorithm to handle writing data
         this.queue[this.write] = item;
         this.write++;
-        return this.queue[this.write];
+        return item;
       }
     }
   }
@@ -515,14 +515,15 @@ class CircularQueue {
   dequeue() {
     //read pointer should not move passed the write pointer
     this.arr = [...this.queue];
-    this.valueAtCurrPosition = this.arr[this.read];
+    this.valueAtCurrPosition = this.queue[this.read];
 
-    if (this.read == 5) {
+    if (this.read == this.max) {
       this.read = 0;
     }
     if (this.read <= this.write) {
       let dequeuedItem = this.queue[this.read];
       this.queue[this.read] = null;
+      this.read++;
       return dequeuedItem;
     } else {
       return null;
