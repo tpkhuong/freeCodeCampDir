@@ -472,7 +472,8 @@ class CircularQueue {
     this.queue = [];
     this.read = 0;
     this.write = 0;
-    this.numberOfPasses = 0;
+    this.enqueueNumOfLoopAround = 0;
+    this.dequeueNumOfLoopAround = 0;
     this.max = size - 1;
 
     while (size > 0) {
@@ -491,11 +492,13 @@ class CircularQueue {
     this.valueAtCurrPosition = this.queue[this.write];
 
     if (this.write == this.max) {
+      this.queue[this.write] = item;
       this.write = 0;
       this.numberOfPasses++;
+      return item;
     }
 
-    if (this.numberOfPasses < 1) {
+    if (this.enqueueNumOfLoopAround < 1) {
       //algorithm to handle writing data
       this.queue[this.write] = item;
       this.write++;
@@ -518,13 +521,21 @@ class CircularQueue {
     this.valueAtCurrPosition = this.queue[this.read];
 
     if (this.read == this.max) {
-      this.read = 0;
-    }
-    if (this.read <= this.write) {
-      let dequeuedItem = this.queue[this.read];
+      let dequeueItem = this.queue[this.read];
       this.queue[this.read] = null;
-      this.read++;
-      return dequeuedItem;
+      this.read = 0;
+      return dequeueItem;
+    } else if (this.read == this.max && this.read == this.write) {
+    }
+    if (this.dequeueNumOfLoopAround <= this.enqueueNumOfLoopAround) {
+      if (this.read <= this.write) {
+        let dequeuedItem = this.queue[this.read];
+        this.queue[this.read] = null;
+        this.read++;
+        return dequeuedItem;
+      } else {
+        return null;
+      }
     } else {
       return null;
     }
