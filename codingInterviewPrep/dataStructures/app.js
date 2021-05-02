@@ -520,19 +520,26 @@ class CircularQueue {
     this.arr = [...this.queue];
     this.valueAtCurrPosition = this.queue[this.read];
 
-    if (this.read == this.max) {
-      let dequeueItem = this.queue[this.read];
-      this.queue[this.read] = null;
-      this.read = 0;
-      return dequeueItem;
-    } else if (this.read == this.max && this.read == this.write) {
-    }
     if (this.dequeueNumOfLoopAround <= this.enqueueNumOfLoopAround) {
       if (this.read <= this.write) {
         let dequeuedItem = this.queue[this.read];
         this.queue[this.read] = null;
         this.read++;
         return dequeuedItem;
+      } else {
+        if (this.read == this.max) {
+          let dequeueItem = this.queue[this.read];
+          this.queue[this.read] = null;
+          this.read = 0;
+          this.dequeueNumOfLoopAround++;
+          return dequeueItem;
+        }
+      }
+      // } else {
+      //   return null;
+      // }
+      if (this.read == this.max) {
+      } else if (this.read == this.max && this.read == this.write) {
       } else {
         return null;
       }
