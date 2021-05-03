@@ -491,23 +491,23 @@ class CircularQueue {
     this.arr = [...this.queue];
     this.valueAtCurrPosition = this.queue[this.write];
 
-    if (this.write == this.max) {
-      this.queue[this.write] = item;
-      this.write = 0;
-      this.numberOfPasses++;
-      return item;
-    }
-
-    if (this.enqueueNumOfLoopAround < 1) {
+    if (this.enqueueNumOfLoopAround == this.dequeueNumOfLoopAround) {
       //algorithm to handle writing data
-      this.queue[this.write] = item;
-      this.write++;
-      return item;
-    } else {
+      if (this.write == this.max) {
+        this.queue[this.write] = item;
+        this.write = 0;
+        this.numberOfPasses++;
+        return item;
+      } else {
+        //algorithm to handle writing data
+        this.queue[this.write] = item;
+        this.write++;
+        return item;
+      }
+    } else if (this.enqueueNumOfLoopAround - this.dequeueNumOfLoopAround == 1) {
       if (this.write === this.read) {
         return null;
       } else {
-        //algorithm to handle writing data
         this.queue[this.write] = item;
         this.write++;
         return item;
