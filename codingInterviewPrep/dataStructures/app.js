@@ -520,31 +520,45 @@ class CircularQueue {
     this.arr = [...this.queue];
     this.valueAtCurrPosition = this.queue[this.read];
 
-    if (this.dequeueNumOfLoopAround <= this.enqueueNumOfLoopAround) {
-      if (this.read <= this.write) {
+    if (this.dequeueNumOfLoopAround == this.enqueueNumOfLoopAround) {
+      if (this.read < this.write) {
         let dequeuedItem = this.queue[this.read];
         this.queue[this.read] = null;
         this.read++;
         return dequeuedItem;
-      } else {
-        if (this.read == this.max) {
-          let dequeueItem = this.queue[this.read];
-          this.queue[this.read] = null;
-          this.read = 0;
-          this.dequeueNumOfLoopAround++;
-          return dequeueItem;
-        }
+      } else if (this.read == this.write && this.queue[this.read] !== null) {
+        let anotherDequeuedItem = this.queue[this.read];
+        this.queue[this.read] = null;
+        return anotherDequeuedItem;
+      } else if (this.read == this.write && this.queue[this.read] === null) {
+        return null;
       }
+
+      if (
+        this.read == this.max &&
+        this.read == this.write &&
+        this.queue[this.read] === null
+      ) {
+        return null;
+      }
+
       // } else {
       //   return null;
       // }
-      if (this.read == this.max) {
-      } else if (this.read == this.max && this.read == this.write) {
-      } else {
+    } else if (this.dequeueNumOfLoopAround < this.enqueueNumOfLoopAround) {
+      if (this.read == this.max && this.queue[this.read] !== null) {
+        let dequeuedItem = this.queue[this.read];
+        this.queue[this.read] = null;
+        this.read = 0;
+        return dequeuedItem;
+      } else if (this.read == this.max && this.queue[this.read] === null) {
         return null;
+      } else {
+        let dequeuedItem = this.queue[this.read];
+        this.queue[this.read] = null;
+        this.read++;
+        return dequeuedItem;
       }
-    } else {
-      return null;
     }
   }
 }
