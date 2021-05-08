@@ -556,10 +556,13 @@ class CircularQueue {
         let dequeuedItem = this.queue[this.read];
         this.queue[this.read] = null;
         this.read = 0;
+        this.dequeueNumOfLoopAround++;
         return dequeuedItem;
-      } else if (this.read == this.max && this.queue[this.read] === null) {
-        return null;
       } else {
+        //   else if (this.read == this.max && this.queue[this.read] === null) {
+        //   //this will run and return null when this.read == this.max and its null`
+        //   return null;
+        // }
         let dequeuedItem = this.queue[this.read];
         this.queue[this.read] = null;
         this.read++;
