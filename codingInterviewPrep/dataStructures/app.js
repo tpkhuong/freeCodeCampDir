@@ -616,3 +616,29 @@ Create a remove method that accepts a value and checks if it exists in the set. 
 Otherwise, it should return false. Create a size method that returns the size of the set collection.
 
 */
+
+class Set {
+  constructor() {
+    this.dictionary = {};
+  }
+  // This method will check for the presence of an element and return true or false
+  has(element) {
+    return this.dictionary[element] !== undefined
+      ? this.dictionary[element]
+      : undefined;
+  }
+  // This method will return all the values in the set
+  values() {
+    return Object.values(this.dictionary);
+  }
+  /* Create an add method that adds a unique value to the set collection and returns true if the value was successfully added and false otherwise. */
+  add(valueInput) {}
+  /* Create an add method that adds a unique value to the set collection and returns true if the value was successfully added and false otherwise. */
+
+  /*   Create a remove method that accepts a value and checks if it exists in the set. If it does, then this method should remove it from the set collection, and return true.
+Otherwise, it should return false. Create a size method that returns the size of the set collection. */
+  remove(valueInput) {}
+  /*   Create a remove method that accepts a value and checks if it exists in the set. If it does, then this method should remove it from the set collection, and return true.
+Otherwise, it should return false. Create a size method that returns the size of the set collection. */
+  size() {}
+}
