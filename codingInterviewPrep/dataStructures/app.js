@@ -606,6 +606,7 @@ console.log(set1.has(1));
 // output: true
 console.log(set1.has(6));
 // output: false
+
 First, we will create an add method that adds a value to our set collection as long as the value does not already exist in the set.
 Then we will create a remove method that removes a value from the set collection if it already exists.
 And finally, we will create a size method that returns the number of elements inside the set collection.
@@ -618,17 +619,32 @@ Otherwise, it should return false. Create a size method that returns the size of
 */
 
 class Set {
-  constructor() {
-    this.dictionary = {};
+  constructor(arrInput) {
+    //remove duplicates
+    var cached = {};
+    var removeDuplicates = arrInput.reduce(function findUnique(
+      buildingUp,
+      currentValue
+    ) {
+      if (!cached[currentValue]) {
+        cached[currentValue] = true;
+        return [...buildingUp, currentValue];
+      }
+      return buildingUp;
+    },
+    []);
+    this.dictionary = { ...removeDuplicates };
+    console.log(this.dictionary);
+    console.log(removeDuplicates);
+    console.log(Object.values(this.dictionary));
   }
   // This method will check for the presence of an element and return true or false
   has(element) {
-    return this.dictionary[element] !== undefined
-      ? this.dictionary[element]
-      : undefined;
+    return !this.dictionary ? undefined : element;
   }
   // This method will return all the values in the set
   values() {
+    // var justValues = Object.values(this.dictionary);
     return Object.values(this.dictionary);
   }
   /* Create an add method that adds a unique value to the set collection and returns true if the value was successfully added and false otherwise. */
