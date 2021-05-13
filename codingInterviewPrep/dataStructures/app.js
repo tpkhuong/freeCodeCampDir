@@ -633,14 +633,16 @@ class Set {
       return buildingUp;
     },
     []);
-    this.dictionary = { ...removeDuplicates };
-    console.log(this.dictionary);
+    // this.dictionary = { ...removeDuplicates };
+    // console.log(this.dictionary);
     console.log(removeDuplicates);
-    console.log(Object.values(this.dictionary));
+    // console.log(Object.values(this.dictionary));
   }
   // This method will check for the presence of an element and return true or false
   has(element) {
-    return !this.dictionary ? undefined : element;
+    for (let eachKey in this.dictionary) {
+      return this.dictionary[eachKey] == element ? true : false;
+    }
   }
   // This method will return all the values in the set
   values() {
@@ -648,7 +650,28 @@ class Set {
     return Object.values(this.dictionary);
   }
   /* Create an add method that adds a unique value to the set collection and returns true if the value was successfully added and false otherwise. */
-  add(valueInput) {}
+  add(valueInput) {
+    var ourValues = Object.values(this.dictionary);
+    if (ourValues.includes(valueInput)) {
+      return false;
+    } else {
+      // ourValues.push(valueInput);
+      ourValues = [...ourValues, valueInput];
+      this.dictionary = { ...ourValues };
+      var arrToObj = ourValues.reduce(function makeArrIntoObj(
+        buildingUp,
+        currentValue,
+        currIndex
+      ) {
+        buildingUp[currIndex] = currentValue;
+        return buildingUp;
+      },
+      {});
+      this.dictionary = arrToObj;
+      return true;
+    }
+    /* convert array to object */
+  }
   /* Create an add method that adds a unique value to the set collection and returns true if the value was successfully added and false otherwise. */
 
   /*   Create a remove method that accepts a value and checks if it exists in the set. If it does, then this method should remove it from the set collection, and return true.
@@ -660,4 +683,20 @@ Otherwise, it should return false. Create a size method that returns the size of
     var makeLength = Object.entries(this.dictionary);
     return makeLength.length;
   }
+}
+
+var testArr = [1, 2, 3, 4, 5, 6];
+
+var obj = testArr.reduce(function arrToObj(
+  buildingUp,
+  currentValue,
+  currIndex
+) {
+  buildingUp[currIndex] = currentValue;
+  return buildingUp;
+},
+{});
+
+for (let index = 0; index < testArr.length; index++) {
+  obj[index] = testArr[index];
 }
