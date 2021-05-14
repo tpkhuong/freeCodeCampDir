@@ -675,17 +675,30 @@ class Set {
   /* Create an add method that adds a unique value to the set collection and returns true if the value was successfully added and false otherwise. */
 
   /*   Create a remove method that accepts a value and checks if it exists in the set. If it does, then this method should remove it from the set collection, and return true.
-Otherwise, it should return false. Create a size method that returns the size of the set collection. */
-  remove(valueInput) {}
+Otherwise, it should return false. */
+  remove(valueInput) {
+    var ourValues = Object.values(this.dictionary);
+    if (!ourValues.includes(valueInput)) {
+      return false;
+    } else {
+      //if valueInput is in ourValues arr remove it
+      ourValues.filter(function removeValue(eachElement) {
+        return eachElement !== valueInput;
+      });
+    }
+  }
   /*   Create a remove method that accepts a value and checks if it exists in the set. If it does, then this method should remove it from the set collection, and return true.
-Otherwise, it should return false. Create a size method that returns the size of the set collection. */
+Otherwise, it should return false. */
+  /* Create a size method that returns the size of the set collection. */
   size() {
     var makeLength = Object.entries(this.dictionary);
     return makeLength.length;
   }
+  /* Create a size method that returns the size of the set collection. */
 }
 
 var testArr = [1, 2, 3, 4, 5, 6];
+var testObj = { a: 1, b: 2, c: 3, d: 4, e: 5 };
 
 var obj = testArr.reduce(function arrToObj(
   buildingUp,
