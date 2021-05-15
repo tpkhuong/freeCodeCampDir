@@ -621,7 +621,7 @@ Otherwise, it should return false. Create a size method that returns the size of
 class Set {
   constructor(arrInput) {
     //remove duplicates
-    var cached = {};
+    this.dictionary = {};
     var removeDuplicates = arrInput.reduce(function findUnique(
       buildingUp,
       currentValue
@@ -633,9 +633,21 @@ class Set {
       return buildingUp;
     },
     []);
+
+    console.log(removeDuplicates);
+    var ourSet = removeDuplicates.reduce(function turnToObj(
+      buildingUp,
+      currentValue,
+      currIndex
+    ) {
+      buildingUp[currIndex] = currentValue;
+      return buildingUp;
+    },
+    {});
+    this.dictionary = ourSet;
+    return ourSet;
     // this.dictionary = { ...removeDuplicates };
     // console.log(this.dictionary);
-    console.log(removeDuplicates);
     // console.log(Object.values(this.dictionary));
   }
   // This method will check for the presence of an element and return true or false
@@ -695,6 +707,22 @@ Otherwise, it should return false. */
     return makeLength.length;
   }
   /* Create a size method that returns the size of the set collection. */
+  /* 
+  
+  Perform a Union on Two Sets
+  In this exercise we are going to perform a union on two sets of data. We will create a method on our Set data structure called union.
+  This method should take another Set as an argument and return the union of the two sets, excluding any duplicate values.
+  
+  For example, if setA = ['a','b','c'] and setB = ['a','b','d','e'], then the union of setA and setB is: setA.union(setB) = ['a', 'b', 'c', 'd', 'e'].
+  
+  */
+  union(setInput) {
+    //setInput is an array?
+    //merge both set
+    var set1 = Object.values(this.dictionary);
+    var set2 = setInput;
+    var mergeBothSet = [...set1, ...set2];
+  }
 }
 
 var testArr = [1, 2, 3, 4, 5, 6];
