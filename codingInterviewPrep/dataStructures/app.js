@@ -722,6 +722,17 @@ Otherwise, it should return false. */
     var set1 = Object.values(this.dictionary);
     var set2 = setInput;
     var mergeBothSet = [...set1, ...set2];
+    var uniqueValuesFromSets = [];
+
+    mergeBothSet.reduce(function findUnqiue(buildingUp, currentValue) {
+      if (!buildingUp[currentValue]) {
+        buildingUp[currentValue] = true;
+        uniqueValuesFromSets.push(currentValue);
+        // uniqueValuesFromSets = [...uniqueValuesFromSets, currentValue];
+        return buildingUp;
+      }
+      return buildingUp;
+    }, {});
   }
 }
 
