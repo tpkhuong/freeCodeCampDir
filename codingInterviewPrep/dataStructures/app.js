@@ -273,9 +273,8 @@ class PriorityQueue {
             0,
             indexOfPriorityInArr
           );
-          let lowerEqualToPrioritySide = copiedCollection.slice(
-            indexOfPriorityInArr
-          );
+          let lowerEqualToPrioritySide =
+            copiedCollection.slice(indexOfPriorityInArr);
           copiedCollection = [
             ...higherPrioritySide,
             arrInput,
@@ -733,6 +732,46 @@ Otherwise, it should return false. */
       }
       return buildingUp;
     }, {});
+  }
+  /*
+  
+  Perform an Intersection on Two Sets of Data
+  In this exercise we are going to perform an intersection on 2 sets of data. We will create a method on our Set data structure called intersection.
+  An intersection of sets represents all values that are common to two or more sets. This method should take another Set as an argument and return the intersection of the two sets.
+
+  For example, if setA = ['a','b','c'] and setB = ['a','b','d','e'], then the intersection of setA and setB is: setA.intersection(setB) = ['a', 'b'].
+
+  */
+  intersection(setInput) {
+    // since our set will have unique values
+    //merge both sets then use freqCounter
+    var valuesSet1 = Object.values(this.dictionary);
+    var copyOfSetInput = setInput;
+    var mergeBothSets = [...valuesSet1, ...copyOfSetInput];
+
+    var freqCounterObj = mergeBothSets.reduce(function countTheValues(
+      buildingUp,
+      currentValue
+    ) {
+      buildingUp[currentValue] = (buildingUp[currentValue] || 0) + 1;
+      return buildingUp;
+    },
+    {});
+    var keysValuesSubarray = Object.entries(freqCounterObj);
+
+    var result = keysValuesSubarray.reduce(function matchTheLength(
+      buildingUp,
+      currentValue
+    ) {
+      var [ourKey, ourValue] = currentValue;
+      if (ourValue == 2) {
+        return [...buildingUp, ourKey];
+        // buildingUp.push(ourKey);
+        // return buildingUp;
+      }
+    },
+    []);
+    return result;
   }
 }
 
