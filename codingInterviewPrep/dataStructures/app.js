@@ -719,7 +719,7 @@ Otherwise, it should return false. */
     //setInput is an array?
     //merge both set
     var set1 = Object.values(this.dictionary);
-    var set2 = setInput;
+    var set2 = [...setInput];
     var mergeBothSet = [...set1, ...set2];
     var uniqueValuesFromSets = [];
 
@@ -746,7 +746,7 @@ Otherwise, it should return false. */
     // since our set will have unique values
     //merge both sets then use freqCounter
     var valuesSet1 = Object.values(this.dictionary);
-    var copyOfSetInput = setInput;
+    var copyOfSetInput = [...setInput];
     var mergeBothSets = [...valuesSet1, ...copyOfSetInput];
 
     var freqCounterObj = mergeBothSets.reduce(function countTheValues(
@@ -772,6 +772,53 @@ Otherwise, it should return false. */
     },
     []);
     return result;
+  }
+  /*
+  
+  Perform a Difference on Two Sets of Data
+  In this exercise we are going to perform a difference on 2 sets of data. We will create a method on our Set data structure called difference.
+  A difference of sets should compare two sets and return the items present in the first set that are absent in the second.
+  This method should take another Set as an argument and return the difference of the two sets.
+
+  For example, if setA = ['a','b','c'] and setB = ['a','b','d','e'], then the difference of setA and setB is: setA.difference(setB) = ['c'].
+
+  */
+  difference(setInput) {
+    var ourValuesArr = Object.values(this.dictionary);
+    var copyOfSetInput = setInput.slice();
+
+    var result = [];
+
+    ourValuesArr.forEach(function notFoundInSecondSet(value) {
+      if (copyOfSetInput.indexOf(value) === -1) {
+        result.push(value);
+      }
+      // if (!copyOfSetInput.includes(value)) {
+
+      // }
+    });
+
+    return result;
+    /* different approach */
+  }
+  binarySearch(arrInput, valueInput) {
+    var start = arrInput[0];
+    var end = arrInput[arrInput.length - 1];
+    var middle = Math.floor(start + end / 2);
+
+    while (start < end && arrInput[middle] !== valueInput) {
+      if (valueInput < arrInput[middle]) {
+        end = middle - 1;
+      } else {
+        start = middle + 1;
+      }
+      middle = Math.floor(start + end / 2);
+    }
+
+    if (arrInput[middle] === valueInput) {
+      return middle;
+    }
+    return -1;
   }
 }
 
