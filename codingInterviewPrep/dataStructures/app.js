@@ -791,6 +791,8 @@ Otherwise, it should return false. */
 
     ourValuesArr.forEach(function notFoundInSecondSet(value) {
       if (copyOfSetInput.indexOf(value) === -1) {
+        // use spread operator
+        // result = [...result, value]
         result.push(value);
       }
       // if (!copyOfSetInput.includes(value)) {
@@ -798,8 +800,20 @@ Otherwise, it should return false. */
       // }
     });
 
+    // return result;
+    /* different approach: use binary search nested inside a loop */
+
+    ourValuesArr.forEach(function useBinarySearch(eachValue) {
+      if (this.binarySearch(copyOfSetInput, eachValue) === -1) {
+        // use spread operator
+        // result = [...result, eachValue];
+        result.push(eachValue);
+      }
+    });
+
+    /* different approach: use binary search nested inside a loop */
+
     return result;
-    /* different approach */
   }
   binarySearch(arrInput, valueInput) {
     var start = arrInput[0];
