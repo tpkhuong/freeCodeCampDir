@@ -844,6 +844,18 @@ Otherwise, it should return false. */
   For example, if setA = ['a','b'] and setB = ['a','b','c','d'], then setA is a subset of setB, so setA.isSubsetOf(setB) should return true.
   
   */
+  isSubsetOf(setInput) {
+    var copyOfSetInput = [...setInput];
+    var ourValues = Object.values(this.dictionary);
+    //assuming both data structures are sorted
+    //loop through first array using every() inside every() use binarySearch to see if values of arr1 is in arr2
+    var ourBoolean = ourValues.every(function valuesAreInArrTwo(element) {
+      return this.binarySearch(copyOfSetInput, element);
+    });
+
+    return ourBoolean ? true : false;
+    //another approach, values in arr1 have to be found in arr2 in the same order is arr2
+  }
 }
 
 var testArr = [1, 2, 3, 4, 5, 6];
