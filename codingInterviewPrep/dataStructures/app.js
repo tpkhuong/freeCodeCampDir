@@ -853,8 +853,33 @@ Otherwise, it should return false. */
       return this.binarySearch(copyOfSetInput, element);
     });
 
-    return ourBoolean ? true : false;
+    // return ourBoolean ? true : false;
     //another approach, values in arr1 have to be found in arr2 in the same order is arr2
+
+    var ourLength = ourValues.length;
+
+    //sort our sets
+    var sortedValues = ourValues.sort(function ascending(a, b) {
+      if (a < b) return -1;
+      if (b < 1) return 1;
+      return 0;
+    });
+
+    var sortedSetInput = copyOfSetInput.sort(function ascending(a, b) {
+      if (a < b) return -1;
+      if (b < a) return 0;
+      return 0;
+    });
+
+    //use recursion?
+    function recursiveAttempt(arrInput) {
+      //make copy of arr from arrInput using length of setA
+
+      if (arrInput.length > 0) {
+      }
+      // compare values in set1 to values in set2 break from recursive call if order of values in set1 is matched with values in set2 in the same order
+      // if()
+    }
   }
 }
 
