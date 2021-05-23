@@ -872,14 +872,18 @@ Otherwise, it should return false. */
     });
 
     //use recursion?
-    function recursiveAttempt(arrInput) {
+    function recursiveAttempt(arrInput, resultArr) {
       //make copy of arr from arrInput using length of setA
-
+      var copyOfSortedValues = [...sortedValues];
+      var copyOfResultArr = resultArr.slice();
+      var result = false;
       if (arrInput.length > 0) {
+        return arrInput;
       }
+      var copiedArrLengthOfSetA = arrInput.splice(0, ourLength);
       // compare values in set1 to values in set2 break from recursive call if order of values in set1 is matched with values in set2 in the same order
-      // if()
     }
+    recursiveAttempt(sortedSetInput, []);
   }
 }
 
