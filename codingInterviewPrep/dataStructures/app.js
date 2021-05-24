@@ -874,13 +874,41 @@ Otherwise, it should return false. */
     //use recursion?
     function recursiveAttempt(arrInput, resultArr) {
       //make copy of arr from arrInput using length of setA
+      //arr of index. loop through setB once the value in the setA once the value in setB matches the first value in setA, get the index of that value in setB
+      var arrOfIndex = [];
       var copyOfSortedValues = [...sortedValues];
       var copyOfResultArr = resultArr.slice();
       var result = false;
       if (arrInput.length > 0) {
         return arrInput;
       }
-      var copiedArrLengthOfSetA = arrInput.splice(0, ourLength);
+      var firstValueOfSetA = sortedValues[0];
+      // we want to compare the first value of setA to the first value of the copied arr of setB,the copies of each arr will start at the index where the value in setB matches the first value in setA
+      //find the index where the value matches the first value in setA
+      for (let index = 0; index < arrInput.length; index++) {
+        let element = arrInput[index];
+        if (element == firstValueOfSetA) {
+          arrOfIndex.push(index);
+        }
+      }
+      /***** loop through setB, use the index from arrOfIndex to make copies of arr we will compare to setA *****/
+      /* reverse the order of the arrOfIndex so we can use pop */
+      var reversedOrderOfArrIndex = [];
+      for (let index = arrOfIndex.length - 1; index >= 0; index--) {
+        let element = arrOfIndex[index];
+        reversedOrderOfArrIndex.push(element);
+      }
+      /***** make copies of arr from setB *****/
+      var copiesOfArrBasedOnIndex = [];
+      while (reversedOrderOfArrIndex.length > 0) {
+        var startCopyAtThisIndex = reversedOrderOfArrIndex.pop();
+        arrInput.slice(startCopyAtThisIndex, startCopyAtThisIndex + ourLength);
+      }
+      // var copiedArrLengthOfSetA;
+      // var firstValueOfSetB = arrInput[0];
+      // if (firstValueOfSetA == firstValueOfSetB) {
+
+      // }
       // compare values in set1 to values in set2 break from recursive call if order of values in set1 is matched with values in set2 in the same order
     }
     recursiveAttempt(sortedSetInput, []);
