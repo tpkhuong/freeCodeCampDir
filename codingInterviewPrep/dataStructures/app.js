@@ -871,10 +871,15 @@ Otherwise, it should return false. */
       return 0;
     });
 
+    /***** get freqCount on setA  *****/
+
+    /***** get freqCount on setA  *****/
+
     //use recursion?
     function recursiveAttempt(arrInput, resultArr) {
       //make copy of arr from arrInput using length of setA
       //arr of index. loop through setB once the value in the setA once the value in setB matches the first value in setA, get the index of that value in setB
+      /***** recursive approach *****/
       var arrOfIndex = [];
       var copyOfSortedValues = [...sortedValues];
       var copyOfResultArr = resultArr.slice();
@@ -882,11 +887,12 @@ Otherwise, it should return false. */
       if (arrInput.length > 0) {
         return arrInput;
       }
+      /***** recursive approach *****/
       var firstValueOfSetA = sortedValues[0];
       // we want to compare the first value of setA to the first value of the copied arr of setB,the copies of each arr will start at the index where the value in setB matches the first value in setA
       //find the index where the value matches the first value in setA
-      for (let index = 0; index < arrInput.length; index++) {
-        let element = arrInput[index];
+      for (let index = 0; index < sortedSetInput.length; index++) {
+        let element = sortedSetInput[index];
         if (element == firstValueOfSetA) {
           arrOfIndex.push(index);
         }
@@ -902,8 +908,16 @@ Otherwise, it should return false. */
       var copiesOfArrBasedOnIndex = [];
       while (reversedOrderOfArrIndex.length > 0) {
         var startCopyAtThisIndex = reversedOrderOfArrIndex.pop();
-        arrInput.slice(startCopyAtThisIndex, startCopyAtThisIndex + ourLength);
+        var pushCopiedArrToArrBasedOnIndex = sortedSetInput.slice(
+          startCopyAtThisIndex,
+          startCopyAtThisIndex + ourLength
+        );
+        copiesOfArrBasedOnIndex.push(pushCopiedArrToArrBasedOnIndex);
       }
+
+      alert("use freqCounter?");
+      /***** make copies of arr from setB *****/
+
       // var copiedArrLengthOfSetA;
       // var firstValueOfSetB = arrInput[0];
       // if (firstValueOfSetA == firstValueOfSetB) {
