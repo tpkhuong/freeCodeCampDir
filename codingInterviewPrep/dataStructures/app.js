@@ -945,3 +945,29 @@ var obj = testArr.reduce(function arrToObj(
 for (let index = 0; index < testArr.length; index++) {
   obj[index] = testArr[index];
 }
+
+/***** object.keys() *****/
+
+var ourObj = { a: 1, b: 2, c: 3 };
+function objectKeys(objInput) {
+  var ourResult = [];
+
+  for (let key in objInput) {
+    ourResult.push(key);
+  }
+  return ourResult;
+}
+
+/***** object.keys() *****/
+
+/***** object.values() *****/
+
+function objectValues() {}
+
+/***** object.values() *****/
+
+/***** object.entries() *****/
+
+function objectEntries() {}
+
+/***** object.entries() *****/
