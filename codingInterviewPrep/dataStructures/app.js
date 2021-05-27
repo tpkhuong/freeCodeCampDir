@@ -872,7 +872,14 @@ Otherwise, it should return false. */
     });
 
     /***** get freqCount on setA  *****/
-
+    var freqCountSetA = ourValues.reduce(function getFreqCount(
+      buildingUp,
+      currentValue
+    ) {
+      buildingUp[currentValue] = (buildingUp[currentValue] || 0) + 1;
+      return buildingUp;
+    },
+    {});
     /***** get freqCount on setA  *****/
 
     //use recursion?
@@ -914,6 +921,20 @@ Otherwise, it should return false. */
         );
         copiesOfArrBasedOnIndex.push(pushCopiedArrToArrBasedOnIndex);
       }
+      /* sort our subbarray if we plan to use binary search */
+
+      var sortedArrBasedOnIndex = copiesOfArrBasedOnIndex.map(
+        function runSortOnEachArr(eachArray) {
+          var sortedSubarray = eachArray.sort(function ascending(a, b) {
+            if (a < b) return -1;
+            if (b < a) return 1;
+            return 0;
+          });
+          return sortedSubarray;
+        }
+      );
+
+      /* sort our subbarray if we plan to use binary search */
 
       alert("use freqCounter?");
       /***** make copies of arr from setB *****/
@@ -954,6 +975,7 @@ function objectKeys(objInput) {
 
   for (let key in objInput) {
     ourResult.push(key);
+    // ourResult = [...ourResult, key];
   }
   return ourResult;
 }
@@ -962,12 +984,31 @@ function objectKeys(objInput) {
 
 /***** object.values() *****/
 
-function objectValues() {}
+function objectValues(objInput) {
+  var result = [];
+
+  for (let key in objInput) {
+    var eachValue = objInput[key];
+    result.push(eachValue);
+    // result = [...result, eachValue];
+  }
+  return result;
+}
 
 /***** object.values() *****/
 
 /***** object.entries() *****/
 
-function objectEntries() {}
+function objectEntries(objInput) {
+  var result = [];
+
+  for (let key in objInput) {
+    var eachValue = objInput[key];
+    var arrOfKeyValuePairs = [key, eachValue];
+    result.push(arrOfKeyValuePairs);
+    // result = [...result, arrOfKeyValuePairs];
+  }
+  return result;
+}
 
 /***** object.entries() *****/
