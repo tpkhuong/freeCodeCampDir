@@ -856,8 +856,56 @@ Otherwise, it should return false. */
     // return ourBoolean ? true : false;
     //another approach, values in arr1 have to be found in arr2 in the same order is arr2
 
-    var ourLength = ourValues.length;
+    var ourLengthSetA = ourValues.length;
 
+    /***** get freqCount on setA  *****/
+    var freqCountSetA = ourValues.reduce(function getFreqCount(
+      buildingUp,
+      currentValue
+    ) {
+      buildingUp[currentValue] = (buildingUp[currentValue] || 0) + 1;
+      return buildingUp;
+    },
+    {});
+    /***** get freqCount on setA  *****/
+
+    /***** we dont want setB to be sorted *****/
+
+    var firstValueOfSetA = ourValues[0];
+    var arrOfIndexFoundInSetB = [];
+    var reversedOrderOfIndexArrOfSetB = [];
+    for (let index = 0; index < copyOfSetInput.length; index++) {
+      let element = copyOfSetInput[index];
+      if (element === firstValueOfSetA) {
+        arrOfIndexFoundInSetB.push(index);
+      }
+    }
+
+    for (let index = arrOfIndexFoundInSetB.length - 1; index >= 0; index--) {
+      let element = arrOfIndexFoundInSetB[index];
+      reversedOrderOfIndexArrOfSetB.push(element);
+    }
+
+    /***** using while loop we will remove value at the end of reverseOrderOfIndexArrOfSetB, use the index in reverseOrderOfIndex and length of setA to copy
+     * subarray of setB
+     *  *****/
+    var arrOfSubarrayBasedOnIndex = [];
+    while (reversedOrderOfIndexArrOfSetB.length > 0) {
+      let useIndexToCopySubarray = reverseOrderOfIndexArrOfSetB.pop();
+      let pushCopiedSubarrayOfSetB = copyOfSetInput.push(
+        useIndexToCopySubarray,
+        useIndexToCopySubarray + ourLengthSetA
+      );
+
+      arrOfSubarrayBasedOnIndex.push(pushCopiedSubarrayOfSetB);
+    }
+    alert(
+      "use filter method and get the last value of setA, loop through array of subarrays, only keeping the subarrays of setB where the last value matches the last value of setA"
+    );
+    /***** using while loop we will remove value at the end of reverseOrderOfIndexArrOfSetB, use the index in reverseOrderOfIndex and length of setA to copy
+     * subarray of setB
+     *  *****/
+    /***** we dont want setB to be sorted *****/
     //sort our sets
     var sortedValues = ourValues.sort(function ascending(a, b) {
       if (a < b) return -1;
@@ -870,17 +918,6 @@ Otherwise, it should return false. */
       if (b < a) return 0;
       return 0;
     });
-
-    /***** get freqCount on setA  *****/
-    var freqCountSetA = ourValues.reduce(function getFreqCount(
-      buildingUp,
-      currentValue
-    ) {
-      buildingUp[currentValue] = (buildingUp[currentValue] || 0) + 1;
-      return buildingUp;
-    },
-    {});
-    /***** get freqCount on setA  *****/
 
     //use recursion?
     function recursiveAttempt(arrInput, resultArr) {
@@ -917,7 +954,7 @@ Otherwise, it should return false. */
         var startCopyAtThisIndex = reversedOrderOfArrIndex.pop();
         var pushCopiedArrToArrBasedOnIndex = sortedSetInput.slice(
           startCopyAtThisIndex,
-          startCopyAtThisIndex + ourLength
+          startCopyAtThisIndex + ourLengthSetA
         );
         copiesOfArrBasedOnIndex.push(pushCopiedArrToArrBasedOnIndex);
       }
