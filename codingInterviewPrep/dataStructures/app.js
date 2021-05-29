@@ -872,6 +872,7 @@ Otherwise, it should return false. */
     /***** we dont want setB to be sorted *****/
 
     var firstValueOfSetA = ourValues[0];
+    var lastVauleOfSetA = ourValues[ourLengthSetA - 1];
     var arrOfIndexFoundInSetB = [];
     var reversedOrderOfIndexArrOfSetB = [];
     for (let index = 0; index < copyOfSetInput.length; index++) {
@@ -896,15 +897,37 @@ Otherwise, it should return false. */
         useIndexToCopySubarray,
         useIndexToCopySubarray + ourLengthSetA
       );
-
       arrOfSubarrayBasedOnIndex.push(pushCopiedSubarrayOfSetB);
     }
-    alert(
-      "use filter method and get the last value of setA, loop through array of subarrays, only keeping the subarrays of setB where the last value matches the last value of setA"
-    );
+
     /***** using while loop we will remove value at the end of reverseOrderOfIndexArrOfSetB, use the index in reverseOrderOfIndex and length of setA to copy
      * subarray of setB
      *  *****/
+
+    var arrOfSubarrayMatchFirstAndLastValue = arrOfSubarrayBasedOnIndex.filter(
+      function arrMatchLastValue(subarray) {
+        var lengthOfSubarray = subarray.length;
+        var lastValueOfSubarray = subarray[lengthOfSubarray - 1];
+        return lastValueOfSubarray === lastVauleOfSetA;
+      }
+    );
+
+    var arrOfObjFreqCount = arrOfSubarrayMatchFirstAndLastValue.map(
+      function makeFreqCountObj(subarray) {
+        return subarray.reduce(function freqCounter(buildingUp, currentValue) {
+          // currentValue will be each value of our subarray
+          buildingUp[currentValue] = (building[currentValue] || 0) + 1;
+          return buildingUp;
+        }, {});
+      }
+    );
+
+    /***** instead of using freq counter what if we turn our arr into a string then compare the str values *****/
+
+    alert("convert each subarray into str");
+
+    /***** instead of using freq counter what if we turn our arr into a string then compare the str values *****/
+
     /***** we dont want setB to be sorted *****/
     //sort our sets
     var sortedValues = ourValues.sort(function ascending(a, b) {
