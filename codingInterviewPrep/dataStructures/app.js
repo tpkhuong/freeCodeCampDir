@@ -857,7 +857,7 @@ Otherwise, it should return false. */
     //another approach, values in arr1 have to be found in arr2 in the same order is arr2
 
     var ourLengthSetA = ourValues.length;
-
+    var strFormOfOurSetA = ourValues.join("");
     /***** get freqCount on setA  *****/
     var freqCountSetA = ourValues.reduce(function getFreqCount(
       buildingUp,
@@ -912,6 +912,7 @@ Otherwise, it should return false. */
       }
     );
 
+    /***** get the freqCounter of each subarray *****/
     var arrOfObjFreqCount = arrOfSubarrayMatchFirstAndLastValue.map(
       function makeFreqCountObj(subarray) {
         return subarray.reduce(function freqCounter(buildingUp, currentValue) {
@@ -921,11 +922,20 @@ Otherwise, it should return false. */
         }, {});
       }
     );
+    /***** get the freqCounter of each subarray *****/
 
     /***** instead of using freq counter what if we turn our arr into a string then compare the str values *****/
+    var arrOfStrValuesOfSetB = arrOfSubarrayMatchFirstAndLastValue.map(
+      function joinValuesOfEachSubarray(subarray) {
+        return subarray.join("");
+      }
+    );
 
-    alert("convert each subarray into str");
+    /***** loop through each str in array and compare to the string of setA *****/
 
+    alert("loop through each str in array");
+
+    /***** loop through each str in array and compare to the string of setA *****/
     /***** instead of using freq counter what if we turn our arr into a string then compare the str values *****/
 
     /***** we dont want setB to be sorted *****/
@@ -996,7 +1006,6 @@ Otherwise, it should return false. */
 
       /* sort our subbarray if we plan to use binary search */
 
-      alert("use freqCounter?");
       /***** make copies of arr from setB *****/
 
       // var copiedArrLengthOfSetA;
@@ -1072,3 +1081,18 @@ function objectEntries(objInput) {
 }
 
 /***** object.entries() *****/
+
+function testingIdea() {
+  var arrOfSubarrays = [
+    ["a", "b"],
+    ["c", "d"],
+    ["e", "f"],
+  ];
+
+  function turnIntoStr(arrInput) {
+    var arrOfStrings = arrInput.map(function useJoinMethod(subarray) {
+      return subarray.join("");
+    });
+    console.log(arrOfStrings);
+  }
+}
