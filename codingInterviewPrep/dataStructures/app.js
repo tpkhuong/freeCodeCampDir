@@ -931,11 +931,16 @@ Otherwise, it should return false. */
       }
     );
 
-    /***** loop through each str in array and compare to the string of setA *****/
+    /***** use some() loop through each str in array and compare to the string of setA *****/
 
-    alert("loop through each str in array");
+    var ourBoolean = arrOfStrValuesOfSetB.some(function matchesStrFormOfSetA(
+      eachStr
+    ) {
+      return eachStr === strFormOfOurSetA;
+    });
 
-    /***** loop through each str in array and compare to the string of setA *****/
+    return ourBoolean;
+    /***** use some() loop through each str in array and compare to the string of setA *****/
     /***** instead of using freq counter what if we turn our arr into a string then compare the str values *****/
 
     /***** we dont want setB to be sorted *****/
