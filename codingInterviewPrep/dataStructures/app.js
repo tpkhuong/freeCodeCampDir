@@ -1022,8 +1022,80 @@ Otherwise, it should return false. */
     }
     recursiveAttempt(sortedSetInput, []);
   }
+  /***** checkSet *****/
+
+  /***** checkSet *****/
 }
 
+function checkSet() {}
+
+/***** create and add to Set *****/
+
+/*
+
+Problem Explanation
+To solve this problem, you have to add an array of items to the set.
+
+Hints
+Hint 1
+Use the add function to add an array of strings to the set.
+
+Hint 2
+Use the length attribute on the values of the Set.
+
+*/
+
+class Set {
+  constructor(arrInput) {
+    var copiedArrInput = [...arrInput];
+    /* no duplicates*/
+
+    var cached = {};
+    var result = [];
+
+    copiedArrInput.forEach(function onlyUnique(eachValue) {
+      if (!cached[eachValue]) {
+        cached[eachValue] = true;
+        result.push(eachValue);
+        // result = [...result, eachValue];
+        // result = result.concat([eachValue])
+      }
+    });
+
+    /* no duplicates*/
+    this.collection = { ...copiedArrInput };
+    var ourValues = Object.values(this.collection);
+    this.collection = ourValues;
+    // return ourValues;
+    return result;
+  }
+  add(value) {
+    var lengthOfSet = this.collection.length;
+    if (lengthOfSet === 0) return undefined;
+    var copyOfCollection = [...this.collection];
+    /***** check if value input is already in the set *****/
+    //some will break out of the loop once it returns true
+    var setIncludesValueBoolean = copyOfCollection.some(
+      function setIncludeValue(eachSetValue) {
+        return eachSetValue === value;
+      }
+    );
+
+    // if setIncludeValue is false then it means our set/collection does not include value we want to add to our set
+    //we can add that value to the collection
+    if (!setIncludesValueBoolean) {
+      copyOfCollection.push(value);
+    }
+    /***** check if value input is already in the set *****/
+    /***** we can sort our set *****/
+
+    return copyOfCollection;
+
+    /***** we can sort our set *****/
+  }
+}
+
+/***** create and add to Set *****/
 var testArr = [1, 2, 3, 4, 5, 6];
 var testObj = { a: 1, b: 2, c: 3, d: 4, e: 5 };
 
