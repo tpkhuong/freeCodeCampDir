@@ -1088,14 +1088,34 @@ class Set {
     }
     /***** check if value input is already in the set *****/
     /***** we can sort our set *****/
-
-    return copyOfCollection;
-
+    copyOfCollection.sort(function sortAscending(a, b) {
+      if (a < b) return -1;
+      if (b < a) return 1;
+      return 0;
+    });
     /***** we can sort our set *****/
+    return copyOfCollection;
   }
+  /***** create and add to Set *****/
+
+  /***** remove value from set *****/
+  /*
+Remove items from a set in ES6
+Let's practice removing items from an ES6 Set using the delete method.
+
+First, create an ES6 Set:
+
+var set = new Set([1,2,3]);
+Now remove an item from your Set with the delete method.
+
+set.delete(1);
+console.log([...set]) // should return [ 2, 3 ]
+*/
+  /***** remove value from set *****/
+
+  remove() {}
 }
 
-/***** create and add to Set *****/
 var testArr = [1, 2, 3, 4, 5, 6];
 var testObj = { a: 1, b: 2, c: 3, d: 4, e: 5 };
 
