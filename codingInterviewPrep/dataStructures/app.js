@@ -1113,8 +1113,80 @@ console.log([...set]) // should return [ 2, 3 ]
 */
   /***** remove value from set *****/
 
-  remove() {}
+  remove(valueInput) {
+    //copy of collection
+    var copyOfCollection = [...this.collection];
+    //find index of value we want to remove
+    var indexOfValue;
+    // forEach(function findIndexOfValue(element, index) {
+    //   if (element === valueInput) {
+    //     indexOfValue = index;
+    //   }
+    // })
+    for (let index = 0; index < copyOfCollection.length; index++) {
+      let element = copyOfCollection[index];
+      if (element === valueInput) {
+        indexOfValue = index;
+      }
+    }
+    //copy left and right side of the index
+    var leftSideOfValue = copyOfCollection.slice(0, indexOfValue);
+    var rightSideOfValue = copyOfCollection.slice(indexOfValue + 1);
+    //merge copied left and copied right of array
+    var mergedArr = leftSideOfValue.concat(rightSideOfValue);
+    var mergedArr = [...leftSideOfValue, ...rightSideOfValue];
+    return mergedArr;
+  }
+  /* 
+  Use .has and .size on an ES6 Set
+Let's look at the .has and .size methods available on the ES6 Set object.
+
+First, create an ES6 Set
+
+var set = new Set([1,2,3]);
+The .has method will check if the value is contained within the set.
+
+var hasTwo = set.has(2);
+The .size method will return an integer representing the size of the Set
+
+var howBig = set.size;
+  
+  */
+  has(valueInput) {
+    var copyOfCollection = [...this.collection];
+    // return copyOfCollection.includes(valueInput);
+    // var ourBoolean = copyOfCollection.includes(valueInput);
+    // if (ourBoolean) {
+    //   return true;
+    // }
+    // return false;
+    //use for loop
+    // var result = false;
+    // for (let index = 0; index < copyOfCollection.length; index++) {
+    //   let element = copyOfCollection[index];
+    //   if (element === valueInput) {
+    //     return true;
+    //   }
+    // }
+    // return result;
+    //use foreach
+    // var result = false;
+    // copyOfCollection.forEach(function findValue(element) {
+    //   if (element === valueInput) {
+    //     return true;
+    //   }
+    // })
+    // return result;
+  }
+  size() {
+    return this.collection.length;
+  }
 }
+
+var arr = [1, 2, 3, 4, 5, 6];
+var index = 3;
+var leftSide = arr.slice(0, index);
+var rightSide = arr.slice(index + 1);
 
 var testArr = [1, 2, 3, 4, 5, 6];
 var testObj = { a: 1, b: 2, c: 3, d: 4, e: 5 };
