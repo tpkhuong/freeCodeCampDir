@@ -1224,7 +1224,60 @@ clear empties the map
 
 */
 
+class Map {
+  constructor(size) {
+    this.collection = [];
+    this.collectionSize = size;
+  }
+  //method goes here. these methods will be in an obj assigned to the prototype property of the obj part of the class Map which is a function/obj combo
+  add(key, value) {
+    //check size of collection, if size is 50% used up we want to increase the size
+    //loop through collection, get the number of undefined and non undefined values in collection, check if non undefined takes up 50% of collection size
+    //use the original size value that was passed in
+    //loop starting from the end of our current collection up to (current collection size + size value passed in);
+
+    //index will be a number
+    var index = hash(key, this.collectionSize);
+    //check if at index in our this.collection there is an array or not
+    //if its undefined we want an array there
+    if (!this.collection[index]) {
+      this.collection[index] = [];
+    }
+    //if array at index length is 0 we want to add an array with the key,value pair
+    var arrayAtIndex = this.collection[index];
+    if (arrayAtIndex.length === 0) {
+      arrayAtIndex.push([key, value]);
+    } else {
+      //if our array at index length is greater than 0,loop through an update value
+      //for loop
+      for (let index = 0; index < arrayAtIndex.length; index++) {
+        var subarrayKey = arrayAtIndex[index][0];
+        var subarrayValue = arrayAtIndex[index][1];
+        if (subarrayKey === key) {
+          subarrayValue = value;
+        }
+      }
+      //for each
+      arrayAtIndex.forEach(function findKey(subarray, index, collection) {
+        var subarrayKey = subarray[0];
+        var subarrayValue = subarray[1];
+        if (subarrayKey === key) {
+          subarrayValue = value;
+        }
+      });
+    }
+  }
+  remove() {}
+  hash(str, n) {
+    let sum = 0;
+    for (let i = 0; i < str.length; i++) sum += str.charCodeAt(i) * 3;
+
+    return sum % n;
+  }
+}
+
 var arr = [1, 2, 3, 4, 5, 6];
+var arrLength = arr.length;
 var index = 3;
 var leftSide = arr.slice(0, index);
 var rightSide = arr.slice(index + 1);
