@@ -1235,7 +1235,42 @@ class Map {
     //loop through collection, get the number of undefined and non undefined values in collection, check if non undefined takes up 50% of collection size
     //use the original size value that was passed in
     //loop starting from the end of our current collection up to (current collection size + size value passed in);
+    /***** checking the size of our collection/hash table/map *****/
+    var sizeOfCollection = this.collection.length;
+    //code below will give us a percentage
+    var halfFullOfValues =
+      (Math.floor(sizeOfCollection / 2) / sizeOfCollection) * 100;
+    //check oif halfFullOfValues is >= 50
+    if (halfFullOfValues >= 50) {
+      //if halfFullOfValues is 50 or greater we want to increase the size of our collection
+      // let copyOfCollection = this.collection.slice();
+      let copyOfCollection = [...this.collection];
+      let lengthOfCopyOfCollection = copyOfCollection.length;
+      // let copyOfCollection = [].concat(this.collection);
+      //we want to stop our loop length of current collection plus size passed in or size passed in times 2
+      let stopAtThisLength = lengthOfCopyOfCollection + this.collectionSize;
+      for (
+        let index = lengthOfCopyOfCollection + 1;
+        index < stopAtThisLength;
+        index++
+      ) {
+        let element = copyOfCollection[index];
+        element = undefined;
+      }
+    }
+    var countNumOfUndefined = {};
+    //using freqCount to count the num of undefined
+    this.collection.forEach(function countUndefined(eachValue) {
+      //use freqCount
+      if (eachValue == undefined) {
+        countNumOfUndefined[eachValue] =
+          (countNumOfUndefined[eachValue] || 0) + 1;
+      }
+    });
 
+    //check if num of undefined is >= 50%;
+
+    /***** checking the size of our collection/hash table/map *****/
     //index will be a number
     var index = hash(key, this.collectionSize);
     //check if at index in our this.collection there is an array or not
