@@ -1236,28 +1236,21 @@ class Map {
     //use the original size value that was passed in
     //loop starting from the end of our current collection up to (current collection size + size value passed in);
     /***** checking the size of our collection/hash table/map *****/
+    alert(
+      "when we use hash func it will give us a random index then we check if at the index is there an array or is it undefined"
+    );
+    alert("if it is undefined we assign an empty array at that index");
+    alert(
+      "if the index is 35, the length of the array will be 35 with 34 undefined and one empty array"
+    );
+    alert("make our algorithm better");
     var sizeOfCollection = this.collection.length;
     //code below will give us a percentage
     var halfFullOfValues =
       (Math.floor(sizeOfCollection / 2) / sizeOfCollection) * 100;
-    //check oif halfFullOfValues is >= 50
-    if (halfFullOfValues >= 50) {
-      //if halfFullOfValues is 50 or greater we want to increase the size of our collection
-      // let copyOfCollection = this.collection.slice();
-      let copyOfCollection = [...this.collection];
-      let lengthOfCopyOfCollection = copyOfCollection.length;
-      // let copyOfCollection = [].concat(this.collection);
-      //we want to stop our loop length of current collection plus size passed in or size passed in times 2
-      let stopAtThisLength = lengthOfCopyOfCollection + this.collectionSize;
-      for (
-        let index = lengthOfCopyOfCollection + 1;
-        index < stopAtThisLength;
-        index++
-      ) {
-        let element = copyOfCollection[index];
-        element = undefined;
-      }
-    }
+
+    //check if num of undefined is >= 50%;
+
     var countNumOfUndefined = {};
     //using freqCount to count the num of undefined
     this.collection.forEach(function countUndefined(eachValue) {
@@ -1269,6 +1262,24 @@ class Map {
     });
 
     //check if num of undefined is >= 50%;
+    //check if halfFullOfValues is >= 50
+    if (halfFullOfValues >= 50) {
+      //if halfFullOfValues is 50 or greater we want to increase the size of our collection
+      // let copyOfCollection = this.collection.slice();
+      let copyOfCollection = [...this.collection];
+      let lengthOfCopyOfCollection = copyOfCollection.length;
+      // let copyOfCollection = [].concat(this.collection);
+      //we want to add our loop length of current collection plus size passed in or size passed in times 2
+      let stopAtThisLength = lengthOfCopyOfCollection + this.collectionSize;
+      for (
+        let index = lengthOfCopyOfCollection + 1;
+        index < stopAtThisLength;
+        index++
+      ) {
+        let element = copyOfCollection[index];
+        element = 0;
+      }
+    }
 
     /***** checking the size of our collection/hash table/map *****/
     //index will be a number
@@ -1393,4 +1404,17 @@ function testingIdea() {
     });
     console.log(arrOfStrings);
   }
+}
+
+function findLengthOfArr() {
+  var result = [];
+  let index = Math.floor(Math.random() * 100);
+
+  if (!result[index]) {
+    result[index] = [];
+  }
+
+  console.log(result[0]);
+
+  return result;
 }
