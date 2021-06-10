@@ -1244,25 +1244,43 @@ class Map {
       "if the index is 35, the length of the array will be 35 with 34 undefined and one empty array"
     );
     alert("make our algorithm better");
-    var sizeOfCollection = this.collection.length;
+    /***** since our hash func will give us a random index then we will use that random index to check if at that index there is an array or it is undefined
+     * our length will be based on that index.
+     * we want to check how many undefined and values there are in our array before we increase the size of our array.
+     * we shouldn't use the length of the array to check if 50% is used because our hash func will give us a random index. once we use that index to check if we should add an array at the index
+     * not. the length of the array will be based our index
+     * 
+     * old code:
+     * 
+     * var sizeOfCollection = this.collection.length;
     //code below will give us a percentage
     var halfFullOfValues =
       (Math.floor(sizeOfCollection / 2) / sizeOfCollection) * 100;
+     * 
+     *  *****/
 
-    //check if num of undefined is >= 50%;
-
-    var countNumOfUndefined = {};
+    var countNumOfNotUndefined = {};
     //using freqCount to count the num of undefined
     this.collection.forEach(function countUndefined(eachValue) {
       //use freqCount
-      if (eachValue == undefined) {
-        countNumOfUndefined[eachValue] =
-          (countNumOfUndefined[eachValue] || 0) + 1;
+      //check if the value is an array instead of if it is undefined because when we check if the value is undefined instead of an array our loop will loop once
+      //
+      // if (eachValue == undefined) {
+      //   countNumOfUndefined[eachValue] =
+      //     (countNumOfUndefined[eachValue] || 0) + 1;
+      // }
+      if (Array.isArray(eachValue)) {
+        eachValue = "Array";
+        countNumOfNotUndefined[eachValue] =
+          (countNumOfNotUndefined[eachValue] || 0) + 1;
       }
     });
 
-    //check if num of undefined is >= 50%;
+    //check if num of "Array" in countNumOfNotUndefined is >= 50%;
     //check if halfFullOfValues is >= 50
+    /***** when our map/hash table is at 50% or greater we can call hash func pass in the key and new size of our map/hash table. new size should be the current size
+     * plus size passed in
+     *  *****/
     if (halfFullOfValues >= 50) {
       //if halfFullOfValues is 50 or greater we want to increase the size of our collection
       // let copyOfCollection = this.collection.slice();
@@ -1417,4 +1435,24 @@ function findLengthOfArr() {
   console.log(result[0]);
 
   return result;
+}
+
+function freqCounter(arrInput) {
+  var freqCountObj = {};
+
+  // for (let index = 0; index < arrInput.length; index++) {
+  //   console.log(arrInput[index]);
+  // }
+  arrInput.forEach(function countUndefined(eachValue) {
+    if (Array.isArray(eachValue)) {
+      eachValue = "Array";
+      freqCountObj[eachValue] = (arrInput[eachValue] || 0) + 1;
+    }
+    /***** our for loop/for each loop will only loop once *****/
+    // if (!freqCountObj[eachValue]) {
+    //   freqCountObj[eachValue] = (freqCountObj[eachValue] || 0) + 1;
+    // }
+  });
+
+  return freqCountObj;
 }
