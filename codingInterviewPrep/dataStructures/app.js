@@ -1275,8 +1275,19 @@ class Map {
           (countNumOfNotUndefined[eachValue] || 0) + 1;
       }
     });
+    var numOfArrInOurMap = countNumOfUndefined["Array"];
+
+    //calculate the number of arr in our compared to the length of the map
+
+    //get the number of "Array" in our map divide that number by length * 100
+    var percentOfArrInOurMap = Math.floor(
+      (numOfArrInOurMap / this.collection.length) * 100
+    );
 
     //check if num of "Array" in countNumOfNotUndefined is >= 50%;
+    if (percentOfArrInOurMap >= 50) {
+    }
+
     //check if halfFullOfValues is >= 50
     /***** when our map/hash table is at 50% or greater we can call hash func pass in the key and new size of our map/hash table. new size should be the current size
      * plus size passed in
