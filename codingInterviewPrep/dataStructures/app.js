@@ -1286,6 +1286,53 @@ class Map {
 
     //check if num of "Array" in countNumOfNotUndefined is >= 50%;
     if (percentOfArrInOurMap >= 50) {
+      //once our map is 50% used up, our new size will be original size times 2
+      let increaseCollectionSize = this.collectionSize * 2;
+      let index = hash(key, increaseCollectionSize);
+
+      if (!this.collection[index]) {
+        this.collection[index] = [];
+      }
+    } else {
+      //if our map size is not 50% used up, we will call hash with the key and current map size
+      //index will be a number
+      var index = hash(key, this.collectionSize);
+      //check if at index in our this.collection there is an array or not
+      //if its undefined we want an array there
+      if (!this.collection[index]) {
+        this.collection[index] = [];
+      }
+      //if array at index length is 0 we want to add an array with the key,value pair
+      var arrayAtIndex = this.collection[index];
+      if (arrayAtIndex.length === 0) {
+        arrayAtIndex.push([key, value]);
+      } else {
+        //if our array at index length is greater than 0,loop through an update value
+        var indexOfSubarray;
+        //for loop
+        for (let index = 0; index < arrayAtIndex.length; index++) {
+          //have a variable to store index
+          //loop through collection find the subarray that contains the key
+          //then mutate that subarray
+
+          let subarrayKey = arrayAtIndex[index][0];
+          let subarrayValue = arrayAtIndex[index][1];
+          if (subarrayKey === key) {
+            subarrayValue = value;
+          }
+        }
+        //for each
+        arrayAtIndex.forEach(function findKey(subarray, index, collection) {
+          //have a variable to store index
+          //loop through collection find the subarray that contains the key
+          //then mutate that subarray
+          var subarrayKey = subarray[0];
+          var subarrayValue = subarray[1];
+          if (subarrayKey === key) {
+            subarrayValue = value;
+          }
+        });
+      }
     }
 
     //check if halfFullOfValues is >= 50
@@ -1311,36 +1358,6 @@ class Map {
     }
 
     /***** checking the size of our collection/hash table/map *****/
-    //index will be a number
-    var index = hash(key, this.collectionSize);
-    //check if at index in our this.collection there is an array or not
-    //if its undefined we want an array there
-    if (!this.collection[index]) {
-      this.collection[index] = [];
-    }
-    //if array at index length is 0 we want to add an array with the key,value pair
-    var arrayAtIndex = this.collection[index];
-    if (arrayAtIndex.length === 0) {
-      arrayAtIndex.push([key, value]);
-    } else {
-      //if our array at index length is greater than 0,loop through an update value
-      //for loop
-      for (let index = 0; index < arrayAtIndex.length; index++) {
-        var subarrayKey = arrayAtIndex[index][0];
-        var subarrayValue = arrayAtIndex[index][1];
-        if (subarrayKey === key) {
-          subarrayValue = value;
-        }
-      }
-      //for each
-      arrayAtIndex.forEach(function findKey(subarray, index, collection) {
-        var subarrayKey = subarray[0];
-        var subarrayValue = subarray[1];
-        if (subarrayKey === key) {
-          subarrayValue = value;
-        }
-      });
-    }
   }
   remove() {}
   hash(str, n) {
