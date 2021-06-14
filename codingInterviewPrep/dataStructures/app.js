@@ -1308,6 +1308,9 @@ class Map {
         arrayAtIndex.push([key, value]);
       } else {
         //if our array at index length is greater than 0,loop through an update value
+        alert(
+          "find the index of the subarray that contains our key then mutate that subarray"
+        );
         var indexOfSubarray;
         //for loop
         for (let index = 0; index < arrayAtIndex.length; index++) {
