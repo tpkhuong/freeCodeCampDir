@@ -1316,25 +1316,45 @@ class Map {
         for (let index = 0; index < arrayAtIndex.length; index++) {
           //have a variable to store index
           //loop through collection find the subarray that contains the key
-          //then mutate that subarray
-
-          let subarrayKey = arrayAtIndex[index][0];
-          let subarrayValue = arrayAtIndex[index][1];
-          if (subarrayKey === key) {
-            subarrayValue = value;
+          let [ourKey] = arrayAtIndex[index];
+          if (ourKey == key) {
+            indexOfSubarray = index;
           }
+          // let subarrayKey = arrayAtIndex[index][0];
+          // let subarrayValue = arrayAtIndex[index][1];
+          // if (subarrayKey === key) {
+          //   subarrayValue = value;
+          // }
         }
+        //then mutate that subarray
+        //arrayAtIndex is scoped to the else statement
+        var mutateSubarray = arrayAtIndex[indexOfSubarray];
+        mutateSubarray[1] = value;
+
+        // var [, ourValue] = arrayAtIndex[indexOfSubarray];
+        // ourValue = value;
         //for each
         arrayAtIndex.forEach(function findKey(subarray, index, collection) {
           //have a variable to store index
+          var [ourKey] = subarray;
+          if (ourKey == key) {
+            indexOfSubarray = index;
+          }
+
           //loop through collection find the subarray that contains the key
           //then mutate that subarray
-          var subarrayKey = subarray[0];
-          var subarrayValue = subarray[1];
-          if (subarrayKey === key) {
-            subarrayValue = value;
-          }
+          // var subarrayKey = subarray[0];
+          // var subarrayValue = subarray[1];
+          // if (subarrayKey === key) {
+          //   subarrayValue = value;
+          // }
         });
+        //using destructuring will not work because ourValue will be the secondValue of the subarray
+        //we want to mutate so use arr[index] = value
+        var mutateSubarray = arrayAtIndex[indexOfSubarray];
+        mutateSubarray[1] = value;
+        // var [, ourValue] = arrayAtIndex[indexOfSubarray];
+        // ourValue = value;
       }
     }
 
@@ -1362,7 +1382,39 @@ class Map {
 
     /***** checking the size of our collection/hash table/map *****/
   }
-  remove() {}
+  remove(key) {
+    //need to work with arrayAtIndex;
+    var index = hash(key, this.collection);
+    var arrayAtIndex = this.collection[index];
+    //if it is 0 then return undefined
+    //we could loop through our map if our map length is greater than 0
+    if (arrayAtIndex.length > 0) {
+      //removed value in subarray
+      let removedValue;
+      for (let index = 0; index < arrayAtIndex.length; index++) {
+        let element = arrayAtIndex[index];
+        let [ourKey] = element;
+        if (ourKey === key) {
+          removedValue = element.pop();
+        }
+      }
+      // return removedValue;
+      //remove subarray with key passed into remove()
+      let indexOfSubarray;
+      for (let index = 0; index < arrayAtIndex.length; index++) {
+        let element = arrayAtIndex[index];
+        let [ourKey] = element;
+        if (ourKey == key) {
+          indexOfSubarray = index;
+        }
+      }
+      //use splice to remove subarray that contain our key passed into remove();
+      var removeSubarray = arrayAtIndex.splice(indexOfSubarray, 1);
+      return removeSubarray;
+    } else {
+      return null;
+    }
+  }
   hash(str, n) {
     let sum = 0;
     for (let i = 0; i < str.length; i++) sum += str.charCodeAt(i) * 3;
