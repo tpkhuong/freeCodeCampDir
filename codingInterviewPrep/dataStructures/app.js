@@ -1415,6 +1415,97 @@ class Map {
       return null;
     }
   }
+  // get accepts a key and returns the stored value
+  // has accepts a key and returns true if the key exists or false if it doesn't.
+  get(key) {
+    //our hash func will return the same index/hash value for same key/str passed into the hash func
+    var index = hash(key, this.collectionSize);
+    var arrAtIndex = this.collection[index];
+
+    if (!arrInput) {
+      return -1;
+    } else {
+      //loop though arrAtIndex and find the key
+      //then return value
+      for (let index = 0; index < arrInput.length; index++) {
+        let element = arrInput[index];
+        let [ourKey, ourValue] = element;
+
+        // if (ourKey == key) return ourValue;
+        // break
+        return ourKey == key ? ourValue : -1;
+      }
+      //forEach
+      arrAtIndex.forEach(function findValue(eachSubarray, index) {
+        var [ourKey, ourValue] = eachSubarray;
+
+        // if(ourKey == key) return ourValue;
+        return ourKey == key ? ourValue : -1;
+      });
+    }
+  }
+  has(key) {
+    //our hash func will return the same index/hash value for same key/str passed into the hash func
+    var index = hash(key, this.collectionSize);
+    var arrAtIndex = this.collection[index];
+
+    if (!arrAtIndex) {
+      return -1;
+    } else {
+      //loop through arrAtIndex
+      //for loop
+      for (let index = 0; index < arrInput.length; index++) {
+        let element = arrInput[index];
+        let [ourKey, ourValue] = element;
+        if (ourKey == key) return true;
+        return -1;
+      }
+      //foreach
+      arrAtIndex.forEach(function containKey(subarray, index) {
+        var [ourKey, ourValue] = subarray;
+
+        // if (ourKey == key) return true;
+        // return -1;
+        return ourKey == key ? true : -1;
+      });
+      //for of
+      for (let element of arrayAtIndex) {
+        let [ourKey, ourValue] = element;
+        // return ourKey == key ? true : -1;
+        if (ourKey == key) return true;
+        return -1;
+      }
+    }
+  }
+  // values returns an array of all the values in the map
+  // size returns the number of items in the map
+  // clear empties the map
+  values() {
+    var result = [];
+    //we will use recursion to loop through our collection, we want to use recursion because we will loop through the subarrays too and add the values to an array that we will return
+  }
+  size() {
+    //get the number of arrays in our collection.
+    //use freqCounter
+    var freqCounter = this.collection.reduce(function findArrInCollection(
+      buildingUp,
+      currentValue
+    ) {
+      //buildingUp is our {}
+      //currentValue is each subarray
+      if (Array.isArray(currentValue)) {
+        buildingUp["array"] = (buildingUp["array"] || 0) + 1;
+      }
+      return buildingUp;
+    },
+    {});
+    //freqCounter will have {"array": numOfTimesArrIsInOurCollection}
+    return freqCounter["array"];
+  }
+  clear() {
+    //set the collection length to 0
+    this.collection.length = 0;
+  }
   hash(str, n) {
     let sum = 0;
     for (let i = 0; i < str.length; i++) sum += str.charCodeAt(i) * 3;
