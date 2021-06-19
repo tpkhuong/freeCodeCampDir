@@ -1482,7 +1482,51 @@ class Map {
   // clear empties the map
   values() {
     var result = [];
-    //we will use recursion to loop through our collection, we want to use recursion because we will loop through the subarrays too and add the values to an array that we will return
+    var arrOfSubarrayInCollection = [];
+    //have to loop through this.collection and get all the arr/[]
+    this.collection.forEach(function addSubarray(subarray, index) {
+      if (Array.isArray(subarray)) {
+        //[[["1",0],["2",1]],0,0]: if our array is [["1",0],["2",1]] push will copy/add [["1",0],["2",1]] to the array we want
+        arrOfSubarrayInCollection.push(subarray);
+        // arrOfSubarrayInCollection = [...arrOfSubarrayInCollection, subarray]
+      }
+    });
+    //our arrOfSubarrayInCollection will have [[subarray from this.collection]], there should be no undefined so when we pass the length of subarray into our recur we will break when the index
+    //matches the length of arrOfSubarrayInCollection
+    //we will use recursion to loop through our arrOfSubarrayInCollection, we want to use recursion because we will loop through the subarrays too and add the values to an array that we will return
+    //we need to loop the subarrays and get values.
+    recurHelper(arrOfSubarrayInCollection);
+    function recurHelper(arrInput, index = 0) {
+      //[[["1",0],["2",1]],0,0]
+      let lengthOfArr = arrInput.length;
+      if (index === lengthOfArr) {
+        return;
+      }
+
+      //each time we call recurHelper we want to access the value at index then pass that subarray into loopThroughSubarrayRecur
+      let passSubarrayToLoopThroughFunc = arrInput[index];
+      loopThroughSubarrayRecur(passSubarrayToLoopThroughFunc);
+      recurHelper(arrInput, index + 1);
+    }
+
+    //we want to loop through the subarray of our this.collection we do not know if the array at index, when we use the hash func which will give us a hash that we call index
+    //then we use that index to check if there is an arr there if there is an array there we just add our arr [key,value] to the arrAtIndex
+    function loopThroughSubarrayRecur(subarrayInput, secondLevelIndex = 0) {
+      //[["1",0],["2",1]] we want to loop through this array and access these arrays ["1",0] then ["2", 1];
+      var lengthOfSubarray = subarrayInput.length;
+
+      if (index === lengthOfSubarray) {
+        return;
+      }
+
+      var arrOfKeyValuePair = subarrayInput[index];
+      result.push(arrOfKeyValuePair[1]);
+      /***** using destructuring *****/
+      // var [ourKey, ourValue]  = subarrayInput[index]
+      // var [ourKey, ourValue] = arrOfKeyValuePair;
+      // result.push(ourValue);
+      loopThroughSubarrayRecur(subarrayInput, secondLevelIndex + 1);
+    }
   }
   size() {
     //get the number of arrays in our collection.
