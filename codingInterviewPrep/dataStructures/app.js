@@ -1288,7 +1288,7 @@ class Map {
     if (percentOfArrInOurMap >= 50) {
       //once our map is 50% used up, our new size will be original size times 2
       let increaseCollectionSize = this.collectionSize * 2;
-      let index = hash(key, increaseCollectionSize);
+      let index = this.hash(key, increaseCollectionSize);
 
       if (!this.collection[index]) {
         this.collection[index] = [];
@@ -1296,7 +1296,7 @@ class Map {
     } else {
       //if our map size is not 50% used up, we will call hash with the key and current map size
       //index will be a number
-      var index = hash(key, this.collectionSize);
+      var index = this.hash(key, this.collectionSize);
       //check if at index in our this.collection there is an array or not
       //if its undefined we want an array there
       if (!this.collection[index]) {
@@ -1384,7 +1384,7 @@ class Map {
   }
   remove(key) {
     //need to work with arrayAtIndex;
-    var index = hash(key, this.collection);
+    var index = this.hash(key, this.collection);
     var arrayAtIndex = this.collection[index];
     //if it is 0 then return undefined
     //we could loop through our map if our map length is greater than 0
@@ -1419,7 +1419,7 @@ class Map {
   // has accepts a key and returns true if the key exists or false if it doesn't.
   get(key) {
     //our hash func will return the same index/hash value for same key/str passed into the hash func
-    var index = hash(key, this.collectionSize);
+    var index = this.hash(key, this.collectionSize);
     var arrAtIndex = this.collection[index];
 
     if (!arrInput) {
@@ -1446,7 +1446,7 @@ class Map {
   }
   has(key) {
     //our hash func will return the same index/hash value for same key/str passed into the hash func
-    var index = hash(key, this.collectionSize);
+    var index = this.hash(key, this.collectionSize);
     var arrAtIndex = this.collection[index];
 
     if (!arrAtIndex) {
@@ -1550,6 +1550,89 @@ class Map {
     //set the collection length to 0
     this.collection.length = 0;
   }
+  hash(str, n) {
+    let sum = 0;
+    for (let i = 0; i < str.length; i++) sum += str.charCodeAt(i) * 3;
+
+    return sum % n;
+  }
+}
+
+/*
+
+Create a Hash Table
+In this challenge we will learn about hash tables. A Hash table is used to implement associative arrays, or mappings of key-value pairs, like the objects and Maps we have just been studying.
+A JavaScript object could be implemented as a hash table, for instance (its actual implementation will depend on the environment it's running in).
+The way a hash table works is that it takes a key input and hashes this key in a deterministic way to some numerical value.
+This numerical value is then used as the actual key the associated value is stored by. Then, if you try to access the same key again, the hashing function will process the key,
+return the same numerical result, which will then be used to look up the associated value. This provides very efficient O(1) lookup time on average.
+
+Hash tables can be implemented as arrays with hash functions producing array indices within a specified range.
+In this method, the choice of the array size is important, as is the hashing function. For instance, what if the hashing function produces the same value for two different keys?
+This is called a collision. One way to handle collisions is to just store both key-value pairs at that index. Then, upon lookup of either, you would have to iterate through the bucket of items to find the key you are looking for.
+A good hashing function will minimize collisions to maintain efficient search time.
+
+Here, we won't be concerned with the details of hashing or hash table implementation, we will just try to get a general sense of how they work.
+
+Let's create the basic functionality of a hash table. We've created a naive hashing function for you to use. You can pass a string value to the function hash and it will return a hashed value you can use as a key for storage.
+Store items based on this hashed value in the this.collection object. Create these three methods: add, remove, and lookup. The first should accept a key value pair to add to the hash table.
+The second should remove a key-value pair when passed a key. The third should accept a key and return the associated value or null if the key is not present.
+
+*/
+
+class HashTable {
+  constructor(size) {
+    this.collection = {};
+    this.collectionSize = size;
+  }
+  /* The first should accept a key value pair to add to the hash table. */
+  add(key, value) {
+    var index = this.hash(key, this.collectionSize);
+
+    //our this.collection is an obj instead of an array
+    if (!this.collection[index]) {
+      this.collection[index] = [];
+    }
+    var arrOfIndexInCollection = this.collection[index];
+    //check size/length of the arr asign to this.collection[index];
+    var lengthOfArrAtIndexOfCollection = arrOfIndexInCollection.length;
+
+    if (lengthOfArrAtIndexOfCollection === 0) {
+      let arrAssignedAtIndexOfCollection = this.collection[index];
+
+      arrAssignedAtIndexOfCollection.push([key, value]);
+    } else {
+      //loop through subarray of arrAtIndexOfCollection
+      let indexOfSubarray;
+      //for loop
+      for (let index = 0; index < lengthOfArrAtIndexOfCollection; index++) {
+        let subarray = arrOfIndexOfCollection[index];
+        // let ourKey = subarray[0]
+        let [ourKey, ourValue] = subarray;
+        if (ourKey === key) {
+          indexOfSubarray = index;
+        }
+      }
+      //for each
+      arrOfIndexInCollection.forEach(function findIndex(subarray, index) {
+        // var ourKey = subarray[0]
+        var [ourKey, ourValue] = subarray;
+        if (ourKey === key) {
+          indexOfSubarray = index;
+        }
+      });
+
+      let mutateSubarray = arrOfIndexOfCollection[indexOfSubarray];
+      //if we used destructuring [ourKey,ourValue] = mutateSubarray;
+      //ourvalue will be the second value in the mutateSubarray
+      //if we want to reassign the value at index 1 we have to use array[index];
+      mutateSubarray[1] = value;
+    }
+  }
+  /*  The second should remove a key-value pair when passed a key. */
+  remove(key) {}
+  /* The third should accept a key and return the associated value or null if the key is not present. */
+  lookup(key) {}
   hash(str, n) {
     let sum = 0;
     for (let i = 0; i < str.length; i++) sum += str.charCodeAt(i) * 3;
