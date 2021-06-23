@@ -1630,9 +1630,65 @@ class HashTable {
     }
   }
   /*  The second should remove a key-value pair when passed a key. */
-  remove(key) {}
+  remove(key) {
+    //want to find/work with subarray with matching key
+    var index = this.hash(key, this.collectionSize);
+    //we want to use this index to access the subarray that has our key
+    var indexOfArrayThatMatchesKey;
+    //we can check if our arrayAtIndex is undefined or is an array
+    var arrayAtIndex = this.collection[index];
+    if (!arrayAtIndex) {
+      return undefined;
+    } else {
+      //if there is an array at index then we will loop through it
+      //for loop
+      for (let index = 0; index < arrayAtIndex.length; index++) {
+        let element = arrayAtIndex[index];
+        // let [ourKey, ourValue] = arrayAtIndex[index];
+        let [ourKey, ourValue] = element;
+        if (ourKey == key) indexOfArrayThatMatchesKey = index;
+      }
+      //foreach
+      arrayAtIndex.forEach(function findIndex(subarray, index) {
+        var [ourKey, ourValue] = subarray;
+        if (ourKey == key) indexOfArrayThatMatchesKey = index;
+      });
+      //use indexOfArrayThatMatchesKey with splice on arrayAtIndex to remove the key-value pair
+      var removedKeyValuePairArr = arrayAtIndex.splice(
+        indexOfArrayThatMatchesKey,
+        1
+      );
+      return removedKeyValuePairArr;
+    }
+    //if there is no array at index return undefined
+    // if (!this.collection[index]) {
+    //   return undefined;
+    // }
+  }
   /* The third should accept a key and return the associated value or null if the key is not present. */
-  lookup(key) {}
+  lookup(key) {
+    var index = this.hash(key, this.collectionSize);
+    var arrayAtIndex = this.collection[index];
+
+    if (!arrayAtIndex) {
+      return undefined;
+    }
+
+    //loop through arrayAtIndex return the value that is in the same subarray as the key
+    //for loop
+    for (let index = 0; index < arrayAtIndex.length; index++) {
+      let element = arrayAtIndex[index];
+      // let [ourKey, ourValue] = arrayAtIndex[index];
+      let [ourKey, ourValue] = element;
+      if (ourKey == key) return ourValue;
+    }
+    //foreach
+    arrayAtIndex.forEach(function getTheValue(subarray) {
+      var [ourKey, ourValue] = subarray;
+
+      if (ourKey == key) return ourValue;
+    });
+  }
   hash(str, n) {
     let sum = 0;
     for (let i = 0; i < str.length; i++) sum += str.charCodeAt(i) * 3;
@@ -1640,6 +1696,87 @@ class HashTable {
     return sum % n;
   }
 }
+
+/* linked list */
+
+/*
+
+Work with Nodes in a Linked List
+Another common data structure you'll run into in computer science is the linked list. A linked list is a linear collection of data elements, called 'nodes',
+each of which points to the next. Each node in a linked list contains two key pieces of information: the element itself, and a reference to the next node.
+
+Imagine that you are in a conga line. You have your hands on the next person in the line, and the person behind you has their hands on you. You can see the person straight ahead of you,
+but they are blocking the view of the other people ahead in line. A node is just like a person in a conga line: they know who they are and they can only see the next person in line,
+but they are not aware of the other people ahead or behind them.
+
+In our code editor, we've created two nodes, Kitten and Puppy, and we've manually connected the Kitten node to the Puppy node.
+
+Create a Cat and Dog node and manually add them to the line.
+
+*/
+
+function LinkedList() {
+  var length = 0;
+  var head = null;
+
+  var Node = function (element) {
+    this.element = element;
+    this.next = null;
+  };
+
+  this.head = function () {
+    return head;
+  };
+
+  this.size = function () {
+    return length;
+  };
+
+  this.add = function (element) {
+    // Only change code below this line
+    var newNode = Node(element);
+    if (!head) {
+      head = newNode;
+    } else {
+      //if there is a head. since we are not working with a tail. this add will be similar to unshift where the head will change
+      //newNode will point to head then we update head
+      newNode.next = head;
+      head = newNode;
+      length += 1;
+    }
+    // Only change code above this line
+  };
+}
+
+/* create a linked list*/
+
+/*
+
+Create a Linked List Class
+Let's create a linked list class. Every linked list should start out with a few basic properties: a head (the first item in your list) and a length (number of items in your list).
+Sometimes you'll see implementations of linked lists that incorporate a tail for the last element of the list, but for now we'll just stick with these two. Whenever we add an element to the linked list,
+our length property should be incremented by one.
+
+We'll want to have a way to add items to our linked list, so the first method we'll want to create is the add method.
+
+If our list is empty, adding an element to our linked list is straightforward enough: we just wrap that element in a Node class, and we assign that node to the head of our linked list.
+
+But what if our list already has one or more members? How do we add an element to the list? Recall that each node in a linked list has a next property. To add a node to the list,
+find the last node in the list, and point that last node's next property at our new node. (Hint: you know you've reached the end of a linked list when a node's next property is null.)
+
+Write an add method that assigns the first node you push to the linked list to the head; after that, whenever adding a node, every node should be referenced by the previous node's next property.
+
+Note
+
+Your list's length should increase by one every time an element is added to the linked list.
+
+*/
+
+/* create a linked list*/
+
+class SinglyLinkedList {}
+
+/* linked list */
 
 var arr = [1, 2, 3, 4, 5, 6];
 var arrLength = arr.length;
