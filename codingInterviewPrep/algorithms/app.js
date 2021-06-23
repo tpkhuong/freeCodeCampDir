@@ -691,6 +691,13 @@ function intersection(arrInput) {
 
 /***** intersection recursive *****/
 
+/***** intersection recursive: another approach *****/
+// [[5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20]]
+
+function intersectionRecur(arrInput) {}
+
+/***** intersection recursive: another approach *****/
+
 /***** intersection non-recursive *****/
 
 function intersectionNonRecursive(...arraysInput) {
