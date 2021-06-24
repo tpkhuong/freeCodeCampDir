@@ -693,8 +693,48 @@ function intersection(arrInput) {
 
 /***** intersection recursive: another approach *****/
 // [[5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20]]
+alert(
+  "secRecur if result is empty add all the value of first subarray to result. when we are working with second subarray we will compare result with second subarray"
+);
+function intersectionRecur(arrInput) {
+  //
+  var lengthToMatchFreq = arrInput.length;
+  var result = [];
+  var freqCounter = {};
 
-function intersectionRecur(arrInput) {}
+  //call firstRecursive
+  firstRecursive(arrInput);
+  function firstRecursive(innerArrInput, index = 0) {
+    // [[5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20]]
+    var lengthOfArr = innerArrInput.length;
+    if (index === lengthOfArr) {
+      return;
+    }
+
+    var subarray = innerArrInput[index]; // [5, 10, 15, 20]
+    secondRecursive(subarray); // [5, 10, 15, 20]
+    firstRecursive(innerArrInput, index + 1);
+  }
+  function secondRecursive(secArrInput, index = 0) {
+    // [5, 10, 15, 20]
+    var lengthOfSecArr = secArrInput.length;
+
+    if (index === lengthOfSecArr) {
+      return;
+    }
+
+    var valueOfSubarray = secArrInput[index]; //5
+    //freqCounter[5] = freqCounter[5] will be undefined so it will be 0 + 1 working with first subarray [5,10,15,20]
+    freqCounter[valueOfSubarray] = (freqCounter[valueOfSubarray] || 0) + 1;
+    secondRecursive(secArrInput, index + 1);
+  }
+  //use for in loop through freqCounter add the value that === lengthToMatchFreq;
+  for (let eachKey in freqCounter) {
+    let eachValue = freqCounter[eachKey];
+    if (eachValue == lengthToMatchFreq) result.push(eachKey);
+  }
+  return result;
+}
 
 /***** intersection recursive: another approach *****/
 
