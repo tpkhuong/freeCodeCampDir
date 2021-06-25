@@ -1774,7 +1774,43 @@ Your list's length should increase by one every time an element is added to the 
 
 /* create a linked list*/
 
-class SinglyLinkedList {}
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+class SinglyLinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
+  getHead() {
+    return this.head;
+  }
+  getTail() {
+    return this.tail;
+  }
+  getSize() {
+    return this.length;
+  }
+  prepend(value) {
+    /* we are adding to the beginning of our linked list: the head is always changing */
+    var newNode = new Node(value);
+    if (this.head == null) {
+      this.head = newNode;
+      this.tail = newNode;
+      // this.tail = this.head;
+    } else {
+      // this means this.head is not null;
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+    this.length++;
+    return this;
+  }
+}
 
 /* linked list */
 
