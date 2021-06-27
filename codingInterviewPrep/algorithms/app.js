@@ -738,7 +738,15 @@ function intersectionRecur(arrInput) {
 
 /***** intersection recursive: another approach *****/
 
-function intersectionRecurAnotherway(arrInput) {}
+function intersectionRecurAnotherway(arrInput) {
+  var result = [];
+
+  function firstRecursive(firstArrInput, firstIndex = 0) {
+    
+  }
+
+  function secondRecursive(secondArrInput, secondIndex = 0)
+}
 
 /***** intersection non-recursive *****/
 
