@@ -1810,6 +1810,21 @@ class SinglyLinkedList {
     this.length++;
     return this;
   }
+  append() {
+    /* since we adding to the end of our linked list: the tail is alays changing */
+    var newNode = new Node(value);
+    if (this.head == null) {
+      this.head = newNode;
+      this.tail = newNode;
+      // or
+      // this.tail = this.head;
+    } else {
+      this.tail.next = newNode;
+      this.tail = newNode;
+    }
+    this.length++;
+    return this;
+  }
 }
 
 /* linked list */
