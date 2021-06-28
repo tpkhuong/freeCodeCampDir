@@ -1810,7 +1810,7 @@ class SinglyLinkedList {
     this.length++;
     return this;
   }
-  append() {
+  append(value) {
     /* since we adding to the end of our linked list: the tail is alays changing */
     var newNode = new Node(value);
     if (this.head == null) {
@@ -1824,6 +1824,9 @@ class SinglyLinkedList {
     }
     this.length++;
     return this;
+  }
+  shift() {
+    /* removing from the beginning */
   }
 }
 
