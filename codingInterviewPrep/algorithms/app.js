@@ -739,13 +739,33 @@ function intersectionRecur(arrInput) {
 /***** intersection recursive: another approach *****/
 
 function intersectionRecurAnotherway(arrInput) {
-  var result = [];
+  // [[5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20]]
+  var placeHolder = [];
+  var appearInAllSubarrays = [];
 
   function firstRecursive(firstArrInput, firstIndex = 0) {
-    
-  }
+    // [[5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20]]
+    var firstArrLength = firstArrInput.length;
 
-  function secondRecursive(secondArrInput, secondIndex = 0)
+    if (firstIndex === firstArrLength) {
+      return;
+    }
+
+    var subarray = firstArrInput[index];
+
+    secondRecursive(subarray); //[5,10,15,20];
+  }
+  //when we pass
+  function secondRecursive(secondArrInput, secondIndex = 0) {
+    //[5,10,15,20];
+    var secondArrLength = secondArrInput.length;
+
+    if (secondIndex === secondArrLength) {
+      return;
+    }
+
+    var valueOfSubarray = secondArrInput[secondIndex];
+  }
 }
 
 /***** intersection non-recursive *****/
@@ -1102,3 +1122,9 @@ union([
 ]);
 
 /***** union *****/
+
+/***** union recursive *****/
+
+function unionRecursive(arrInput) {}
+
+/***** union recursive *****/
