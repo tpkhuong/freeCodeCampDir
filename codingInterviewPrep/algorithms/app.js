@@ -753,6 +753,15 @@ function intersectionRecurAnotherway(arrInput) {
 
     var subarray = firstArrInput[index];
 
+    alert(
+      "we want to compare each value in secondRecursive with an array that has all the value in the current length of the array"
+    );
+    alert(
+      "first array we work with all the value will appear in the array because our length is 1"
+    );
+    if (firstIndex === 0) {
+      placeHolder = subarray;
+    }
     secondRecursive(subarray); //[5,10,15,20];
   }
   //when we pass
