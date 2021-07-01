@@ -1866,6 +1866,48 @@ Note: The length of the list should decrease by one every time an element is rem
   }
   pop() {
     /* removing from the end */
+    /* this is if this.length is 0 or this.head/this.tail is falsy */
+    if (!this.head) return undefined;
+    /* this is if our linked list length is greater than 1*/
+    var current = this.head;
+    var newTail = current;
+
+    while (current.next) {
+      newTail = current;
+      current = current.next;
+    }
+    this.tail = newTail;
+    this.tail.next = null;
+    this.length--;
+    /* this is if our linked list length is equal or less than 1*/
+    if (this.length === 0) {
+      this.head = null;
+      this.tail = null;
+    }
+    return current;
+  }
+  get(index) {
+    /* ["linked", "linked", "linked"]. length will be 3 */
+    /*      0         1         2     counter */
+
+    if (index < 0 || index >= this.length) return null;
+    var current = this.head;
+    var counter = 0;
+    while (counter !== index) {
+      current = current.next;
+      counter++;
+    }
+    return current;
+  }
+  set(index, value) {
+    var found = this.append(index);
+
+    if (found) {
+      found.value = value;
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
