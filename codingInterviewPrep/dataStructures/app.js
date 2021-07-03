@@ -1909,6 +1909,34 @@ Note: The length of the list should decrease by one every time an element is rem
       return false;
     }
   }
+  insert(index, value) {
+    //if index is less than 0 or >= this.length return undefined or false
+    if (index < 0 || index >= this.length) return null;
+    alert(
+      "what about there is a value already at index, how do we want to handle that?"
+    );
+    /* ["linked", "linked", "linked"]. length will be 3 */
+    /*      0         1         2     counter */
+    //if index === to 0 we want to add to the beginning
+    if (index === 0) {
+      this.prepend(value);
+      return true;
+      // if index === this.length - 1, this will be 2 so we want to add to the end
+    } else if (index === this.length - 1) {
+      this.append(value);
+      return true;
+    } else {
+      //we are in the middle of our linked list
+      var newNode = new Node(value);
+      var beforeNode = this.get(index - 1);
+      var afterNode = beforeNode.next;
+      beforeNode.next = newNode;
+      newNode.next = afterNode;
+      this.length++;
+      return true;
+    }
+  }
+  remove(index) {}
 }
 
 /* linked list */
