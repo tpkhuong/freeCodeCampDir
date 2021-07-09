@@ -1912,9 +1912,7 @@ Note: The length of the list should decrease by one every time an element is rem
   insert(index, value) {
     //if index is less than 0 or >= this.length return undefined or false
     if (index < 0 || index >= this.length) return null;
-    alert(
-      "what about there is a value already at index, how do we want to handle that?"
-    );
+
     /* ["linked", "linked", "linked"]. length will be 3 */
     /*      0         1         2     counter */
     //if index === to 0 we want to add to the beginning
@@ -1936,7 +1934,67 @@ Note: The length of the list should decrease by one every time an element is rem
       return true;
     }
   }
-  remove(index) {}
+  remove(index) {
+    //if index is less than 0 or >= this.length return undefined or false
+    if (index < 0 || index >= this.length) return null;
+
+    /* ["linked", "linked", "linked"]. length will be 3 */
+    /*      0         1         2     counter */
+    //if index === to 0 we want to remove to the beginning
+    if (index === 0) {
+      this.shift();
+      return ture;
+      // if index === this.length - 1, this will be 2 so we want to remove to the end
+    } else if (index >= this.length - 1) {
+      this.pop();
+      return true;
+    } else {
+      //we are in the middle of our linked list
+      var beforeNode = this.get(index - 1);
+      var removeNode = beforeNode.next;
+      var afterNode = removeNode.next;
+      beforeNode.next = afterNode;
+      removeNode.next = null;
+      this.length--;
+      return removeNode;
+    }
+  }
+}
+
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.previous = null;
+    this.next = null;
+  }
+}
+
+class DoublyLinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
+  //adding to the beginning. this.head will change
+  prepend(value) {
+    //if this.head is null make this.head = to newNode
+    var newNode = new Node(value);
+    if (this.head == null) {
+      this.head = newNode;
+      this.tail = newNode;
+      // this.tail = this.head
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+      //we don't need line below because when we call new Node(value) and assigned the object returned from the new Node()
+      //our Node class will create an object that have these properties. value, previous, next
+      //newNode is already has .previous pointing to null
+      // this.head.previous = null;
+    }
+    this.length++;
+    return this;
+  }
+  //adding to the end. this.tail will change
 }
 
 /* linked list */
