@@ -1995,6 +1995,97 @@ class DoublyLinkedList {
     return this;
   }
   //adding to the end. this.tail will change
+  append(value) {
+    var newNode = new Node(value);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+      // this.tail = this.head;
+    } else {
+      this.tail.next = newNode;
+      newNode.previous = this.tail;
+      this.tail = newNode;
+    }
+    this.length++;
+    return this;
+  }
+  //removing from the beginning
+  shift() {
+    if (this.length === 0) return undefined;
+    var removedNode = this.head;
+    if (this.length == 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.head = removedNode.next;
+      removedNode.next = null;
+      this.head.previous = null;
+    }
+    this.length--;
+    return removedNode;
+  }
+  //removing from the end
+  pop() {
+    if (this.length === 0) return undefined;
+    var removedNode = this.tail;
+    if (this.length == 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.tail = removedNode.previous;
+      this.tail.next = null;
+      removedNode.previous = null;
+    }
+    this.length--;
+    return removedNode;
+  }
+  get(index) {
+    var middleOfLinkedList = Math.floor(this.length / 2);
+    if (index < 0 || index >= this.length) return null;
+    //if index is less than middleOfLinkedList, start at this.head
+    if (index < middleOfLinkedList) {
+      let current = this.head;
+      let counter = 0;
+      while (counter != index) {
+        current = current.next;
+        counter++;
+      }
+    } else {
+      //else start at this.tail
+      let current = this.tail;
+      let counter = this.length - 1;
+      while (counter != index) {
+        current = current.previous;
+        counter--;
+      }
+    }
+    return current;
+  }
+  set(index, value) {
+    var found = this.get(index);
+    if (found) {
+      found.value = value;
+      return true;
+    }
+    return false;
+  }
+  insert(index, value) {
+    var newNode = new Node(value);
+    if (index < 0 || index > this.length) return false;
+    if (index === 0) !!this.prepend(value);
+    if (index === this.length) !!this.append(value);
+    //else we are in the middle
+    var beforeNode = this.get(index - 1);
+    var afterNode = beforeNode.next;
+
+    beforeNode.next = newNode;
+    newNode.next = afterNode;
+    afterNode.previous = newNode;
+    newNode.previous = beforeNode;
+    this.length++;
+    return true;
+  }
+  remove(index) {}
 }
 
 /* linked list */
