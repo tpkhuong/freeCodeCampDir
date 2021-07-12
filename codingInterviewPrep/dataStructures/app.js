@@ -2085,10 +2085,44 @@ class DoublyLinkedList {
     this.length++;
     return true;
   }
-  remove(index) {}
+  remove(index) {
+    if (index < 0 || index >= this.length) return false;
+    if (index === 0) this.shift();
+    if (index === this.length - 1) this.pop();
+    //else we are in the middle
+    var removedNode = this.get(index);
+    var beforeNode = removedNode.previous;
+    var afterNode = removedNode.next;
+
+    beforeNode.next = afterNode;
+    afterNode.previous = beforeNode;
+    removedNode.previous = null;
+    removedNode.next = null;
+    this.length--;
+    return removedNode;
+  }
 }
 
 /* linked list */
+
+/* Tree */
+
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+class BinarySearchTree {
+  constructor() {
+    this.root = null;
+  }
+  insert(value) {}
+}
+
+/* Tree */
 
 var arr = [1, 2, 3, 4, 5, 6];
 var arrLength = arr.length;
