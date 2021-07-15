@@ -2166,11 +2166,77 @@ class BinarySearchTree {
     }
     return current;
   }
-  breadthFirstSearch() {}
-  preOrderDepthFirstSearch() {}
-  inOrderDepthFirstSearch() {}
-  postOrderDepthFirstSearch() {}
+  breadthFirstSearch() {
+    //starting node will be this.root
+    var result = [];
+    var queue = [];
+
+    var currentNode = this.root;
+
+    queue.push(currentNode);
+    while (queue.length > 0) {
+      //remove from the beginning
+      currentNode = queue.shift();
+      result.push(visitedNode);
+      if (visitedNode.left) {
+        queue.push(visitedNode.left);
+      }
+      if (visitedNode.right) {
+        queue.push(visitedNode.right);
+      }
+    }
+    return result;
+  }
+  preOrderDepthFirstSearch() {
+    var result = [];
+
+    function traverse(node) {
+      result.push(node);
+      if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
+    }
+    traverse(this.root);
+    return result;
+  }
+  inOrderDepthFirstSearch() {
+    var result = [];
+
+    function traverse(node) {
+      if (node.left) traverse(node.left);
+      result.push(node);
+      if (node.right) traverse(node.right);
+    }
+    traverse(this.root);
+    return result;
+  }
+  postOrderDepthFirstSearch() {
+    var result = [];
+
+    function traverse(node) {
+      if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
+      result.push(node);
+    }
+    traverse(this.root);
+    return result;
+  }
+  findMin() {
+    if (this.root == null) return null;
+  }
+  findMax() {
+    if (this.root == null) return null;
+  }
 }
+
+/*
+
+Find the Minimum and Maximum Value in a Binary Search Tree
+In this challenge you will define two methods, findMin and findMax. These methods should return the minimum and maximum value held in the binary search tree 
+(don't worry about adding values to the tree for now, we have added some in the background). If you get stuck, reflect on the invariant that must be true for binary search trees: 
+each left subtree is less than or equal to its parent and each right subtree is greater than or equal to its parent. 
+Let's also say that our tree can only store integer values. If the tree is empty, either method should return null.
+
+*/
 
 /* Tree */
 
