@@ -17,6 +17,7 @@ Example
 
 function duplicateCount(text) {
   //
+  var result = [];
   // var arrOfStrChar = [...text]
   var freqCounter = {};
 
@@ -44,6 +45,11 @@ function duplicateCount(text) {
   }
   recursiveHelper(arrOfLowerCaseLetterAndNums);
   //return the char in the array that are duplicates
+  for (let eachKey in freqCounter) {
+    var valueInCounter = freqCounter[eachKey];
+    valueInCounter > 1 ? result.push(eachKey) : null;
+  }
+  return result.length;
 }
 
 // const duplicateCount = (text) => {};
