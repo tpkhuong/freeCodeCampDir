@@ -21,6 +21,8 @@ function duplicateCount(text) {
   // var arrOfStrChar = [...text]
   var freqCounter = {};
 
+  if (text.length === 0) return 0;
+
   var arrOfStrChar = text.split("");
   //lets make sure the array we pass into our recursive Func is working with lowerCase letters
   //using regex make two arrays. one with just letters and one with just numbers
@@ -31,7 +33,21 @@ function duplicateCount(text) {
   ) {
     return eachChar.toLowerCase();
   });
-  var arrOfLowerCaseLetterAndNums = [...arrOfLowerCaseLetters, ...arrOfNumbers];
+  //check if the string passed in has numbers
+  if (!arrOfNumbers) {
+    recursiveHelper(arrOfLowerCaseLetters);
+  } else {
+    //if we get here it means there is number in our string
+    let arrOfLowerCaseLetterAndNums;
+    arrOfLowerCaseLetters
+      ? ((arrOfLowerCaseLetterAndNums = [
+          ...arrOfLowerCaseLetters,
+          ...arrOfNumbers,
+        ]),
+        recursiveHelper(arrOfLowerCaseLetterAndNums))
+      : recursiveHelper(arrOfNumbers);
+  }
+
   function recursiveHelper(arrInput, index = 0) {
     var lengthOfArr = arrInput.length;
     if (lengthOfArr === index) {
@@ -43,7 +59,7 @@ function duplicateCount(text) {
     freqCounter[strChar] = (freqCounter[strChar] || 0) + 1;
     recursiveHelper(arrInput, index + 1);
   }
-  recursiveHelper(arrOfLowerCaseLetterAndNums);
+
   //return the char in the array that are duplicates
   for (let eachKey in freqCounter) {
     var valueInCounter = freqCounter[eachKey];
@@ -54,3 +70,39 @@ function duplicateCount(text) {
 
 // const duplicateCount = (text) => {};
 "aA11".match(/\d/gi);
+
+/* Reversed Strings */
+
+/* 
+const chai = require("chai");
+const assert = chai.assert;
+chai.config.truncateThreshold=0;
+
+describe("Basic tests", () => {
+  it("Testing for fixed tests", () => {
+    assert.strictEqual(solution('world'), 'dlrow');
+    assert.strictEqual(solution('hello'), 'olleh');
+    assert.strictEqual(solution(''), '');
+    assert.strictEqual(solution('h'), 'h');
+  });
+});  
+
+*/
+
+function reversedStr(text) {
+  //iterative
+  var arrOfStrings = text.split("");
+  var arrOfReversedStr = [];
+  var lengthOfStr = text.length;
+
+  if (lengthOfStr <= 1) {
+    return text;
+  }
+
+  for (let index = arrOfStrings.length - 1; index >= 0; index--) {
+    var element = arrOfStrings[index];
+    arrOfReversedStr.push(element);
+  }
+
+  return arrOfReversedStr.join("");
+}
