@@ -55,16 +55,22 @@ function duplicateCount(text) {
     }
 
     var strChar = arrInput[index];
-
+    //might not have to loop through freqCounter if we push any strChar that has a freqCounter[strChar] value greater than 1
+    //we will add it to the result arr
+    // if (freqCounter[strChar] > 1) {
+    //   result.push(strChar);
+    // }
+    //ternary opeartor
     freqCounter[strChar] = (freqCounter[strChar] || 0) + 1;
+    freqCounter[strChar] > 1 ? result.push(strChar) : null;
     recursiveHelper(arrInput, index + 1);
   }
 
   //return the char in the array that are duplicates
-  for (let eachKey in freqCounter) {
-    var valueInCounter = freqCounter[eachKey];
-    valueInCounter > 1 ? result.push(eachKey) : null;
-  }
+  // for (let eachKey in freqCounter) {
+  //   var valueInCounter = freqCounter[eachKey];
+  //   valueInCounter > 1 ? result.push(eachKey) : null;
+  // }
   return result.length;
 }
 
