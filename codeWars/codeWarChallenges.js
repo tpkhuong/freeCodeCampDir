@@ -111,4 +111,17 @@ function reversedStr(text) {
   }
 
   return arrOfReversedStr.join("");
+  // recursive
+  function recursiveHelper(arrInput, index = lengthOfStr - 1) {
+    if (0 > index) {
+      return;
+    }
+
+    var charOfStr = arrInput[index];
+    arrOfReversedStr.push(charOfStr);
+    recursiveHelper(arrOfStrings, index - 1);
+  }
+
+  recursiveHelper(arrOfStrings);
+  return arrOfReversedStr.join("");
 }
