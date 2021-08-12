@@ -125,3 +125,50 @@ function reversedStr(text) {
   recursiveHelper(arrOfStrings);
   return arrOfReversedStr.join("");
 }
+
+/* 
+
+Convert a Number to a String!
+
+We need a function that can transform a number into a string.
+
+What ways of achieving this do you know?
+*/
+
+function numberToString(num) {
+  return typeof num === "number" ? num + "" : console.log("Not a number");
+  return typeof num === "number" ? String(num) : console.log("Not a number");
+}
+
+/*
+
+Create a function (or write a script in Shell) that takes an integer as an argument and returns "Even" for even numbers or "Odd" for odd numbers.
+
+Even or Odd
+
+*/
+
+function evenOrOdd(number) {
+  return number % 2 === 0 ? "Even" : "Odd";
+}
+
+/*
+Counting sheep...
+
+Consider an array/list of sheep where some sheep may be missing from their place. We need a function that counts the number of sheep present in the array (true means present).
+
+For example,
+
+[true,  true,  true,  false,
+  true,  true,  true,  true ,
+  true,  false, true,  false,
+  true,  false, false, true ,
+  true,  true,  true,  true ,
+  false, false, true,  true]
+The correct answer would be 17.
+
+Hint: Don't forget to check for bad values like null/undefined
+
+*/
+
+function countingSheep(arrayOfSheep) {}
