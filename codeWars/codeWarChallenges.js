@@ -171,4 +171,24 @@ Hint: Don't forget to check for bad values like null/undefined
 
 */
 
-function countingSheep(arrayOfSheep) {}
+function countingSheep(arrayOfSheep) {
+  var result = arrayOfSheep.filter(function getPresentSheeps(eachValue) {
+    if (typeof eachValue === "boolean") {
+      return eachValue === true;
+    }
+  });
+
+  return result.length;
+}
+
+/*
+Convert number to reversed array of digits
+
+Convert number to reversed array of digits
+Given a random non-negative number, you have to return the digits of this number within an array in reverse order.
+
+Example:
+348597 => [7,9,5,8,4,3]
+*/
+
+function digitize(numInput) {}
