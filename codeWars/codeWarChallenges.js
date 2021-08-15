@@ -191,4 +191,35 @@ Example:
 348597 => [7,9,5,8,4,3]
 */
 
-function digitize(numInput) {}
+function digitize(numInput) {
+  var result = [];
+  var convertToStr = String(numInput);
+  var arrOfNumInStrForm = convertToStr.split("");
+  var lengthOfArr = arrOfNumInStrForm.length;
+
+  // function recursiveLooping(arrInput, index = lengthOfArr - 1) {
+  //   if (index < 0) {
+  //     return;
+  //   }
+  //   var convertNumInStrBackToNumForm = Number(arrInput[index]);
+  //   result.push(convertNumInStrBackToNumForm);
+  //   recursiveLooping(arrInput, index - 1);
+  // }
+  function recursiveLooping(arrInput, index = 0) {
+    if (index === lengthOfArr) {
+      return [];
+    }
+    var convertedNumInStrBackToNumForm = Number(arrInput[index]);
+
+    return recursiveLooping(arrInput, index + 1).concat([
+      convertedNumInStrBackToNumForm,
+    ]);
+    //will return [7,9,5,8,4,3]
+    // return [convertNumInStrBackToNumForm].concat(
+    //   recursiveLooping(arrInput, index + 1)
+    // );
+    // will return [3, 4, 8, 5, 9, 7]
+  }
+  var ourResultArr = recursiveLooping(arrOfNumInStrForm);
+  console.log(ourResultArr);
+}
