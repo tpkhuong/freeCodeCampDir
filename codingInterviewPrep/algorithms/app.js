@@ -1220,3 +1220,263 @@ endsWith("Cats are the best!", "best!"); // => true
 endsWith("Cats are the best!", "worst!"); // => false
 
 var str = "chesse,meat,potatoes, peppers,milk";
+
+//Regular High Order Functions
+
+element.addEventListener("click", function () {
+  console.log("Our evidence is updated");
+});
+
+const newClue = function (name) {
+  const length = name.length;
+
+  return function (weapon) {
+    const clue = length + weapon.length;
+    return !!(clue % 1);
+  };
+};
+
+var clue = () => {
+  const msg = "Help! I think i found a clue!";
+
+  const logger = () => {
+    console.log(msg);
+  };
+
+  setTimeout(logger, 1000);
+  console.log("what happens first? this log or the help above?"); //this first because msg is inside func expression logger. logger is called in setTimeout()
+};
+
+function head(array) {
+  return array[0];
+}
+
+// Implement nthValue :
+// Gets the element at index n of array. If n is negative, the nth element from the end is returned.
+
+// Definition: nthValue(array, number)
+
+function nthValue(array, index) {
+  if (array.length > 0) {
+    if (index > 0) {
+      //positive index
+      return array[index];
+    } else {
+      //negative index
+      return array[array.length + index]
+    }
+  } else {
+    console.log("Empty Array");
+  }
+}
+
+function forEach(collection, callback) {
+  for (let index = 0; index < collection.length; index++){
+    let element = collection[index]
+    callback(element, index, collection);
+  }
+}
+
+function map(collection, callback) {}
+
+function filter(collection, callback) {}
+
+function partition(collection, callback) {}
+
+function callLater(func) {}
+
+function reverseString(strInput) {
+  var result = [];
+  var arrOfChars = strInput.split("");
+
+  for (let index = arrOfChars.length - 1; index >= 0; index--){
+    let element = arrOfChars[index];
+    result.push(element);
+  }
+
+  return result.join("");
+}
+
+forEach([1, 2, 3, 4, 5, 6], function logStuff(value, index, list) {
+  console.log(value)
+});
+
+
+const who = {
+  name: "Mrs. White"
+}
+
+who.name;
+
+const suspect = who.name;//assigning the value of who.name which is "Mrs. White" to the variable suspect
+
+who.name = "Mrs. Green";
+
+suspect;//still the string "Mrs. White"
+
+suspect = "Mr. Green";//cant do this
+
+suspect //still the string "Mrs. White";
+
+who.story; //undefined;
+
+/***** Object memory *****/
+
+### 1. What's the output?
+```
+let c = { greeting: 'Hey!' };
+let d;
+
+d = c;
+c.greeting = 'Hello';
+console.log(d.greeting);
+```
+- A: Hello
+- B: Hey!
+- C: undefined
+- D: ReferenceError
+- E: TypeError
+
+[solution](https://github.com/lydiahallie/javascript-questions#6-whats-the-output)
+
+### 2. What's the output?
+```
+let greeting;
+greetign = {}; // Typo!
+console.log(greetign);
+```
+- A: {}
+- B: ReferenceError: greetign is not - defined
+- C: undefined
+
+[solution](https://github.com/lydiahallie/javascript-questions#9-whats-the-output)
+
+### 3. What's the output?
+
+```
+function checkAge(data) {
+  if (data === { age: 18 }) {
+    console.log('You are an adult!');
+  } else if (data == { age: 18 }) {
+    console.log('You are still an adult.');
+  } else {
+    console.log(`Hmm.. You don't have an age I guess`);
+  }
+}
+
+checkAge({ age: 18 });
+```
+
+- A: You are an adult!
+- B: You are still an adult.
+- C: Hmm.. You don't have an age I guess
+
+[solution](https://github.com/lydiahallie/javascript-questions#18-whats-the-output)
+
+### 4. What's the output?
+```
+const obj = { a: 'one', b: 'two', a: 'three' };
+console.log(obj);
+```
+- A: { a: "one", b: "two" }
+- B: { b: "two", a: "three" }
+- C: { a: "three", b: "two" }
+- D: SyntaxError
+
+[solution](https://github.com/lydiahallie/javascript-questions#25-whats-the-output)
+
+
+### 5. What's the output?
+```
+const a = {};
+const b = { key: 'b' };
+const c = { key: 'c' };
+
+a[b] = 123;
+a[c] = 456;
+
+console.log(a[b]);
+```
+
+- A: 123
+- B: 456
+- C: undefined
+- D: ReferenceError
+
+[solution](https://github.com/lydiahallie/javascript-questions#29-whats-the-output)
+
+### 6. What's the output?
+```
+let person = { name: 'Lydia' };
+const members = [person];
+person = null;
+
+console.log(members);
+```
+- A: null
+- B: [null]
+- C: [{}]
+- D: [{ name: "Lydia" }] 
+
+[solution](https://github.com/lydiahallie/javascript-questions#46-whats-the-output)
+
+### Other good ones on this topic:
+https://github.com/lydiahallie/javascript-questions#47-whats-the-output
+
+https://github.com/lydiahallie/javascript-questions#47-whats-the-output
+
+https://github.com/lydiahallie/javascript-questions#47-whats-the-output
+
+---
+
+This exercise is part of **JS Fundamentals: Objects, Arrays, and Functions by Bianca Gandolfo**.
+
+- Watch the workshop on [Frontend Masters](https://frontendmasters.com/workshops/fundamentals-functional-js/)
+- Read through the [course notes](https://coda.io/d/JS-Fundamentals-Objects-Arrays-and-Functions_dbWVmy2v9xL)
+- Ask questions by joining Bianca's private community, [Code and Coffee](https://andcoffee.io)
+
+```
+
+function createArray() {
+  const storage = {};
+
+  return {
+    length: 0,
+    push: function(valueInput) {
+      /* TODO */
+      //since we are not returning anything we want to use if else
+      if (length === 0) {
+        storage[0] = valueInput;
+      } else {
+        storage[length] = valueInput;
+      }
+      length++;
+      //ternary operator
+      length === 0 ? storage[0] = valueInput : storage[length] = valueInput;
+      length++;
+    },
+    pop: function() { 
+      /* TODO */
+      //we want to remove the key value pair and decrement the length
+      //every time we add to our obj length will be increment
+      //the next time we call push or pop length will be +1 more than the highest property/key in the obj
+      //length = 0 storage[0] = valueInput then we increment length, length will be 1
+      //length = 1 storage[1] = valueInput then we increment length, length will be 2
+      delete storage[length - 1];
+      length--;
+    }
+  };
+}
+
+const myArray = createArray();
+
+myArray.push(11);
+console.log(myArray);// myArray contains {0: 11}
+
+myArray.push(12); 
+console.log(myArray); // => {0: 11, 1: 12}
+
+console.log(myArray.length === 2); // => returns 2
+
+console.log(myArray.pop() === 12); // => returns 12
+console.log(myArray.length === 1); // => returns 1
