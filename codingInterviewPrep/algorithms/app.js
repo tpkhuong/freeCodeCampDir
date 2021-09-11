@@ -1214,6 +1214,8 @@ const room = mystery.getRoom();
 
 const SPOILER = withMurdererAndWeapon(room);
 
+// endsWith
+
 function endsWith(string, searchString) {}
 
 endsWith("Cats are the best!", "best!"); // => true
@@ -1281,7 +1283,16 @@ function map(collection, callback) {}
 
 function filter(collection, callback) {}
 
+// Prompt
+// Implement a method, partition that creates an array of elements split into two groups, the first of which contains elements callback returns truthy for, the second of which contains elements callback returns falsey for. The callback is invoked with one argument: (value).
+
+// Definition: partition(collection, callback)
+
 function partition(collection, callback) {}
+
+// Implement , callLater that returns a function that can be called later up to three times, with three arguments.
+
+// Definition: callLater(callback)
 
 function callLater(func) {}
 
@@ -1437,6 +1448,8 @@ This exercise is part of **JS Fundamentals: Objects, Arrays, and Functions by Bi
 
 ```
 
+/***** object version of Array push and pop *****/
+
 function createArray() {
   const storage = {};
 
@@ -1480,3 +1493,84 @@ console.log(myArray.length === 2); // => returns 2
 
 console.log(myArray.pop() === 12); // => returns 12
 console.log(myArray.length === 1); // => returns 1
+
+/***** object getValue and setValue *****/
+
+// Prompt 1
+// Implement a method, getValue that takes an object and key name and returns the value associated with that key or a default value if supplied.
+
+// Definition: getValue(object, key, [defaultValue]) 
+
+// Example Usage:
+let who = {name: "Colonel Mustard"};
+
+getValue(who, "name");
+// => "Colonel Mustard"
+
+getValue(who, "story", "We don't know yet.");
+// => "We don’t know yet";
+
+function getValue(object, key, defaultValue) {
+  if (object[key]) {
+    return object[key];
+  } else {
+    if (defaultValue) {
+      return defaultValue;
+    }
+  }
+}
+
+// Prompt 2
+// Implement setValue :
+// Sets the value at property of object. If the property doesn't exist, it's created.
+// Note: This method mutates the original object.
+
+// Definition: setValue(object, key, value) 
+
+// Example Usage:
+// const who = {name: "Colonel Mustard"};
+
+setValue(who, "name", "Miss Scarlett");
+
+console.log(who);
+// => {name: "Miss Scarlett"}
+
+function setValue(object, key, value) {
+  if (object[key] == undefined) {
+    object[key] = value;
+    return object[key];
+  }
+  object[key] = value;
+  return object[key];
+}
+
+// String Contains
+
+// Prompt 
+// Implement a method, contains that takes and our string data structure and a value and returns true if the data structure contains the value or false if it does not.
+
+// Definition: contains(string, value) 
+
+// Example Usage:
+
+const rooms = 'Billiard Room,Kitchen,Conservatory,Hall,Dining Room';
+contains(rooms, "Library"); // => false
+
+contains(rooms, "Hall"); // => true
+
+// function contains(string, value) {
+//   return string.includes(value);
+// }
+
+function contains(string, value) {
+  var arrOfStr = string.split(',');
+  //loop through array of strings
+  let reassigningIndex;
+  arrOfStr.forEach(function findIndex(eachString, index, list) {
+    if(eachString === value) reassigningIndex = index;
+  });
+  if (reassigningIndex != undefined) {
+    return true;
+  }
+  return false;
+}
