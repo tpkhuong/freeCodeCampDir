@@ -1452,31 +1452,36 @@ This exercise is part of **JS Fundamentals: Objects, Arrays, and Functions by Bi
 
 function createArray() {
   const storage = {};
-
+  console.log(this == window);
   return {
     length: 0,
     push: function(valueInput) {
       /* TODO */
+      console.log(this == window);
+      const currentIndex = this.length;
       //since we are not returning anything we want to use if else
-      if (length === 0) {
-        storage[0] = valueInput;
+      if (currentIndex === 0) {
+        this[currentIndex] = valueInput;
       } else {
-        storage[length] = valueInput;
+        this[currentIndex] = valueInput;
       }
-      length++;
+      this.length++;
       //ternary operator
-      length === 0 ? storage[0] = valueInput : storage[length] = valueInput;
-      length++;
+      currentIndex === 0 ? this[currentIndex] = valueInput : this[currentIndex] = valueInput;
+      this.length++;
     },
     pop: function() { 
       /* TODO */
+      const currentIndex = this.length;
       //we want to remove the key value pair and decrement the length
       //every time we add to our obj length will be increment
       //the next time we call push or pop length will be +1 more than the highest property/key in the obj
       //length = 0 storage[0] = valueInput then we increment length, length will be 1
       //length = 1 storage[1] = valueInput then we increment length, length will be 2
-      delete storage[length - 1];
-      length--;
+      if (currentIndex > 0) {
+        delete this[currentIndex - 1];
+      this.length--;
+      }
     }
   };
 }
