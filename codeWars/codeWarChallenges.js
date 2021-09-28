@@ -243,3 +243,61 @@ Division should be integer division. For example, this should return 2, not 2.66
 eight(dividedBy(three()));
 
 */
+
+function zero(func1) {
+  if (func1 == undefined) {
+    return 0;
+  }
+
+  return operations["+"](3);
+}
+
+function one(func1) {}
+
+function two(func1) {}
+
+function three(func1) {}
+
+function four(func1) {}
+
+function five(func1) {}
+
+function six(func1) {}
+
+function seven(func1) {}
+
+function eight(func1) {}
+
+function nine(func1) {}
+
+// operations
+
+function plus(input) {
+  return input;
+}
+
+function minus(input) {}
+
+function times(input) {}
+
+function dividedBy(input) {}
+
+function calculationFunc(arithmeticOperator, value1, value2) {
+  // value1 will be based on the func number
+  const operations = {
+    "*": function () {
+      return value1 * value2;
+    },
+    "/": "world",
+    "+": function () {
+      return 0 + value;
+    },
+    "-": "hello",
+  };
+
+  return operations[arithmeticOperator]();
+}
+
+function testingStuff(input) {
+  return `- ${input}`;
+}
