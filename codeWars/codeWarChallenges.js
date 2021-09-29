@@ -244,43 +244,123 @@ eight(dividedBy(three()));
 
 */
 
-function zero(func1) {
-  if (func1 == undefined) {
+function zero(operatorAndInput) {
+  if (operatorAndInput == undefined) {
     return 0;
   }
 
-  return operations["+"](3);
+  const [arithmeticOperator, valueInput] = operatorAndInput.split(" ");
+
+  return Math.floor(calculationFunc(arithmeticOperator, 0, Number(valueInput)));
 }
 
-function one(func1) {}
+function one(operatorAndInput) {
+  if (operatorAndInput == undefined) {
+    return 1;
+  }
 
-function two(func1) {}
+  const [arithmeticOperator, valueInput] = operatorAndInput.split(" ");
 
-function three(func1) {}
+  return Math.floor(calculationFunc(arithmeticOperator, 1, Number(valueInput)));
+}
 
-function four(func1) {}
+function two(operatorAndInput) {
+  if (operatorAndInput == undefined) {
+    return 2;
+  }
 
-function five(func1) {}
+  const [arithmeticOperator, valueInput] = operatorAndInput.split(" ");
 
-function six(func1) {}
+  return Math.floor(calculationFunc(arithmeticOperator, 2, Number(valueInput)));
+}
 
-function seven(func1) {}
+function three(operatorAndInput) {
+  if (operatorAndInput == undefined) {
+    return 3;
+  }
 
-function eight(func1) {}
+  const [arithmeticOperator, valueInput] = operatorAndInput.split(" ");
 
-function nine(func1) {}
+  return Math.floor(calculationFunc(arithmeticOperator, 3, Number(valueInput)));
+}
+
+function four(operatorAndInput) {
+  if (operatorAndInput == undefined) {
+    return 4;
+  }
+
+  const [arithmeticOperator, valueInput] = operatorAndInput.split(" ");
+
+  return Math.floor(calculationFunc(arithmeticOperator, 4, Number(valueInput)));
+}
+
+function five(operatorAndInput) {
+  if (operatorAndInput == undefined) {
+    return 5;
+  }
+
+  const [arithmeticOperator, valueInput] = operatorAndInput.split(" ");
+
+  return Math.floor(calculationFunc(arithmeticOperator, 5, Number(valueInput)));
+}
+
+function six(operatorAndInput) {
+  if (operatorAndInput == undefined) {
+    return 6;
+  }
+
+  const [arithmeticOperator, valueInput] = operatorAndInput.split(" ");
+
+  return Math.floor(calculationFunc(arithmeticOperator, 6, Number(valueInput)));
+}
+
+function seven(operatorAndInput) {
+  if (operatorAndInput == undefined) {
+    return 7;
+  }
+
+  const [arithmeticOperator, valueInput] = operatorAndInput.split(" ");
+
+  return Math.floor(calculationFunc(arithmeticOperator, 7, Number(valueInput)));
+}
+
+function eight(operatorAndInput) {
+  if (operatorAndInput == undefined) {
+    return 8;
+  }
+
+  const [arithmeticOperator, valueInput] = operatorAndInput.split(" ");
+
+  return Math.floor(calculationFunc(arithmeticOperator, 8, Number(valueInput)));
+}
+
+function nine(operatorAndInput) {
+  if (operatorAndInput == undefined) {
+    return 9;
+  }
+
+  const [arithmeticOperator, valueInput] = operatorAndInput.split(" ");
+
+  return Math.floor(calculationFunc(arithmeticOperator, 9, Number(valueInput)));
+}
 
 // operations
 
 function plus(input) {
-  return input;
+  return `+ ${input}`;
 }
 
-function minus(input) {}
+function minus(input) {
+  return `- ${input}`;
+}
 
-function times(input) {}
+function times(input) {
+  return `* ${input}`;
+}
 
-function dividedBy(input) {}
+function dividedBy(input) {
+  return `/ ${input}`;
+}
 
 function calculationFunc(arithmeticOperator, value1, value2) {
   // value1 will be based on the func number
@@ -288,16 +368,106 @@ function calculationFunc(arithmeticOperator, value1, value2) {
     "*": function () {
       return value1 * value2;
     },
-    "/": "world",
-    "+": function () {
-      return 0 + value;
+    "/": function () {
+      return value1 / value2;
     },
-    "-": "hello",
+    "+": function () {
+      return value1 + value2;
+    },
+    "-": function () {
+      return value1 - value2;
+    },
   };
 
   return operations[arithmeticOperator]();
 }
 
-function testingStuff(input) {
-  return `- ${input}`;
+// one solution
+
+var n = function (digit) {
+  return function (op) {
+    return op ? op(digit) : digit;
+  };
+};
+var zero = n(0);
+var one = n(1);
+var two = n(2);
+var three = n(3);
+var four = n(4);
+var five = n(5);
+var six = n(6);
+var seven = n(7);
+var eight = n(8);
+var nine = n(9);
+
+function plus(r) {
+  return function (l) {
+    return l + r;
+  };
 }
+function minus(r) {
+  return function (l) {
+    return l - r;
+  };
+}
+function times(r) {
+  return function (l) {
+    return l * r;
+  };
+}
+function dividedBy(r) {
+  return function (l) {
+    return l / r;
+  };
+}
+
+//seven(times(five()))
+
+/*
+
+var five = n(5);
+
+five will be a func ref
+
+function (op) {
+    return op ? op(5) : 5;
+  };
+
+when we call it five() the parameter op will be undefined which is falsy so func will return 5
+
+times(five()) will return a func ref
+
+r parameter will be 5
+
+function (l) {
+    return l * 5;
+  };
+
+function times(r) {
+  return function (l) {
+    return l * 5;
+  };
+}
+
+the outer seven(times(five()));
+
+var seven = n(7);
+
+seven(function (7) {
+    return 7 * 5;
+  };)
+
+  this time op will be truthy
+
+function (op) {
+    return op ? op(5) : 5;
+  };
+
+  op parameter will be 
+
+  function (7) {
+    return 7 * 5;
+  };
+
+
+*/
