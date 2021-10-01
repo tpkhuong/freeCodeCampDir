@@ -1452,12 +1452,12 @@ This exercise is part of **JS Fundamentals: Objects, Arrays, and Functions by Bi
 
 function createArray() {
   const storage = {};
-  console.log(this == window);
+  console.log(this == window);//true
   return {
     length: 0,
     push: function(valueInput) {
       /* TODO */
-      console.log(this == window);
+      console.log(this == window);//false. the this will be whatever calls push()
       const currentIndex = this.length;
       //since we are not returning anything we want to use if else
       if (currentIndex === 0) {
