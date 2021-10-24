@@ -1579,3 +1579,36 @@ function contains(string, value) {
   }
   return false;
 }
+
+/** 
+ * get rid of trail zeros in array
+ * **/
+
+function splitStr(str) {
+  const arrOfValues = str.split("");
+  return arrOfValues;
+}
+
+let arrOfStrings = splitStr();
+
+const lengthOfArr = arrOfStrings.length;
+
+let useIndexOfNonZero;
+
+function getRidOfTrailZerosRecursive(arrInput, index) {
+  // we will send in the right side of the decimal
+  //and the right side does not contain all zeros
+  let currentValue = arrInput[index];
+  if (currentValue !== "0") {
+    // each time this return statement is called it will 
+    //return the index of that function call
+    //once currentValue is not "0" it will return that index then the index will increase for each function call return
+    /** 
+     * assign the index to an identifier outside this recursive func
+     * **/
+    useIndexOfNonZero = index;
+    return
+  }
+
+  getRidOfTrailZerosRecursive(arrInput, index - 1);
+}
