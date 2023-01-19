@@ -795,14 +795,14 @@ function intersectionNonRecursive(...arraysInput) {
     });
 
     var valuesInBothArr = [...firstArr, ...secondArr];
-    var vistied = {};
+    var visited = {};
 
     return valuesInBothArr.reduce(function nonDuplicates(
       buildingUp,
       currentValue
     ) {
-      if (!vistied[currentValue]) {
-        vistied[currentValue] = true;
+      if (!visited[currentValue]) {
+        visited[currentValue] = true;
         return [...buildingUp, currentValue];
       }
       return buildingUp;
@@ -1095,8 +1095,62 @@ function intersection(arrInput) {
   return result;
 }
 
-// [[5, 10, 15,5,15, 20], [15, 88, 1, 5, 7,15,5], [15,5,1, 10, 15, 5, 20,15]]
+function intersection(...array){
+  const result = [];
+  const length = array.length;
+  const arrayOfValues = array.flat();
+
+  const objOfFreq = arrayOfValues.reduce(function addFreq(buildingUp, currentValue){
+      buildingUp[currentValue] = (buildingUp[currentValue] || 0) + 1;
+      return buildingUp;
+  },{});
+
+  for(let key in objOfFreq){
+    let value = objOfFreq[key];
+
+    if(value === length){
+      result.push(key);
+    }
+  }
+
+  return result;
+}
+
+// [[5, 10, 15,5,15, 20],[15, 88, 1, 5, 7,15,5],[15,5,1, 10, 15, 5, 20,15]]
 //after running our reduce [[5, 10, 15, 20],[15, 88, 1, 5, 7],[15, 5, 1, 10, 20]]
+
+function intersection(array){
+  // const result = [];
+  const length = array.length;
+  // const arrayOfValues = array.flat();
+
+  const arrayOfObjAndArr = array.reduce(function findValuesInAllArray(buildingUp,currentValue,index){
+    const freqCountObj = buildingUp[0];
+    const result = buildingUp[1];
+    const indexPlusOne = index + 1;
+    // const valuesAppearOnceArray = [];
+    const visitedObj = {}
+    // check if our algorithm have seen value
+    currentValue.forEach((value)=>{
+      if(!visitedObj[value]){
+        visitedObj[value] = true;
+        // valuesAppearOnceArray.push(value);
+        // freq count value
+        freqCountObj[value] = (freqCountObj[value] || 0) + 1;
+        // add value to array
+        if(indexPlusOne == length){
+          freqCountObj[value] == length ? result.push(value) : null;
+        }
+      };
+    });
+
+    return buildingUp;
+  },[{},[]])
+
+  return arrayOfObjAndArr[1];
+}
+
+
 /***** intersection *****/
 
 /***** union *****/
@@ -1158,14 +1212,14 @@ const weapons = [
   "Wrench",
 ];
 
-const rooms = [
-  "Billiard Room",
-  "Kitchen",
-  "Library",
-  "Conservatory",
-  "Hall",
-  "Dining Room",
-];
+// const rooms = [
+//   "Billiard Room",
+//   "Kitchen",
+//   "Library",
+//   "Conservatory",
+//   "Hall",
+//   "Dining Room",
+// ];
 
 function solveMystery(suspects, weapons, rooms) {
   function getMurderer() {
@@ -1272,16 +1326,30 @@ function nthValue(array, index) {
   }
 }
 
-function forEach(collection, callback) {
+function _forEach(collection, callback) {
   for (let index = 0; index < collection.length; index++){
     let element = collection[index]
     callback(element, index, collection);
   }
 }
 
-function map(collection, callback) {}
+function _map(collection, callback) {}
 
-function filter(collection, callback) {}
+function _filter(collection, callback) {}
+
+function _reduce(list, howToCombine, initialValue){
+  var momoValue = initialValue;
+
+  _forEach(list, function loopThoughList(value,index,list){
+    if(!momoValue && index === 0){
+      momoValue = value;
+    }else{
+      momoValue = howToCombine(momoValue,value);
+    }
+  });
+
+  return momoValue;
+}
 
 // Prompt
 // Implement a method, partition that creates an array of elements split into two groups, the first of which contains elements callback returns truthy for, the second of which contains elements callback returns falsey for. The callback is invoked with one argument: (value).
@@ -1612,3 +1680,51 @@ function getRidOfTrailZerosRecursive(arrInput, index) {
 
   getRidOfTrailZerosRecursive(arrInput, index - 1);
 }
+
+/** 
+ * JavaScript Array includes()
+The includes() method returns true if an array contains a specified value. The includes() method returns false if the value is not found.
+
+write a function that takes in an array and value, return true if the array contains the value else return false.
+* **/ 
+
+
+/** 
+ * Write a function, reverseString,  that reverses a string and returns it. The string to reverse is given as an argument in the function.
+ * **/ 
+
+/** 
+ * reverseString("hello") should become "olleh".
+reverseString("Howdy") should become "ydwoH".
+reverseString("Greetings from Earth") should return 
+"htraE morf sgniteerG".
+* **/
+
+/**
+ * Given a sorted array arr[] of n elements, write a function to search a given element x in arr[] and return the index of x in the array. Consider array is 0 base index. 
+ * **/ 
+
+/** 
+ * 
+ * Input: arr[] = {10, 20, 30, 50, 60, 80, 110, 130, 140, 170}, x = 110
+Output: 6
+Explanation: Element x is present at index 6. 
+
+Input: arr[] = {10, 20, 30, 40, 60, 110, 120, 130, 170}, x = 175
+Output: -1
+Explanation: Element x is not present in arr[].
+ * **/ 
+
+/** 
+ * construct a function intersection that take in arrays as values and compares the arrays and returns a new array with elements found in all of the arrays.
+ * Given two integer arrays nums1 and nums2, return an array of their intersection. 
+ * Each element in the result must be unique and you may return the result in any order.
+ * **/ 
+
+/** 
+ * Write a function mergeSort which takes an array of integers as input and returns an array of these integers in sorted order from least to greatest. A good way to implement this is to write one function, for instance merge, which is responsible for merging two sorted arrays, and another function, for instance mergeSort, which is responsible for the recursion that produces single-item arrays to feed into merge.
+ * **/ 
+
+/** 
+ * 
+ * **/ 
