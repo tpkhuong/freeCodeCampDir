@@ -1119,7 +1119,7 @@ function intersection(...array){
 // [[5, 10, 15,5,15, 20],[15, 88, 1, 5, 7,15,5],[15,5,1, 10, 15, 5, 20,15]]
 //after running our reduce [[5, 10, 15, 20],[15, 88, 1, 5, 7],[15, 5, 1, 10, 20]]
 
-function intersection(array){
+function intersection(...array){
   // const result = [];
   const length = array.length;
   // const arrayOfValues = array.flat();
@@ -1681,23 +1681,48 @@ function getRidOfTrailZerosRecursive(arrInput, index) {
   getRidOfTrailZerosRecursive(arrInput, index - 1);
 }
 
-/** 
- * JavaScript Array includes()
-The includes() method returns true if an array contains a specified value. The includes() method returns false if the value is not found.
+function binarySearch(array,value){
+  var start = 0;
+  var end = array.length - 1
+  var middle = Math.floor((start + end) / 2);
+  var guess = array[middle];
 
+  while(start <= end && value !== guess){
+    if(value < guess){
+      end = middle - 1;
+    }
+    if(value > guess){
+      start = middle + 1;
+    }
+    middle = Math.floor((start + end) / 2)
+    guess = array[middle]
+  };
+
+  if(guess === value){
+    return middle;
+  }else{
+    return -1;
+  }
+}
+
+/** 
+ * JavaScript Array includes() 
+ * The includes() method returns true if an array contains a specified value. The includes() method returns false if the value is not found.
 write a function that takes in an array and value, return true if the array contains the value else return false.
 * **/ 
 
+// includes([1,2,3,4,5],5) returns true
+// includes(["apple","orange","melo"],berry) returns false
+// includes(["red","blue","white"],blue) returns true
 
 /** 
  * Write a function, reverseString,  that reverses a string and returns it. The string to reverse is given as an argument in the function.
  * **/ 
 
 /** 
- * reverseString("hello") should become "olleh".
-reverseString("Howdy") should become "ydwoH".
-reverseString("Greetings from Earth") should return 
-"htraE morf sgniteerG".
+ * reverseString("hello") should return "olleh".
+reverseString("Howdy") should return "ydwoH".
+reverseString("Greetings from Earth") should return "htraE morf sgniteerG".
 * **/
 
 /**
@@ -1706,17 +1731,19 @@ reverseString("Greetings from Earth") should return
 
 /** 
  * 
- * Input: arr[] = {10, 20, 30, 50, 60, 80, 110, 130, 140, 170}, x = 110
+ * Input: arr[] = [10, 20, 30, 50, 60, 80, 110, 130, 140, 170], x = 110
 Output: 6
 Explanation: Element x is present at index 6. 
 
 Input: arr[] = {10, 20, 30, 40, 60, 110, 120, 130, 170}, x = 175
 Output: -1
 Explanation: Element x is not present in arr[].
+* binarySearch([10, 20, 30, 50, 60, 80, 110, 130, 140, 170], 110) returns 6
+* binarySearch([10, 20, 30, 40, 60, 110, 120, 130, 170], 175) returns -1
  * **/ 
 
 /** 
- * construct a function intersection that take in arrays as values and compares the arrays and returns a new array with elements found in all of the arrays.
+ * Construct a function intersection that take in arrays as values and compares the arrays and returns a new array with elements found in all of the arrays passed into the function call.
  * Given two integer arrays nums1 and nums2, return an array of their intersection. 
  * Each element in the result must be unique and you may return the result in any order.
  * **/ 
@@ -1725,6 +1752,50 @@ Explanation: Element x is not present in arr[].
  * Write a function mergeSort which takes an array of integers as input and returns an array of these integers in sorted order from least to greatest. A good way to implement this is to write one function, for instance merge, which is responsible for merging two sorted arrays, and another function, for instance mergeSort, which is responsible for the recursion that produces single-item arrays to feed into merge.
  * **/ 
 
+function merge(firstArray,secondArray){
+  const result = [];
+
+  var leftIndex = 0;
+  var rightIndex = 0;
+
+  while(leftIndex < firstArray.length && rightIndex < secondArray.length){
+    if(firstArray[leftIndex] < secondArray[rightIndex]){
+      result.push(firstArray[leftIndex]);
+      leftIndex+=1
+    }else{
+      result.push(secondArray[rightIndex]);
+      rightIndex+=1
+    }
+  }
+
+  while(leftIndex < firstArray.length){
+    result.push(firstArray[leftIndex]);
+    leftIndex+=1
+  }
+
+  while(rightIndex < secondArray.length){
+    result.push(secondArray[rightIndex]);
+    rightIndex+=1
+  }
+
+  return result;
+}
+
+function mergeSort(array){
+  if(array.length <= 1) return array;
+
+  const middle = Math.floor(array.length / 2);
+
+  const leftSide = array.slice(0,middle);
+  const rightSide = array.slice(middle);
+
+  const sortedLeftside = mergeSort(leftSide);
+  const sortedRightside = mergeSort(rightSide);
+
+  return merge(sortedLeftside,sortedRightside);
+}
+
 /** 
- * 
+ * mergeSort([12, 34, 11, 1, 54, 25, 67, 45])
+ * returns [1, 11, 12, 25, 34, 45, 54, 67]
  * **/ 
